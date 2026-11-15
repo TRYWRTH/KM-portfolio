@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Hanken_Grotesk, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import Shell from "@/components/Shell";
 import { pl } from "@/content/pl";
 import "./globals.css";
 
 const serif = Instrument_Serif({ subsets: ["latin", "latin-ext"], weight: "400", variable: "--font-serif", display: "swap" });
+const sans = Hanken_Grotesk({ subsets: ["latin", "latin-ext"], weight: ["400", "500", "600"], variable: "--font-sans", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], weight: ["300", "400", "500"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, view
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={pl.lang} className={`${serif.variable} ${mono.variable}`}>
+    <html lang={pl.lang} className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
       <body>
         <Shell>{children}</Shell>
       </body>
