@@ -2,16 +2,24 @@
 
 import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
-import { pl, type Production } from "@/content/pl";
 
 /**
- * One production on Reżyseria: photo with a small title in the middle and a glass "curtain"
- * (role, theatre · year, description) that materialises over it.
+ * Photo card used on Reżyseria and Czarne Szmaty: photo with a small title in the middle and a glass
+ * "curtain" (two small lines + description) that materialises over it.
  * Click (or Enter / Space) toggles the curtain; it closes on its own when the pointer leaves the photo,
  * when focus moves away, on Esc, or when the photo scrolls mostly out of view (touch screens).
  * Touch screens also get a visible info button that toggles it.
  */
-export default function ProductionCard({ p, sizes }: { p: Production; sizes: string }) {
+export interface PhotoCardData {
+  title: string;
+  /** two small lines at the top of the curtain, e.g. role — name / theatre · year */
+  lines: [string, string];
+  paragraphs: string[];
+  image?: { src: string; alt: string };
+  wide?: boolean;
+}
+
+export default function PhotoCard({ p, sizes }: { p: PhotoCardData; sizes: string }) {
   const [open, setOpen] = useState(false);
   const cvId = useId();
   const ref = useRef<HTMLElement>(null);
@@ -69,12 +77,8 @@ export default function ProductionCard({ p, sizes }: { p: Production; sizes: str
           <div className="cv-rim" aria-hidden />
           <div className="cv-text">
             <div className="cv-meta">
-              <p className="pc-line pc-role">
-                {p.role} — {pl.name}
-              </p>
-              <p className="pc-line pc-place">
-                {p.theatre} · {p.year}
-              </p>
+              <p className="pc-line pc-role">{p.lines[0]}</p>
+              <p className="pc-line pc-place">{p.lines[1]}</p>
             </div>
             <div className="cv-desc">
               {p.paragraphs.map((t) => (

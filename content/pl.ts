@@ -135,7 +135,7 @@ export const collective = {
   // order and credits as on the "czarne szmaty / #czsz – wybrane akcje" slide
   photos: [
     {
-      src: "/photos/aresztowanie-cricoteki.jpg", title: "Aresztowanie Cricoteki",
+      src: "/photos/aresztowanie-cricoteki.jpg", title: "Aresztowanie Cricoteki", wide: true,
       with: "#czsz + Pat Mic", photo: "fot. Pat Mic", place: "Kraków", year: 2021,
       alt: "Trzy performerki w policyjnych mundurach i z doklejonymi wąsami stoją przed budynkiem Cricoteki w Krakowie.",
     },
@@ -151,7 +151,7 @@ export const collective = {
       alt: "Trzy performerki w maskach orłów z koronami i czerwonych pelerynach na tle budynku we mgle.",
     },
     {
-      src: "/photos/pozdrowienia-z-lesbos.jpg", title: "Pozdrowienia z Lesbos",
+      src: "/photos/pozdrowienia-z-lesbos.jpg", title: "Pozdrowienia z Lesbos", wide: true,
       with: "#czsz + Pat Mic", photo: "fot. Pat Mic", place: "Warszawa", year: 2018,
       alt: "Trzy performerki w strojach kąpielowych pozują na miejskim skrzyżowaniu przy tablicy z napisem „Lesbos”.",
     },

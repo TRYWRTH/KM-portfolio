@@ -1,11 +1,11 @@
-import Image from "next/image";
 import Entry from "@/components/AbEntry";
+import PhotoGrid from "@/components/PhotoGrid";
 import { collective } from "@/content/pl";
 
 /**
  * Kolektyw Czarne Szmaty, in the same light two-column style as O mnie:
  * left = title, collapsible list of actions; right = lead, paragraphs, Facebook link;
- * below = selected actions with photos.
+ * below = selected actions in the same photo grid as Reżyseria.
  */
 export default function CzarneSzmatySection() {
   const [lead, ...rest] = collective.paragraphs;
@@ -52,25 +52,15 @@ export default function CzarneSzmatySection() {
         <h2 id="works-title" className="ab-eyebrow">
           {collective.photosTitle}
         </h2>
-        <ul className="ab-work-list">
-          {collective.photos.map((ph) => (
-            <li key={ph.src}>
-              <figure className="ab-work">
-                <div className="ab-work-img">
-                  <Image src={ph.src} alt={ph.alt} fill sizes="(max-width: 767px) 100vw, 56vw" />
-                </div>
-                <figcaption>
-                  <p className="ab-label">
-                    {ph.place}, {ph.year}
-                  </p>
-                  <h3 className="ab-work-title">„{ph.title}”</h3>
-                  <p className="ab-desc">{ph.with}</p>
-                  <p className="ab-label ab-credit">{ph.photo}</p>
-                </figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
+        <PhotoGrid
+          items={collective.photos.map((ph) => ({
+            title: ph.title,
+            lines: [ph.with, `${ph.place} · ${ph.year}`],
+            paragraphs: [ph.photo],
+            image: { src: ph.src, alt: ph.alt },
+            wide: ph.wide,
+          }))}
+        />
       </section>
     </div>
   );
