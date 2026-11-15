@@ -62,12 +62,20 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
             <span className="sl" aria-hidden>/</span>
             {pl.shortName}
           </Link>
+          {/* phones only: Kontakt sits up here so the three other links fit side by side in the rail */}
+          {sections
+            .filter((s) => s.topBar)
+            .map((s) => (
+              <Link key={s.id} href={"/" + s.slug} scroll={false} className="navlink top-contact">
+                {s.label}
+              </Link>
+            ))}
         </header>
 
         {/* bottom rail: the four sections spread across the bottom of the hero */}
         <nav className="hero-rail" aria-label={pl.nav.main}>
           {sections.map((s) => (
-            <Link key={s.id} href={"/" + s.slug} scroll={false} className="navlink">
+            <Link key={s.id} href={"/" + s.slug} scroll={false} className={s.topBar ? "navlink rail-contact" : "navlink"}>
               <NavLabel label={s.label} mobileHide={s.mobileHide} />
             </Link>
           ))}

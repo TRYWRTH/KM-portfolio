@@ -89,6 +89,7 @@ a { color: inherit; text-decoration: none }
 .hero-rail .navlink { letter-spacing: .24em; opacity: 1; text-decoration: none; transition: opacity .2s ease }
 .hero-rail .navlink:hover { opacity: .6 }
 .hero-rail .navlink:focus-visible { outline: 1px solid #fff; outline-offset: 2px }
+.top .top-contact { display: none }
 
 .name {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -52%);
@@ -397,14 +398,15 @@ a { color: inherit; text-decoration: none }
   .ab-right > :last-child { margin-bottom: 0 }
 }
 
-/* home page rail on phones: 24px margins, 11px, two rows of two (left-aligned) */
+/* home page on phones: 24px margins, 11px; Kontakt moves up opposite the wordmark,
+   the other three sit side by side along the bottom */
 @media (max-width: 639.98px) {
-  .top { left: 24px; top: 24px }
-  .hero-rail {
-    left: 24px; right: 24px; padding-bottom: max(24px, env(safe-area-inset-bottom));
-    display: grid; grid-template-columns: repeat(2, max-content); justify-content: start; column-gap: 40px; row-gap: 16px;
-  }
-  .hero-rail .navlink { font-size: 11px }
+  .top { left: 24px; right: 24px; top: 24px; display: flex; justify-content: space-between; align-items: center }
+  .top .top-contact { display: inline-flex; letter-spacing: .24em; opacity: 1; text-decoration: none; transition: opacity .2s ease }
+  .top .top-contact:hover { opacity: .6 }
+  .hero-rail { left: 24px; right: 24px; padding-bottom: max(24px, env(safe-area-inset-bottom)) }
+  .hero-rail .rail-contact { display: none }
+  .hero-rail .navlink, .top .navlink { font-size: 11px }
 }
 
 
