@@ -82,20 +82,29 @@ a { color: inherit; text-decoration: none }
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -52%);
   text-align: center; pointer-events: none !important; width: max-content; max-width: 94vw;
 }
-.name { text-shadow: 0 1px 14px rgba(0,0,0,.35); transition: color 1s var(--ease-io), text-shadow 1s var(--ease-io) }
+/* the name and roles are only seen during the opening: after the photo comes in they fade away
+   (opacity only, so the heading stays available to screen readers); without the opening they stay hidden */
+.name {
+  text-shadow: 0 1px 14px rgba(0,0,0,.35); opacity: 0;
+  transition: color 1s var(--ease-io), text-shadow 1s var(--ease-io), opacity .9s ease 2s;
+}
 .name h1 {
   font-family: var(--serif); font-weight: 400; text-transform: none;
   font-size: calc(2.25rem + 2.25vw); line-height: 1; letter-spacing: -.015em; white-space: nowrap;
+  padding-bottom: .22em; margin-bottom: -.22em; /* room for the tail of the j inside the sweep's clip */
 }
+.name-roles { margin-top: 22px; font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase }
+.name-sep { opacity: .6 }
 .name .word { display: inline-block }
 
 /* ---------- intro: white page, the name sweeps in (editorial sweep) ---------- */
 .top, .hero-nav { transition: opacity .8s ease .25s, visibility 0s .25s }
 .stage.intro { background: var(--white) }
 .stage.intro #bg { opacity: 0; transform: scale(1.05) }
-.stage.intro .name { color: var(--ink); text-shadow: none }
+.stage.intro .name { color: var(--ink); text-shadow: none; opacity: 1; transition: none }
 .stage.intro :is(.top, .hero-nav) { opacity: 0; visibility: hidden; transition: none }
 .stage.intro .editorial-sweep { animation: editorialSweep 1.15s cubic-bezier(.76, 0, .24, 1) .3s both }
+.stage.intro .name-roles { animation: editorialSweep .9s cubic-bezier(.76, 0, .24, 1) 1.5s both }
 @keyframes editorialSweep {
   0% { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateX(-14px); filter: blur(2px) }
   70% { opacity: 1; filter: blur(0) }
@@ -154,6 +163,7 @@ a { color: inherit; text-decoration: none }
   :root { --ox: 74% }
   .name h1 { font-size: clamp(2.6rem, 12vw, 3.6rem) }
   .name .word { display: block }
+  .name-roles { font-size: 11px; letter-spacing: .14em; white-space: nowrap }
 }
 @media (max-width: 767.98px) {
   .top { left: 20px; right: 20px; top: 20px }
@@ -167,7 +177,8 @@ a { color: inherit; text-decoration: none }
   .wide-only { display: none }
 }
 @media (prefers-reduced-motion: reduce) {
-  #bg .drift, .stage.intro .editorial-sweep { animation: none }
+  #bg .drift, .stage.intro .editorial-sweep, .stage.intro .name-roles { animation: none }
+  .name { transition: none }
   #curtain .c { transition-duration: .01s }
   .view, .view > * { transition-duration: .01s }
 }

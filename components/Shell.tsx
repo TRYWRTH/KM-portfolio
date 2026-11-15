@@ -10,8 +10,9 @@ import { pl, sectionByPath, sections, type Side } from "@/content/pl";
 
 const HIDE: Record<Side, string> = { l: "inset(0 100% 0 0)", r: "inset(0 0 0 100%)" };
 const SWAP_MS = 1100; // ink + page wipe (.9s, page layer +.14s) when switching sections
-// Intro: the name sweeps in from 300ms for 1.15s; the page follows at the same moment as before.
-const INTRO_LETTERS_MS = 1900;
+// Intro: the name sweeps in from 300ms (1.15s), the roles from 1.5s (.9s); then the photo comes in
+// and, 2s later, the name and roles fade away (see .name in globals.css).
+const INTRO_LETTERS_MS = 2600;
 const INTRO_MAX_MS = 6000; // reveal anyway if the photo is slow
 const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 

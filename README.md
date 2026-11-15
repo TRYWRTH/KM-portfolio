@@ -46,7 +46,7 @@ Replace `public/karolina.jpg` with the new image (landscape, about 2400px wide).
 
 ## Intro
 
-On a fresh load of `/`, the page starts white and the name sweeps in from the left (`.editorial-sweep`: a clip-path wipe with a short slide and a slight blur that clears) (`.stage.intro` in `app/globals.css`, letter delays in `components/Landing.tsx`). Once the letters have finished and the photo has loaded, `Shell` removes the `intro` class: the photo fades in from 105% scale, the name turns white, and the wordmark and bottom navigation follow. If the photo is slow, the page is revealed after 6s anyway. Visitors with reduced motion get no intro. Section URLs opened directly skip it too.
+On a fresh load of `/`, the page starts white and the name sweeps in from the left (`.editorial-sweep`: a clip-path wipe with a short slide and a slight blur that clears) (`.stage.intro` in `app/globals.css`, letter delays in `components/Landing.tsx`). Once the letters have finished and the photo has loaded, `Shell` removes the `intro` class: the photo fades in from 105% scale, the name and roles turn white and the top menu follows; two seconds later the name and roles fade away. They are not shown again until the next full page load. If the photo is slow, the page is revealed after 6s anyway. Visitors with reduced motion get no intro. Section URLs opened directly skip it too.
 
 ## Work with a photo
 

@@ -89,6 +89,14 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
               </Fragment>
             ))}
           </h1>
+          <p className="name-roles">
+            {pl.roles.map((r, i) => (
+              <Fragment key={r}>
+                {i > 0 ? <span className="name-sep"> | </span> : null}
+                {r}
+              </Fragment>
+            ))}
+          </p>
         </div>
 
       </div>
