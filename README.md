@@ -46,7 +46,7 @@ Replace `public/karolina.jpg` with the new image (landscape, about 2400px wide).
 
 ## Intro
 
-On a fresh load of `/`, the page starts white, the name sweeps in from the left (`.editorial-sweep`: a clip-path wipe with a short slide and a slight blur that clears) and then the roles line under it (`pl.roles`). See `.stage.intro` in `app/globals.css`. Once the letters have finished and the photo has loaded, `Shell` removes the `intro` class: the photo fades in from 105% scale while the name and roles fade out, as one 2.4s crossfade (`--reveal` in `app/globals.css`), and the top menu arrives as it settles. They are not shown again until the next full page load. If the photo is slow, the page is revealed after 6s anyway. Visitors with reduced motion get no intro. Section URLs opened directly skip it too.
+On a fresh load of `/`, the page opens on the hero photo, heavily blurred; the name sweeps in from the left (`.editorial-sweep`: a clip-path wipe with a short slide and a slight blur that clears) and then the roles line under it (`pl.roles`). See `.stage.intro` in `app/globals.css`. Once the letters have finished and the photo has loaded, `Shell` removes the `intro` class: the photo sharpens (and settles from 112% scale) while the name and roles fade out, at the same pace (2.4s `--reveal` in `app/globals.css`), and the top menu arrives as it settles. They are not shown again until the next full page load. If the photo is slow, the page is revealed after 6s anyway. Visitors with reduced motion get no intro. Section URLs opened directly skip it too.
 
 ## Work with a photo
 

@@ -6,9 +6,8 @@ import { useEffect, useId, useRef, useState } from "react";
 /**
  * Photo card used on Reżyseria and Czarne Szmaty: photo with a small title in the middle and a glass
  * "curtain" (two small lines + description) that materialises over it.
- * Click (or Enter / Space) toggles the curtain; it closes on its own when the pointer leaves the photo,
+ * Click / tap (or Enter / Space) toggles the curtain; it closes on its own when the pointer leaves the photo,
  * when focus moves away, on Esc, or when the photo scrolls mostly out of view (touch screens).
- * Touch screens also get a visible info button that toggles it.
  */
 export interface PhotoCardData {
   title: string;
@@ -37,6 +36,10 @@ export default function PhotoCard({ p, sizes }: { p: PhotoCardData; sizes: strin
       ref={ref}
       className={`pc${open ? " is-open" : ""}${p.wide ? "" : " pc-sm"}`}
       tabIndex={0}
+      role="button"
+      aria-label={p.title}
+      aria-expanded={open}
+      aria-controls={cvId}
       aria-describedby={cvId}
       onClick={() => setOpen((o) => !o)}
       onPointerLeave={(e) => {
@@ -87,19 +90,6 @@ export default function PhotoCard({ p, sizes }: { p: PhotoCardData; sizes: strin
             </div>
           </div>
         </div>
-        <button
-          type="button"
-          className="pc-info"
-          aria-expanded={open}
-          aria-controls={cvId}
-          aria-label={open ? "Zamknij informacje o spektaklu" : "Pokaż informacje o spektaklu"}
-          onClick={(e) => {
-            e.stopPropagation(); // the figure's own click would toggle it straight back
-            setOpen((o) => !o);
-          }}
-        >
-          <span className="pc-info-dot">{open ? <span className="pc-x" aria-hidden /> : <i aria-hidden>i</i>}</span>
-        </button>
       </div>
     </figure>
   );

@@ -9,6 +9,7 @@
   --ease: cubic-bezier(.76, 0, .18, 1);
   --ease-io: cubic-bezier(.8, 0, .2, 1);
   --reveal: 2.4s cubic-bezier(.4, 0, .2, 1); /* the opening crossfade: photo in, name out, together */
+  --intro-bg: #545557; /* shown for a moment until the hero photo has loaded: its average tone */
   /* subpage palette */
   --ash: #b2beb5; --blue-gray: #7393b3; --charcoal: #36454f; --dark-gray: #a9a9a9; --glaucous: #6082b6;
 }
@@ -29,7 +30,7 @@ a { color: inherit; text-decoration: none }
 .stage { position: fixed; inset: 0; background: #1c1c1d; transition: background-color var(--reveal) }
 
 /* ---------- photo = the whole background ---------- */
-#bg { position: fixed; inset: 0; overflow: hidden; transform-origin: 50% 0; transition: opacity var(--reveal), transform var(--reveal) }
+#bg { position: fixed; inset: 0; overflow: hidden; transform-origin: 50% 0; transition: filter var(--reveal), transform var(--reveal) }
 /* the photo is pinned to the top edge and only ever grows downwards/sideways, so the head is never cropped */
 #bg .drift {
   position: absolute; inset: 0 -2% -2%;
@@ -85,7 +86,7 @@ a { color: inherit; text-decoration: none }
 }
 /* the name and roles are only seen during the opening: after the photo comes in they fade away
    (opacity only, so the heading stays available to screen readers); without the opening they stay hidden */
-.name { color: var(--ink); opacity: 0; transition: opacity var(--reveal) } /* fades out exactly as the photo fades in */
+.name { color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,.3); opacity: 0; transition: opacity var(--reveal) } /* fades out exactly as the photo sharpens */
 .name h1 {
   font-family: var(--serif); font-weight: 400; text-transform: none;
   font-size: calc(2.25rem + 2.25vw); line-height: 1; letter-spacing: -.015em; white-space: nowrap;
@@ -95,10 +96,12 @@ a { color: inherit; text-decoration: none }
 .name-sep { opacity: .6 }
 .name .word { display: inline-block }
 
-/* ---------- intro: white page, the name sweeps in (editorial sweep) ---------- */
+/* ---------- intro: blurred hero photo, the name sweeps in (editorial sweep) ---------- */
 .top, .hero-nav { transition: opacity 1.2s ease 1.4s, visibility 0s 1.4s } /* arrive as the photo settles */
-.stage.intro { background: var(--white) }
-.stage.intro #bg { opacity: 0; transform: scale(1.05) }
+.stage.intro { background: var(--intro-bg) }
+/* the opening shows the hero photo itself, heavily blurred (scaled up so the soft edges stay off screen);
+   it sharpens while the name fades out, with the same timing (--reveal) */
+.stage.intro #bg { filter: blur(40px) saturate(1.3); transform: scale(1.12) }
 .stage.intro .name { opacity: 1; transition: none }
 .stage.intro :is(.top, .hero-nav) { opacity: 0; visibility: hidden; transition: none }
 .stage.intro .editorial-sweep { animation: editorialSweep 1.15s cubic-bezier(.76, 0, .24, 1) .3s both }
@@ -167,9 +170,10 @@ a { color: inherit; text-decoration: none }
   .top { left: 20px; right: 20px; top: 20px }
   .bar { padding: 20px 20px 14px }
   .view { padding-left: 20px; padding-right: 20px }
-  /* phones: wordmark and Kontakt on the first line, the menu centred on its own line below */
-  .top, .bar { grid-template-columns: 1fr auto; row-gap: 18px }
-  .hero-nav, .top-nav { grid-column: 1 / -1; grid-row: 2; gap: 0 28px }
+  /* phones: wordmark and Kontakt on top; the home page menu sits centred at the bottom; subpages have no menu */
+  .top, .bar { grid-template-columns: 1fr auto }
+  .hero-nav { position: fixed; left: 20px; right: 20px; bottom: 24px; gap: 0 28px }
+  .top-nav { display: none }
   .navlink { font-size: 12px }
   /* "Kolektyw Czarne Szmaty" is too wide for a half-width column: show "Czarne Szmaty" */
   .wide-only { display: none }
@@ -351,21 +355,7 @@ a { color: inherit; text-decoration: none }
 .pc.is-open .cv-text { opacity: 1; transform: none; filter: none; transition: opacity .7s ease .2s, transform .9s cubic-bezier(.2, .7, .2, 1) .2s, filter .7s ease .2s }
 
 
-/* info button: only on touch / narrow screens */
-.pc-info { display: none; position: absolute; right: 0; bottom: 0; z-index: 3; width: 48px; height: 48px; align-items: center; justify-content: center; padding: 0 }
-.pc-info-dot {
-  width: 26px; height: 26px; border-radius: 50%; border: 1px solid #fff; background: rgba(8,10,18,.4);
-  display: flex; align-items: center; justify-content: center; color: #fff;
-}
-.pc-info-dot i { font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1 }
-.pc-x { position: relative; width: 12px; height: 12px }
-.pc-x::before, .pc-x::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #fff }
-.pc-x::before { transform: rotate(45deg) }
-.pc-x::after { transform: rotate(-45deg) }
-.pc-info:focus-visible { outline: none }
-.pc-info:focus-visible .pc-info-dot { outline: 1px solid #fff; outline-offset: 3px }
 @media (hover: none), (max-width: 767.98px) {
-  .pc-info { display: flex }
   .cv-text, .pc-sm .cv-text { padding: 22px; font-size: 13px }
   .cv-desc p { max-width: 300px }
 }
