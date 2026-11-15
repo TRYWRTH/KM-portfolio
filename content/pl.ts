@@ -97,12 +97,25 @@ export const about = {
 };
 
 // Kontakt
+// The e-mail address and phone number are stored reversed and only put together in the browser
+// when someone clicks, so they never appear in the page's HTML (keeps address-harvesting bots away).
+// To change them, write the new value backwards here (e.g. "gmail.com" -> "moc.liamg").
 export const contact = {
   title: "Kontakt",
-  items: [
-    { label: "tel.", text: "606 290 300", href: "tel:+48606290300" },
-    { label: "mail", text: "karolina.maciejaszek@gmail.com", href: "mailto:karolina.maciejaszek@gmail.com" },
-  ],
+  email: {
+    label: "mail",
+    action: "Napisz e-mail",
+    copy: "kopiuj adres",
+    copied: "skopiowano",
+    user: "kezsajeicam.anilorak",
+    domain: "moc.liamg",
+  },
+  phone: {
+    label: "tel.",
+    action: "Zadzwoń",
+    country: "+48",
+    digits: "003092606",
+  },
 };
 
 // Kolektyw Czarne Szmaty
