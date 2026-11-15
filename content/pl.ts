@@ -50,6 +50,29 @@ export const pl = {
   ] satisfies Section[],
 };
 
+// O mnie: bio + timeline (education, Kalendarium) + teaching at the Akademia.
+export const about = {
+  lead: "Reżyserka, performerka, wykładowczyni.",
+  bio: [
+    "Absolwentka reżyserii na Akademii Teatralnej im. Aleksandra Zelwerowicza w Warszawie oraz teatrologii na Uniwersytecie Jagiellońskim w Krakowie. Debiutowała w 2007 roku spektaklem „Woyzeck” w Teatrze im. Jaracza w Olsztynie.",
+    "Pracuje w teatrach dramatycznych i lalkowych, instytucjonalnych i offowych. W ostatnich latach aktywnie działa w teatrze formy: łączącym elementy teatru dramatycznego i teatru plastycznego.",
+    "Nagradzana za spektakle dla młodzieży: m.in. Grand Prix 26. Międzynarodowego Festiwalu Teatru dla dzieci i młodzieży „Korczak dzisiaj” w Warszawie 2022 za przedstawienie „Tonja z Glimmerdalen” zrealizowane w Miejskim Teatrze Miniatura w Gdańsku, Grand Prix XIII Festiwalu Mała Boska Komedia w Krakowie 2020, Nagroda za najlepszą reżyserię na 27. Festiwalu Teatrów Lalek „Spotkania” w Toruniu, Wyróżnienia jury profesjonalnego i jury młodzieżowego na 25. Międzynarodowym Festiwalu Teatrów dla Dzieci i Młodzieży „Korczak dzisiaj” dla spektaklu „Rutka” zrealizowanego w Teatrze Arlekin w Łodzi.",
+    "Współzałożycielka i członkini kolektywu akcjonistycznego „Czarne Szmaty”. Wykładowczyni w Akademii Sztuk Teatralnych w Krakowie, Filii we Wrocławiu, w latach 2020–2024 Prodziekanka d.s. reżyserii na w/w uczelni.",
+  ],
+  experienceTitle: "Doświadczenie",
+  experience: [
+    { years: "1998–2003", title: "Teatrologia", detail: "Instytut Polonistyki, Uniwersytet Jagielloński w Krakowie" },
+    { years: "2002–2008", title: "Akademia Teatralna im. Aleksandra Zelwerowicza w Warszawie", detail: "Studia magisterskie" },
+    { years: "2007–obecnie", title: "Reżyseria teatralna", detail: "Realizacje w teatrach dramatycznych i lalkowych" },
+    { years: "2016–obecnie", title: "Performerka w kolektywie Czarne Szmaty", detail: "Współzałożycielka i członkini kolektywu akcjonistycznego" },
+    {
+      years: "2020–obecnie",
+      title: "Akademia Sztuk Teatralnych w Krakowie, Filia we Wrocławiu",
+      detail: "Wykładowczyni na Wydziale Lalkarskim, w latach 2020–2024 prodziekanka d.s. reżyserii Wydziału Lalkarskiego",
+    },
+  ],
+};
+
 export interface Production {
   year: number;
   title: string;
