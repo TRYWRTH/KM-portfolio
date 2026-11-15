@@ -241,67 +241,152 @@ export const awards: Award[] = [
 ];
 
 export interface Production {
-  year: number;
-  /** optional photo: a production with one is shown as a big picture with a short description */
-  image?: { src: string; alt: string };
   title: string;
-  /** author in the form used on the poster ("Philippe’a Dorina", "wg Andrzeja Barta") */
-  author?: string;
-  venue: string;
-  description?: string;
+  /** Karolina's role, shown in the caption as "ROLE — KAROLINA MACIEJASZEK" */
+  role: string;
+  theatre: string;
+  year: number;
+  image?: { src: string; alt: string };
+  /** the curtain description, one sentence per entry; names the original author */
+  paragraphs: string[];
 }
 
 // Reżyseria: selected productions, newest first.
+// "Na podstawie tekstu …" sentences were added where the description did not name the author yet.
 export const productions: Production[] = [
   {
-    year: 2025, title: "Olbrzyyym", image: { src: "/photos/olbrzyyym.jpg", alt: "Scena zalana czerwonym światłem: aktorzy wokół przezroczystej, świecącej kurtyny." }, author: "Philippe’a Dorina", venue: "Wrocławski Teatr Lalek",
-    description: "Spektakl familijny na podstawie dramatu Philippe’a Dorina. Premiera: 4.10.2025.",
+    title: "Olbrzyyym", role: "Reżyseria", theatre: "Wrocławski Teatr Lalek", year: 2025,
+    image: { src: "/photos/olbrzyyym.jpg", alt: "Scena zalana czerwonym światłem: aktorzy wokół przezroczystej, świecącej kurtyny." },
+    paragraphs: [
+      "Spektakl familijny na podstawie dramatu Philippe’a Dorina.",
+      "Premiera: 4.10.2025.",
+    ],
   },
   {
-    year: 2025, title: "Harun i morze opowieści", image: { src: "/photos/harun.jpg", alt: "Dwóch aktorów na tle fioletowego morza; jeden w kamizelce ratunkowej, drugi w pióropuszu z pomarańczowych piór." }, author: "Salman Rushdie", venue: "Teatr Lalka w Warszawie",
-    description: "Spektakl familijny, będący adaptacją powieści słynnego autora, Salmana Rushdiego. Reżyseria, adaptacja, teksty piosenek. Premiera: 1.03.2025.",
+    title: "Harun i morze opowieści", role: "Reżyseria, adaptacja, teksty piosenek", theatre: "Teatr Lalka w Warszawie", year: 2025,
+    image: { src: "/photos/harun.jpg", alt: "Dwóch aktorów na tle fioletowego morza; jeden w kamizelce ratunkowej, drugi w pióropuszu z pomarańczowych piór." },
+    paragraphs: [
+      "Spektakl familijny, będący adaptacją powieści słynnego autora, Salmana Rushdiego.",
+      "Premiera: 1.03.2025.",
+    ],
   },
   {
-    year: 2024, title: "Huśtawka", image: { src: "/photos/hustawka.jpg", alt: "Dwie postaci-lalki siedzą na miękkim, fioletowym podeście pod zwisającymi pasami materiału." }, author: "Timo Parvela", venue: "Teatr Maska w Rzeszowie",
-    description: "Spektakl dla widowni dziecięcej operujący narzędziami szeroko pojętego teatru formy. Reżyseria, adaptacja, teksty piosenek.",
+    title: "Huśtawka", role: "Reżyseria, adaptacja, teksty piosenek", theatre: "Teatr Maska w Rzeszowie", year: 2024,
+    image: { src: "/photos/hustawka.jpg", alt: "Dwie postaci-lalki siedzą na miękkim, fioletowym podeście pod zwisającymi pasami materiału." },
+    paragraphs: [
+      "Spektakl dla widowni dziecięcej operujący narzędziami szeroko pojętego teatru formy.",
+      "Na podstawie tekstu Timo Parveli.",
+    ],
   },
   {
-    year: 2023, title: "Hystericon", image: { src: "/photos/hystericon.jpg", alt: "Aktor w masce starca opiera się o stos kartonowych pudeł." }, author: "Ingrid Lausund", venue: "Teatr Akademii Sztuk Teatralnych w Krakowie, Filii we Wrocławiu",
-    description: "Spektakl dramatyczny na podstawie współczesnego dramatu zrealizowany ze studentami Akademii Sztuk Teatralnych. Adaptacja i reżyseria.",
+    title: "Hystericon", role: "Adaptacja i reżyseria", theatre: "Teatr Akademii Sztuk Teatralnych w Krakowie, Filii we Wrocławiu", year: 2023,
+    image: { src: "/photos/hystericon.jpg", alt: "Aktor w masce starca opiera się o stos kartonowych pudeł." },
+    paragraphs: [
+      "Spektakl dramatyczny na podstawie współczesnego dramatu zrealizowany ze studentami Akademii Sztuk Teatralnych.",
+      "Na podstawie tekstu Ingrid Lausund.",
+    ],
   },
   {
-    year: 2022, title: "Tonja z Glimmerdalen", image: { src: "/photos/tonja.jpg", alt: "Aktorzy w swetrach przy stole z czerwonym obrusem na tle drewnianej ściany." }, author: "Maria Parr", venue: "Miejski Teatr Miniatura w Gdańsku",
-    description: "Spektakl familijny na podstawie kultowej powieści skandynawskiej autorki. Nagrodzony Grand Prix na 26. Międzynarodowym Festiwalu Korczak w Warszawie. Reżyseria i adaptacja.",
-  },
-  { year: 2021, title: "Opowieść wigilijna", image: { src: "/photos/opowiesc-wigilijna.jpg", alt: "Chłopiec i starszy mężczyzna w ozdobnym szlafroku czytają razem książkę, siedząc na scenie." }, author: "Charles Dickens", venue: "Nowy Teatr w Słupsku",
-    description: "Spektakl familijny, klasyczna opowieść według Charlesa Dickensa w nowej odsłonie. Reżyseria, adaptacja, teksty piosenek.",
-  },
-  {
-    year: 2020, title: "Rutka", image: { src: "/photos/rutka.jpg", alt: "Aktorzy budują miasto z czerwonych klocków w niebiesko-czerwonym świetle." }, author: "Joanna Fabicka", venue: "Teatr Lalek Arlekin w Łodzi",
-    description: "Spektakl zrealizowany w ramach Konkursu im. Jana Dormana Instytutu Teatralnego w Warszawie. Przedstawienie prezentowane i nagradzane na licznych festiwalach teatralnych w kraju i za granicą. Reżyseria i adaptacja.",
+    title: "Tonja z Glimmerdalen", role: "Reżyseria i adaptacja", theatre: "Miejski Teatr Miniatura w Gdańsku", year: 2022,
+    image: { src: "/photos/tonja.jpg", alt: "Aktorzy w swetrach przy stole z czerwonym obrusem na tle drewnianej ściany." },
+    paragraphs: [
+      "Spektakl familijny na podstawie kultowej powieści skandynawskiej autorki.",
+      "Nagrodzony Grand Prix na 26. Międzynarodowym Festiwalu Korczak w Warszawie.",
+      "Na podstawie tekstu Marii Parr.",
+    ],
   },
   {
-    year: 2020, title: "Akademia Pana Kleksa", image: { src: "/photos/akademia-pana-kleksa.png", alt: "Aktor prowadzi lalkę przed oszkloną konstrukcją, w której przykucnięta jest postać w bieli." }, author: "Jan Brzechwa", venue: "Teatr Lalki i Aktora w Wałbrzychu",
-    description: "Spektakl dla widowni dziecięcej operujący narzędziami teatru formy na podstawie powieści Jana Brzechwy. Współczesne odczytanie znanej powieści. Reżyseria i adaptacja.",
+    title: "Opowieść wigilijna", role: "Reżyseria, adaptacja, teksty piosenek", theatre: "Nowy Teatr w Słupsku", year: 2021,
+    image: { src: "/photos/opowiesc-wigilijna.jpg", alt: "Chłopiec i starszy mężczyzna w ozdobnym szlafroku czytają razem książkę, siedząc na scenie." },
+    paragraphs: [
+      "Spektakl familijny, klasyczna opowieść według Charlesa Dickensa w nowej odsłonie.",
+    ],
   },
   {
-    year: 2019, title: "Królowa śniegu", image: { src: "/photos/krolowa-sniegu.jpg", alt: "Aktorki w fantazyjnych nakryciach głowy z lustrzanymi taflami na ciemnej scenie." }, author: "H. Ch. Andersen", venue: "Śląski Teatr Ateneum w Katowicach",
-    description: "Spektakl dla widowni dziecięcej operujący środkami teatru lalek na podstawie klasycznej baśni. Nowe odczytanie znanej opowieści. Reżyseria i adaptacja.",
+    title: "Rutka", role: "Reżyseria i adaptacja", theatre: "Teatr Lalek Arlekin w Łodzi", year: 2020,
+    image: { src: "/photos/rutka.jpg", alt: "Aktorzy budują miasto z czerwonych klocków w niebiesko-czerwonym świetle." },
+    paragraphs: [
+      "Spektakl zrealizowany w ramach Konkursu im. Jana Dormana Instytutu Teatralnego w Warszawie.",
+      "Przedstawienie prezentowane i nagradzane na licznych festiwalach teatralnych w kraju i za granicą.",
+      "Na podstawie tekstu Joanny Fabickiej.",
+    ],
   },
   {
-    year: 2019, title: "Fru-Fru", image: { src: "/photos/fru-fru.jpg", alt: "Rząd świecących, białych kul przypominających lampiony na czarnym tle." }, author: "Nguyen Tran Thien Loc", venue: "Olsztyński Teatr Lalek",
-    description: "Spektakl dla najmłodszych widzów (od lat 4) na podstawie picture booka „Metamorfoza Fru-Fru”. Przedstawienie operujące narzędziami szeroko pojętego teatru formy. Reżyseria i scenariusz.",
+    title: "Akademia Pana Kleksa", role: "Reżyseria i adaptacja", theatre: "Teatr Lalki i Aktora w Wałbrzychu", year: 2020,
+    image: { src: "/photos/akademia-pana-kleksa.png", alt: "Aktor prowadzi lalkę przed oszkloną konstrukcją, w której przykucnięta jest postać w bieli." },
+    paragraphs: [
+      "Spektakl dla widowni dziecięcej operujący narzędziami teatru formy na podstawie powieści Jana Brzechwy.",
+      "Współczesne odczytanie znanej powieści.",
+    ],
   },
   {
-    year: 2018, title: "Dzieci obcych bogów", image: { src: "/photos/dzieci-obcych-bogow.jpg", alt: "Aktor w niebieskiej kurtce przy stole w synagodze; w tle wiolonczelistka." }, venue: "Festiwal Dotknij Teatru w Łodzi",
-    description: "Spektakl oparty na scenariuszu według tekstów dokumentalnych (relacji dzieci różnych narodowości mieszkających w łódzkim getcie) z użyciem fragmentów autorskiego tekstu „Wyspa Chudych”. Projekt zrealizowany w Synagodze Reicherów w Łodzi z aktorami Teatru Nowego oraz Teatru Lalek Arlekin.",
+    title: "Królowa śniegu", role: "Reżyseria i adaptacja", theatre: "Śląski Teatr Ateneum w Katowicach", year: 2019,
+    image: { src: "/photos/krolowa-sniegu.jpg", alt: "Aktorki w fantazyjnych nakryciach głowy z lustrzanymi taflami na ciemnej scenie." },
+    paragraphs: [
+      "Spektakl dla widowni dziecięcej operujący środkami teatru lalek na podstawie klasycznej baśni.",
+      "Nowe odczytanie znanej opowieści.",
+      "Na podstawie tekstu H. Ch. Andersena.",
+    ],
   },
-  { year: 2016, title: "Piotruś Pan", image: { src: "/photos/piotrus-pan.jpg", alt: "Postaci w spiczastych czapkach w kłębach niebieskiego dymu na szachownicowej podłodze." }, author: "J.M. Barrie", venue: "Teatr Lalki i Aktora w Wałbrzychu" },
-  { year: 2016, title: "Ronja, córka zbójnika", image: { src: "/photos/ronja.jpg", alt: "Zbójnicy w futrach i hełmach z rogami wspinają się na pochyłą drewnianą płytę." }, author: "Astrid Lindgren", venue: "Teatr Pinokio w Łodzi" },
-  { year: 2015, title: "Wołanie miasta", image: { src: "/photos/wolanie-miasta.jpg", alt: "Zespół muzyczny na scenie w różowym świetle; wokalistka w czerwonej marynarce." }, author: "wg Andrzeja Barta", venue: "Teatr Pinokio w Łodzi" },
-  { year: 2013, title: "Koralina", image: { src: "/photos/koralina.jpg", alt: "Aktorka z durszlakiem na głowie i czerwonym szalikiem wyciąga rękę; obok postać w białym futrze." }, author: "Neil Gaiman", venue: "Teatr Pinokio w Łodzi" },
-  { year: 2013, title: "Disco pigs", image: { src: "/photos/disco-pigs.jpg", alt: "Dwoje młodych aktorów w dynamicznym ruchu w kręgu światła na ciemnej scenie." }, author: "Enda Walsh", venue: "Teatr Rawa w Katowicach" },
-  { year: 2007, title: "Woyzeck", image: { src: "/photos/woyzeck.jpg", alt: "Aktorka w żółtej bluzce z rękami uniesionymi do głowy w ciepłym świetle." }, author: "Georg Buchner", venue: "Teatr im. Jaracza w Olsztynie" },
+  {
+    title: "Fru-Fru", role: "Reżyseria i scenariusz", theatre: "Olsztyński Teatr Lalek", year: 2019,
+    image: { src: "/photos/fru-fru.jpg", alt: "Rząd świecących, białych kul przypominających lampiony na czarnym tle." },
+    paragraphs: [
+      "Spektakl dla najmłodszych widzów (od lat 4) na podstawie picture booka „Metamorfoza Fru-Fru”.",
+      "Przedstawienie operujące narzędziami szeroko pojętego teatru formy.",
+      "Na podstawie tekstu Nguyen Tran Thien Loc.",
+    ],
+  },
+  {
+    title: "Dzieci obcych bogów", role: "Reżyseria", theatre: "Festiwal Dotknij Teatru w Łodzi", year: 2018,
+    image: { src: "/photos/dzieci-obcych-bogow.jpg", alt: "Aktor w niebieskiej kurtce przy stole w synagodze; w tle wiolonczelistka." },
+    paragraphs: [
+      "Spektakl oparty na scenariuszu według tekstów dokumentalnych (relacji dzieci różnych narodowości mieszkających w łódzkim getcie) z użyciem fragmentów autorskiego tekstu „Wyspa Chudych”.",
+      "Projekt zrealizowany w Synagodze Reicherów w Łodzi z aktorami Teatru Nowego oraz Teatru Lalek Arlekin.",
+    ],
+  },
+  {
+    title: "Piotruś Pan", role: "Reżyseria", theatre: "Teatr Lalki i Aktora w Wałbrzychu", year: 2016,
+    image: { src: "/photos/piotrus-pan.jpg", alt: "Postaci w spiczastych czapkach w kłębach niebieskiego dymu na szachownicowej podłodze." },
+    paragraphs: [
+      "Na podstawie tekstu J.M. Barriego.",
+    ],
+  },
+  {
+    title: "Ronja, córka zbójnika", role: "Reżyseria", theatre: "Teatr Pinokio w Łodzi", year: 2016,
+    image: { src: "/photos/ronja.jpg", alt: "Zbójnicy w futrach i hełmach z rogami wspinają się na pochyłą drewnianą płytę." },
+    paragraphs: [
+      "Na podstawie tekstu Astrid Lindgren.",
+    ],
+  },
+  {
+    title: "Wołanie miasta", role: "Reżyseria", theatre: "Teatr Pinokio w Łodzi", year: 2015,
+    image: { src: "/photos/wolanie-miasta.jpg", alt: "Zespół muzyczny na scenie w różowym świetle; wokalistka w czerwonej marynarce." },
+    paragraphs: [
+      "Na podstawie tekstu Andrzeja Barta.",
+    ],
+  },
+  {
+    title: "Koralina", role: "Reżyseria", theatre: "Teatr Pinokio w Łodzi", year: 2013,
+    image: { src: "/photos/koralina.jpg", alt: "Aktorka z durszlakiem na głowie i czerwonym szalikiem wyciąga rękę; obok postać w białym futrze." },
+    paragraphs: [
+      "Na podstawie tekstu Neila Gaimana.",
+    ],
+  },
+  {
+    title: "Disco pigs", role: "Reżyseria", theatre: "Teatr Rawa w Katowicach", year: 2013,
+    image: { src: "/photos/disco-pigs.jpg", alt: "Dwoje młodych aktorów w dynamicznym ruchu w kręgu światła na ciemnej scenie." },
+    paragraphs: [
+      "Na podstawie tekstu Endy Walsha.",
+    ],
+  },
+  {
+    title: "Woyzeck", role: "Reżyseria", theatre: "Teatr im. Jaracza w Olsztynie", year: 2007,
+    image: { src: "/photos/woyzeck.jpg", alt: "Aktorka w żółtej bluzce z rękami uniesionymi do głowy w ciepłym świetle." },
+    paragraphs: [
+      "Na podstawie tekstu Georga Buchnera.",
+    ],
+  },
 ];
 
 export type Content = typeof pl;
