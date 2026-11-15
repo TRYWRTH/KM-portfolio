@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { pl, sections, num, sectionById } from "@/content/pl";
 
 // Parallax depth per label, same formula as the reference: .5 + ((i*37) % 10) / 10
 const depth = (i: number) => 0.5 + ((i * 37) % 10) / 10;
 
-export default function Landing({ open }: { open: boolean }) {
+export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoLoad?: () => void }) {
   const photo = useRef<HTMLImageElement>(null);
   const labs = useRef<HTMLDivElement>(null);
   const openRef = useRef(open);
@@ -61,6 +61,7 @@ export default function Landing({ open }: { open: boolean }) {
             quality={72}
             sizes="(max-aspect-ratio: 3/2) 156vh, 104vw"
             draggable={false}
+            onLoad={onPhotoLoad}
           />
         </div>
       </div>
@@ -82,7 +83,23 @@ export default function Landing({ open }: { open: boolean }) {
         </nav>
 
         <div className="name">
-          <h1>{pl.name}</h1>
+          <h1 aria-label={pl.name}>
+            {pl.name.split(" ").map((word, w, words) => (
+              <Fragment key={w}>
+              {w > 0 ? " " : null}
+              <span className="word" aria-hidden>
+                {Array.from(word).map((ch, c) => {
+                  const i = words.slice(0, w).join("").length + c; // letter index across the name
+                  return (
+                    <span className="ch" key={c} style={{ "--cd": `${Math.round(i * i * 2.9)}ms` } as React.CSSProperties}>
+                      {ch}
+                    </span>
+                  );
+                })}
+              </span>
+              </Fragment>
+            ))}
+          </h1>
           <p>{pl.tagline}</p>
         </div>
 

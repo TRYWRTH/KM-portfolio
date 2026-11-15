@@ -8,6 +8,9 @@ import { num, pl, sectionByPath, sections, type Side } from "@/content/pl";
 
 const HIDE: Record<Side, string> = { l: "inset(0 100% 0 0)", r: "inset(0 0 0 100%)" };
 const SWAP_MS = 220;
+// Intro: letters start at 500ms; last letter (index 18) starts at 18²·2.9ms ≈ 940ms and runs 1s.
+const INTRO_LETTERS_MS = 2500;
+const INTRO_MAX_MS = 6000; // reveal anyway if the photo is slow
 const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 /**
@@ -23,6 +26,17 @@ export default function Shell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(!!section); // open on first paint for direct loads
   const [ready, setReady] = useState(false); // no transitions until hydrated
   const [shownPath, setShownPath] = useState(pathname);
+  // White intro with the name clearing out of the fog; only on a fresh load of "/".
+  const [intro, setIntro] = useState(pathname === "/");
+  const photoLoaded = useRef(false);
+  const lettersDone = useRef(false);
+  const endIntro = useCallback(() => {
+    if (photoLoaded.current && lettersDone.current) setIntro(false);
+  }, []);
+  const onPhotoLoad = useCallback(() => {
+    photoLoaded.current = true;
+    endIntro();
+  }, [endIntro]);
 
   const curtain = useRef<HTMLDivElement>(null);
   const page = useRef<HTMLElement>(null);
@@ -41,6 +55,21 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     const id = requestAnimationFrame(() => setReady(true));
     return () => cancelAnimationFrame(id);
   }, []);
+
+  useEffect(() => {
+    if (!intro) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return setIntro(false);
+    if (document.querySelector<HTMLImageElement>("#bg img")?.complete) photoLoaded.current = true;
+    const a = setTimeout(() => {
+      lettersDone.current = true;
+      endIntro();
+    }, INTRO_LETTERS_MS);
+    const b = setTimeout(() => setIntro(false), INTRO_MAX_MS);
+    return () => {
+      clearTimeout(a);
+      clearTimeout(b);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useIsoLayoutEffect(() => {
     pathRef.current = pathname;
@@ -109,8 +138,8 @@ export default function Shell({ children }: { children: React.ReactNode }) {
   }, [open, close]);
 
   return (
-    <div className={open ? "stage open" : "stage"}>
-      <Landing open={open} />
+    <div className={"stage" + (open ? " open" : "") + (intro ? " intro" : "")}>
+      <Landing open={open} onPhotoLoad={onPhotoLoad} />
 
       <div id="curtain" ref={curtain} data-nt={ready ? undefined : ""} inert={!open} aria-hidden={!open}>
         <div className="c c1" />

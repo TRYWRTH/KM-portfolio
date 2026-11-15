@@ -10,6 +10,7 @@
   --serif: var(--font-serif), "Instrument Serif", "Times New Roman", serif;
   --mono: var(--font-mono), "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   --ease: cubic-bezier(.76, 0, .18, 1);
+  --ease-io: cubic-bezier(.8, 0, .2, 1);
 }
 * { box-sizing: border-box; margin: 0; padding: 0 }
 html, body {
@@ -25,8 +26,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 a { color: inherit; text-decoration: none }
 .tiny { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 500 }
 
+.stage { position: fixed; inset: 0; background: #1c1c1d; transition: background-color 1s var(--ease-io) }
+
 /* ---------- photo = the whole background ---------- */
-#bg { position: fixed; inset: 0; overflow: hidden }
+#bg { position: fixed; inset: 0; overflow: hidden; transition: opacity 1s var(--ease-io), transform 1s var(--ease-io) }
 #bg .drift {
   position: absolute; inset: -2%;
   transform: scale(1.04);
@@ -67,11 +70,13 @@ a { color: inherit; text-decoration: none }
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -52%);
   text-align: center; pointer-events: none !important; width: max-content; max-width: 94vw;
 }
+.name { text-shadow: 0 1px 14px rgba(0,0,0,.35); transition: color 1s var(--ease-io), text-shadow 1s var(--ease-io) }
 .name h1 {
   font-family: var(--serif); font-weight: 400; text-transform: none;
-  font-size: clamp(2.8rem, 8.4vw, 8.6rem); line-height: .95; letter-spacing: -.025em; white-space: nowrap;
+  font-size: calc(2.25rem + 2.25vw); line-height: 1; letter-spacing: -.015em; white-space: nowrap;
 }
-.name p { margin-top: 18px; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 400; opacity: .9 }
+.name .word, .name .ch { display: inline-block }
+.name p { margin-top: 14px; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 400; opacity: .9 }
 
 .labs { position: absolute; inset: 0; pointer-events: none !important }
 .lab {
@@ -100,6 +105,18 @@ a { color: inherit; text-decoration: none }
 /* visible keyboard focus (labels also show underline + teaser) */
 .lab, .top a { outline: none }
 .top a:focus-visible, .lab:focus-visible .l { outline: 1px dashed currentColor; outline-offset: 5px }
+
+/* ---------- intro: white page, the name clears out of the fog ---------- */
+.top, .labs, .name p { transition: opacity 1s var(--ease-io), visibility 0s }
+.top { transition-delay: .25s }
+.name p { transition-delay: .35s }
+.labs { transition-delay: .5s }
+.stage.intro { background: var(--white) }
+.stage.intro #bg { opacity: 0; transform: scale(1.05) }
+.stage.intro .name { color: var(--ink); text-shadow: none }
+.stage.intro :is(.top, .labs, .name p) { opacity: 0; visibility: hidden; transition: none }
+.stage.intro .name .ch { animation: fog 1s cubic-bezier(.5, 1, .89, 1) calc(.5s + var(--cd)) both }
+@keyframes fog { from { opacity: 0; filter: blur(15px) } to { opacity: 1; filter: blur(0) } }
 
 /* ---------- curtain ---------- */
 #curtain { position: fixed; inset: 0; z-index: 30; pointer-events: none; --hide: inset(0 0 0 100%) }
@@ -148,11 +165,12 @@ a { color: inherit; text-decoration: none }
   .lab { left: var(--mx); top: var(--my) }
   .bar { grid-template-columns: auto 1fr auto; gap: 10px }
   .tabs { display: none }
-  .name h1 { white-space: normal; font-size: clamp(3rem, 15vw, 5rem) }
+  .name h1 { font-size: clamp(2.6rem, 12vw, 3.6rem) }
+  .name .word { display: block }
   .lab .t { display: none }
 }
 @media (prefers-reduced-motion: reduce) {
-  #bg .drift, .lab .w { animation: none }
+  #bg .drift, .lab .w, .stage.intro .name .ch { animation: none }
   #curtain .c { transition-duration: .01s }
   #view, #view > * { transition-duration: .01s }
 }

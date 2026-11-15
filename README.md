@@ -42,3 +42,7 @@ Replace `public/karolina.jpg` with the new image (landscape, about 2400px wide).
 ## How the curtain works
 
 `Shell` is a client component in the root layout, so the landing page stays mounted under every route. When the pathname becomes a section, the ink layer and then the white page layer (+140 ms) wipe in with `clip-path` from the side that section's link lives on (`side` in `content/pl.ts`). Going back to `/` (Zamknij, Esc, the home link or the browser back button) reverses the wipe on the same side. Closing uses `history.back()` when you came from `/`, so it doesn't stack history entries. Tabs inside the page use `replace` and only cross-fade the content (220 ms). Direct loads of a section render it already open, with no animation.
+
+## Intro
+
+On a fresh load of `/`, the page starts white and the name clears out of a blur, one letter at a time (`.stage.intro` in `app/globals.css`, letter delays in `components/Landing.tsx`). Once the letters have finished and the photo has loaded, `Shell` removes the `intro` class: the photo fades in from 105% scale, the name turns white, and the nav and labels follow. If the photo is slow, the page is revealed after 6s anyway. Visitors with reduced motion get no intro. Section URLs opened directly skip it too.
