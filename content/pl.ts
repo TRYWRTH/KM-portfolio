@@ -92,19 +92,6 @@ export const about = {
     "Pracuje w teatrach dramatycznych i lalkowych, instytucjonalnych i offowych. W ostatnich latach aktywnie działa w teatrze formy: łączącym elementy teatru dramatycznego i teatru plastycznego.",
     "Współzałożycielka i członkini kolektywu akcjonistycznego „Czarne Szmaty”. Wykładowczyni w Akademii Sztuk Teatralnych w Krakowie, Filii we Wrocławiu, w latach 2020–2024 Prodziekanka d.s. reżyserii na w/w uczelni.",
   ],
-  awardsIntro: "Nagradzana za spektakle dla młodzieży: m.in.",
-  awards: [
-    {
-      lead: "Grand Prix",
-      rest: "26. Międzynarodowego Festiwalu Teatru dla dzieci i młodzieży „Korczak dzisiaj” w Warszawie 2022 za przedstawienie „Tonja z Glimmerdalen” zrealizowane w Miejskim Teatrze Miniatura w Gdańsku",
-    },
-    { lead: "Grand Prix", rest: "XIII Festiwalu Mała Boska Komedia w Krakowie 2020" },
-    { lead: "Nagroda za najlepszą reżyserię", rest: "na 27. Festiwalu Teatrów Lalek „Spotkania” w Toruniu" },
-    {
-      lead: "Wyróżnienia jury profesjonalnego i jury młodzieżowego",
-      rest: "na 25. Międzynarodowym Festiwalu Teatrów dla Dzieci i Młodzieży „Korczak dzisiaj” dla spektaklu „Rutka” zrealizowanego w Teatrze Arlekin w Łodzi",
-    },
-  ],
 };
 
 // Kolektyw Czarne Szmaty
@@ -177,7 +164,7 @@ export interface Award {
   list?: string[];
 }
 
-// Full list of awards. Not shown on the site at the moment (the O mnie page lists a selection in `about.awards`).
+// Full list of awards: the "Nagrody" section on O mnie (left column, after Praca dydaktyczna).
 export const awardsTitle = "Nagrody";
 export const awards: Award[] = [
   {

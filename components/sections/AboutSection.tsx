@@ -1,7 +1,7 @@
 import Entry from "@/components/AbEntry";
-import { about } from "@/content/pl";
+import { about, awards, awardsTitle } from "@/content/pl";
 
-/** O mnie: left column = title + collapsible sections (closed by default), right column = bio + selected awards. */
+/** O mnie: left column = title + collapsible sections (closed by default, Nagrody last), right column = bio. */
 export default function AboutSection() {
   return (
     <div className="ab">
@@ -33,6 +33,22 @@ export default function AboutSection() {
               </div>
             </details>
           ))}
+          <details className="ab-acc">
+            <summary>
+              <h2 className="ab-acc-title">
+                <span>{awardsTitle}</span>
+                <span className="ab-icon" aria-hidden />
+              </h2>
+            </summary>
+            <div className="ab-acc-body">
+              {awards.map((a) => (
+                <Entry
+                  key={a.title + (a.festival ?? "")}
+                  e={{ label: a.year ? String(a.year) : undefined, title: a.title, description: a.festival, more: [a.description], list: a.list }}
+                />
+              ))}
+            </div>
+          </details>
         </div>
       </div>
 
@@ -43,14 +59,6 @@ export default function AboutSection() {
             {p}
           </p>
         ))}
-        <p className="ab-p ab-awards-intro">{about.awardsIntro}</p>
-        <ul className="ab-awards">
-          {about.awards.map((a) => (
-            <li key={a.rest}>
-              <strong>{a.lead}</strong> {a.rest}
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );
