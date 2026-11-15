@@ -14,6 +14,8 @@ export interface Section {
   topBar?: true;
   /** words dropped from the label on narrow screens (< 768px), e.g. "Kolektyw" */
   mobileHide?: string;
+  /** photo shown blurred, behind tinted glass, as the page background */
+  bg: string;
   /** side the link lives on = side the curtain wipes in from */
   side: Side;
 }
@@ -40,11 +42,11 @@ export const pl = {
   // the tabs inside an open page, and the 01–04 numbering on the kickers.
   sections: [
     // bio + timeline (education, Kalendarium) + teaching at the Akademia
-    { id: "about", slug: "o-mnie", label: "O mnie", side: "l" },
+    { id: "about", slug: "o-mnie", label: "O mnie", bg: "/karolina.jpg", side: "l" },
     // her main work
-    { id: "work", slug: "rezyseria", label: "Reżyseria", side: "l" },
-    { id: "czsz", slug: "czarne-szmaty", label: "Kolektyw Czarne Szmaty", mobileHide: "Kolektyw", side: "l" },
-    { id: "contact", slug: "kontakt", label: "Kontakt", side: "r", topBar: true },
+    { id: "work", slug: "rezyseria", label: "Reżyseria", bg: "/photos/orlice.jpg", side: "l" },
+    { id: "czsz", slug: "czarne-szmaty", label: "Kolektyw Czarne Szmaty", mobileHide: "Kolektyw", bg: "/photos/granica-pogardy.jpg", side: "l" },
+    { id: "contact", slug: "kontakt", label: "Kontakt", bg: "/photos/ulanskie-fantazje.jpg", side: "r", topBar: true },
   ] satisfies Section[],
 };
 

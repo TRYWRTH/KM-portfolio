@@ -27,6 +27,7 @@ The script uses Playwright (`npm i -D playwright` if it is not installed globall
 | Landing page (photo, veil, name, bottom navigation, intro) | `components/Landing.tsx` |
 | Curtain + section page chrome (top bar, tabs, Esc, history) | `components/Shell.tsx` |
 | Styles (ported 1:1 from the reference) | `app/globals.css` |
+| Subpage background photos (blurred behind palette-tinted glass; pick one per section with `bg` in `content/pl.ts`) | `public/photos/` |
 | One component per section (placeholders for now) | `components/sections/*.tsx` |
 | Routes (`/o-mnie`, `/rezyseria`, `/czarne-szmaty`, `/kontakt`) | `app/<slug>/page.tsx` |
 | Original visual reference | `reference/v2.html` |

@@ -50,6 +50,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
   // Tab switch while open: keep showing the old content until it has faded out.
   const swapping = open && !!section && shownPath !== pathname && !!sectionByPath(shownPath);
   const snapshot = useRef<React.ReactNode>(children);
+  const glassSrc = (sectionByPath(shownPath) ?? sections[0]).bg;
   if (section && !swapping) snapshot.current = children;
 
   useEffect(() => {
@@ -145,9 +146,9 @@ export default function Shell({ children }: { children: React.ReactNode }) {
       <div id="curtain" ref={curtain} data-nt={ready ? undefined : ""} inert={!open} aria-hidden={!open}>
         <div className="c c1" />
         <div className="c c2">
-          {/* frosted glass: the hero photo, heavily blurred, under a light wash */}
+          {/* tinted glass: the section's photo, heavily blurred, under a palette tint */}
           <div className="glass" aria-hidden>
-            <Image src="/karolina.jpg" alt="" fill sizes="480px" quality={40} />
+            <Image key={glassSrc} src={glassSrc} alt="" fill sizes="480px" quality={40} />
           </div>
           <header className="bar tiny">
             <a

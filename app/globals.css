@@ -2,16 +2,14 @@
 :root {
   --ink: #0d0d0e;
   --white: #fdfdfc;
-  --mute: #7d7b75;
-  --line: #d6d5d0;
-  --red: #d6281c;
   --pad: clamp(16px, 2.2vw, 34px);
   --ox: 71%;
   --serif: var(--font-serif), "Instrument Serif", "Times New Roman", serif;
-  --sans: var(--font-sans), "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
   --mono: var(--font-mono), "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   --ease: cubic-bezier(.76, 0, .18, 1);
   --ease-io: cubic-bezier(.8, 0, .2, 1);
+  /* subpage palette */
+  --ash: #b2beb5; --blue-gray: #7393b3; --charcoal: #36454f; --dark-gray: #a9a9a9; --glaucous: #6082b6;
 }
 * { box-sizing: border-box; margin: 0; padding: 0 }
 html, body {
@@ -119,13 +117,20 @@ a { color: inherit; text-decoration: none }
 #curtain { position: fixed; inset: 0; z-index: 30; pointer-events: none; --hide: inset(0 0 0 100%) }
 #curtain .c { position: absolute; inset: 0; clip-path: var(--hide); transition: clip-path .9s var(--ease) }
 #curtain .c1 { background: var(--ink) }
-#curtain .c2 { background: var(--white); display: flex; flex-direction: column; overflow: hidden; font-family: var(--sans) }
+#curtain .c2 { background: var(--charcoal); color: #fff; display: flex; flex-direction: column; overflow: hidden; font-family: var(--mono) }
+/* tinted glass: blurred, desaturated photo under a Charcoal / Glaucous / Blue Gray tint */
 #curtain .glass { position: absolute; inset: 0; overflow: hidden; pointer-events: none }
-#curtain .glass img { object-fit: cover; object-position: var(--ox) 0%; filter: blur(48px) saturate(.85); transform: scale(1.25) }
-#curtain .glass::after { content: ""; position: absolute; inset: 0; background: rgba(253,253,252,.58) }
+#curtain .glass img { object-fit: cover; object-position: 50% 30%; filter: blur(44px) saturate(.45) brightness(.75); transform: scale(1.25); animation: glass-in .6s ease both }
+@keyframes glass-in { from { opacity: 0 } }
+#curtain .glass::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(110% 80% at 90% 15%, rgba(115,147,179,.28), rgba(115,147,179,0) 60%),
+    linear-gradient(160deg, rgba(54,69,79,.8) 0%, rgba(54,69,79,.6) 35%, rgba(96,130,182,.36) 65%, rgba(54,69,79,.82) 100%);
+}
 #curtain .c2 > :not(.glass) { position: relative; z-index: 1 }
 /* subpages: grotesk type, calm single column, easy to read */
-#curtain .tiny { font-size: .75rem; letter-spacing: .06em; font-weight: 600 }
+#curtain .tiny { font-size: 12px; letter-spacing: .18em; font-weight: 500 }
 .stage:not(.open) #curtain .c1 { transition-delay: .12s }
 .stage.open #curtain .c2 { transition-delay: .14s }
 .stage.open #curtain { pointer-events: auto }
@@ -134,21 +139,24 @@ a { color: inherit; text-decoration: none }
 
 .bar {
   flex: none; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-  padding: var(--pad); border-bottom: 1px solid var(--line); opacity: 0; transition: opacity .5s;
+  padding: var(--pad); border-bottom: 1px solid rgba(178,190,181,.22); opacity: 0; transition: opacity .5s;
 }
 .stage.open .bar, .stage.open #view > * { transition-delay: .7s }
 .stage.open .bar { opacity: 1 }
 .bar .home { justify-self: start }
-.tabs { display: flex; gap: 2px; flex-wrap: wrap; justify-content: center }
+/* tabs look like the hero menu: text only, same gap between every item */
+.tabs { display: flex; gap: 12px 40px; flex-wrap: wrap; justify-content: center }
 .tabs a {
-  padding: 7px 11px; border-radius: 99px; font-size: .7rem; letter-spacing: .05em; font-weight: 600; text-transform: uppercase;
-  color: var(--mute); transition: color .2s, background .2s;
+  font-size: 12px; letter-spacing: .18em; font-weight: 500; text-transform: uppercase; white-space: nowrap;
+  color: #fff; opacity: .7; text-decoration: underline 1px transparent; text-underline-offset: 6px;
+  transition: opacity .2s, text-decoration-color .2s;
 }
-.tabs a:hover { color: var(--ink) }
-.tabs a[aria-current="page"] { background: var(--ink); color: var(--white) }
+.tabs a:is(:hover, :focus-visible), .tabs a[aria-current="page"] { opacity: 1; text-decoration-color: currentColor }
 .bar .close { justify-self: end; white-space: nowrap }
-.bar .close:hover, .bar .home:hover { color: var(--red) }
-.bar a:focus-visible, .bar button:focus-visible { outline: 1px dashed currentColor; outline-offset: 4px }
+.bar .home, .bar .close { transition: opacity .2s; text-decoration: underline 1px transparent; text-underline-offset: 6px }
+.bar .close { opacity: .7; text-transform: uppercase }
+.bar .close:is(:hover, :focus-visible), .bar .home:is(:hover, :focus-visible) { opacity: 1; text-decoration-color: currentColor }
+.bar a:focus-visible, .bar button:focus-visible { outline: 1px solid #fff; outline-offset: 4px }
 
 #view {
   flex: 1; overflow: auto; outline: none;
@@ -159,10 +167,10 @@ a { color: inherit; text-decoration: none }
 .stage.open #view > * { opacity: 1; transform: none }
 
 /* placeholder subpage */
-.k { color: var(--mute); margin-bottom: 16px }
+.k { color: #dfe5e1; margin-bottom: 16px } /* Ash Gray lightened for contrast at 12px */
 .h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.8rem, 7.4vw, 7rem); letter-spacing: -.03em; line-height: .92; margin-bottom: 22px }
 .ph { max-width: 68ch }
-.p { font-size: 1.0625rem; line-height: 1.6; color: #34332f; max-width: 60ch; font-weight: 400 }
+.p { font-size: 15px; line-height: 1.75; color: #eef1ef; max-width: 62ch; font-weight: 400 }
 
 @media (max-width: 820px) {
   :root { --ox: 74% }
