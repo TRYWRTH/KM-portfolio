@@ -23,12 +23,12 @@ The script uses Playwright (`npm i -D playwright` if it is not installed globall
 
 | What | Where |
 | --- | --- |
-| All copy (Polish), section list, label positions, teasers, curtain side | `content/pl.ts` |
-| Landing page (photo, veil, name, floating labels, parallax) | `components/Landing.tsx` |
+| All copy (Polish), the four sections (order, labels, curtain side) | `content/pl.ts` |
+| Landing page (photo, veil, name, bottom navigation, intro) | `components/Landing.tsx` |
 | Curtain + section page chrome (top bar, tabs, Esc, history) | `components/Shell.tsx` |
 | Styles (ported 1:1 from the reference) | `app/globals.css` |
 | One component per section (placeholders for now) | `components/sections/*.tsx` |
-| Routes (`/o-mnie`, `/doswiadczenie`, `/rezyseria`, `/czarne-szmaty`, `/nagrody`, `/dydaktyka`, `/kontakt`) | `app/<slug>/page.tsx` |
+| Routes (`/o-mnie`, `/rezyseria`, `/czarne-szmaty`, `/kontakt`) | `app/<slug>/page.tsx` |
 | Original visual reference | `reference/v2.html` |
 
 To design a section, replace the body of its file in `components/sections/`. The curtain logic doesn't need to change.
@@ -45,4 +45,4 @@ Replace `public/karolina.jpg` with the new image (landscape, about 2400px wide).
 
 ## Intro
 
-On a fresh load of `/`, the page starts white and the name clears out of the mist from the middle outwards (letters settle down as they sharpen, the tracking tightens and a soft haze swells and dissolves behind it) (`.stage.intro` in `app/globals.css`, letter delays in `components/Landing.tsx`). Once the letters have finished and the photo has loaded, `Shell` removes the `intro` class: the photo fades in from 105% scale, the name turns white, and the nav and labels follow. If the photo is slow, the page is revealed after 6s anyway. Visitors with reduced motion get no intro. Section URLs opened directly skip it too.
+On a fresh load of `/`, the page starts white and the name clears out of the mist from the middle outwards (letters settle down as they sharpen, the tracking tightens and a soft haze swells and dissolves behind it) (`.stage.intro` in `app/globals.css`, letter delays in `components/Landing.tsx`). Once the letters have finished and the photo has loaded, `Shell` removes the `intro` class: the photo fades in from 105% scale, the name turns white, and the wordmark and bottom navigation follow. If the photo is slow, the page is revealed after 6s anyway. Visitors with reduced motion get no intro. Section URLs opened directly skip it too.

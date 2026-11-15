@@ -169,8 +169,8 @@ a { color: inherit; text-decoration: none }
   .top { left: 20px; top: 20px }
   .hero-nav { left: 20px; right: 20px; bottom: 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px }
   .top a, .hero-nav a { font-size: 12px }
-  /* "Kolektyw Czarne Szmaty" is wider than a half-width column at 390px: let it wrap rather than overlap */
-  .hero-nav a { white-space: normal }
+  /* "Kolektyw Czarne Szmaty" is too wide for a half-width column: show "Czarne Szmaty" */
+  .hero-nav .wide-only { display: none }
 }
 @media (prefers-reduced-motion: reduce) {
   #bg .drift, .stage.intro .name .ch, .stage.intro .name h1 { animation: none }

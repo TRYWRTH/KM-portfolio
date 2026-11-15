@@ -21,7 +21,7 @@ const MID_MS = 450; // ~half of the .9s wipe (+ the 120ms page-layer lag)
     await page.waitForTimeout(400);
     await page.screenshot({ path: path.join(OUT, `${name}-landing.png`) });
 
-    for (const [side, label] of [["left", "Doświadczenie"], ["right", "Nagrody"]]) {
+    for (const [side, label] of [["left", "Reżyseria"], ["right", "Kontakt"]]) {
       await page.getByRole("link", { name: new RegExp(label) }).first().click();
       await page.waitForFunction(() => document.querySelector(".stage.open"));
       await page.waitForTimeout(MID_MS);

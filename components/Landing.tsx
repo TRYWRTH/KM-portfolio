@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useRef } from "react";
-import { pl, sectionById } from "@/content/pl";
+import { pl, sections } from "@/content/pl";
 
 // Intro: letters clear from the middle of the name outwards, with a little
 // deterministic jitter so the mist doesn't lift in a perfectly even wave.
@@ -92,9 +92,16 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
         </div>
 
         <nav className="hero-nav" aria-label={pl.nav.main}>
-          {pl.heroNav.map((item) => (
-            <Link key={item.id} href={"/" + sectionById(item.id).slug} scroll={false}>
-              {item.label}
+          {sections.map((s) => (
+            <Link key={s.id} href={"/" + s.slug} scroll={false}>
+              {s.mobileHide && s.label.startsWith(s.mobileHide) ? (
+                <>
+                  <span className="wide-only">{s.mobileHide} </span>
+                  {s.label.slice(s.mobileHide.length).trim()}
+                </>
+              ) : (
+                s.label
+              )}
             </Link>
           ))}
         </nav>
