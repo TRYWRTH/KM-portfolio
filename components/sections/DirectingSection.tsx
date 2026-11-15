@@ -1,7 +1,6 @@
 import ProductionCard from "@/components/ProductionCard";
 import ScrollReveal from "@/components/ScrollReveal";
-import SectionHeader from "@/components/SectionHeader";
-import { productions } from "@/content/pl";
+import { productions, sectionById } from "@/content/pl";
 
 /**
  * Reżyseria: productions newest first; photos pair up side by side, "wide" ones take the full width.
@@ -10,7 +9,8 @@ import { productions } from "@/content/pl";
 export default function DirectingSection() {
   return (
     <article className="rz">
-      <SectionHeader id="work" />
+      {/* no visible headline: the first photo opens the page, centred; the heading stays for screen readers */}
+      <h1 className="sr-only">{sectionById("work").label}</h1>
       <ol className="rz-grid">
         {productions.map((p) => (
           <li key={`${p.year}-${p.title}`} className={`rz-item${p.wide ? " rz-wide" : ""}`}>

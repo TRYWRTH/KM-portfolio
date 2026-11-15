@@ -147,7 +147,7 @@ a { color: inherit; text-decoration: none }
 .stage.open :is(.bar, .sub-nav) { opacity: 1 }
 
 #view {
-  flex: 1; overflow: auto; outline: none;
+  flex: 1; overflow: auto; outline: none; container-type: size;
   -webkit-mask-image: linear-gradient(transparent, #000 28px, #000 calc(100% - 28px), transparent);
   mask-image: linear-gradient(transparent, #000 28px, #000 calc(100% - 28px), transparent);
   padding: clamp(28px, 4vw, 56px) 48px 48px;
@@ -282,10 +282,13 @@ a { color: inherit; text-decoration: none }
 /* ---------- Reżyseria: pairs side by side, "wide" photos full width (after 1stdecember.com) ---------- */
 .rz { max-width: none }
 .rz-grid {
-  list-style: none; margin-top: clamp(32px, 4vw, 56px); padding-bottom: 24px;
+  list-style: none; margin-top: 0; padding-bottom: 24px;
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 2.8vw, 40px);
 }
 .rz-wide { grid-column: 1 / -1 }
+/* the first photo opens the page centred in the visible area (#view is a size container) */
+.rz-item:first-child { margin-top: max(0px, calc((100cqh - 100cqw * 9 / 32) / 2)) }
+.rz-item.rz-wide:first-child { margin-top: max(0px, calc((100cqh - 100cqw * 3 / 7) / 2)) }
 .rz-item figure { margin: 0 }
 .rz-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: rgba(54,69,79,.6) }
 .rz-wide .rz-frame { aspect-ratio: 7 / 3 }
@@ -295,6 +298,7 @@ a { color: inherit; text-decoration: none }
 @media (max-width: 767.98px) {
   .rz-grid { grid-template-columns: 1fr; gap: 20px }
   .rz-frame, .rz-wide .rz-frame { aspect-ratio: 3 / 2 }
+  .rz-item:first-child, .rz-item.rz-wide:first-child { margin-top: max(0px, calc((100cqh - 100cqw * 2 / 3) / 2)) }
 }
 
 /* ---------- Reżyseria photo cards: small title in the middle + glass curtain ---------- */
@@ -345,18 +349,11 @@ a { color: inherit; text-decoration: none }
 .cv-desc p:last-child { margin-bottom: 0 }
 .cv-text { opacity: 0; transform: translate3d(0, 8px, 0); filter: blur(6px); transition: opacity .35s ease, transform .35s ease, filter .35s ease }
 .pc-sm .cv-text { padding: 28px; font-size: 15px }
-/* open (mobile button) */
+/* open: toggled by clicking the photo (or the info button on touch screens) */
 .pc.is-open .cv { opacity: 1; visibility: visible; transition: opacity .7s cubic-bezier(.4, 0, .2, 1), visibility 0s }
 .pc.is-open .cv-blur img { filter: blur(16px) saturate(1.45) brightness(1.06) }
 .pc.is-open .cv-text { opacity: 1; transform: none; filter: none; transition: opacity .7s ease .2s, transform .9s cubic-bezier(.2, .7, .2, 1) .2s, filter .7s ease .2s }
 
-/* desktop with a real pointer: hover or keyboard focus opens it */
-@media (hover: hover) and (min-width: 768px) {
-  .pc:hover .cv, .pc:focus-within .cv { opacity: 1; visibility: visible; transition: opacity .7s cubic-bezier(.4, 0, .2, 1), visibility 0s }
-  .pc:hover .pc-name, .pc:focus-within .pc-name { opacity: 0 }
-  .pc:hover .cv-blur img, .pc:focus-within .cv-blur img { filter: blur(16px) saturate(1.45) brightness(1.06) }
-  .pc:hover .cv-text, .pc:focus-within .cv-text { opacity: 1; transform: none; filter: none; transition: opacity .7s ease .2s, transform .9s cubic-bezier(.2, .7, .2, 1) .2s, filter .7s ease .2s }
-}
 
 /* info button: only on touch / narrow screens */
 .pc-info { display: none; position: absolute; right: 0; bottom: 0; z-index: 3; width: 48px; height: 48px; align-items: center; justify-content: center; padding: 0 }
@@ -373,7 +370,6 @@ a { color: inherit; text-decoration: none }
 .pc-info:focus-visible .pc-info-dot { outline: 1px solid #fff; outline-offset: 3px }
 @media (hover: none), (max-width: 767.98px) {
   .pc-info { display: flex }
-  .pc .rz-frame { cursor: default }
   .cv-text, .pc-sm .cv-text { padding: 22px; font-size: 13px }
   .cv-desc p { max-width: 300px }
 }
@@ -383,11 +379,6 @@ a { color: inherit; text-decoration: none }
   .pc.is-open .cv { transition: opacity .15s, visibility 0s }
   .cv-blur img, .pc.is-open .cv-blur img { filter: blur(16px) saturate(1.45) brightness(1.06); transition: none }
   .cv-text, .pc.is-open .cv-text { opacity: 1; transform: none; filter: none; transition: none }
-}
-@media (prefers-reduced-motion: reduce) and (hover: hover) and (min-width: 768px) {
-  .pc:hover .cv, .pc:focus-within .cv { transition: opacity .15s, visibility 0s }
-  .pc:hover .cv-blur img, .pc:focus-within .cv-blur img { transition: none }
-  .pc:hover .cv-text, .pc:focus-within .cv-text { transition: none }
 }
 
 
