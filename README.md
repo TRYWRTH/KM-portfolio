@@ -51,3 +51,7 @@ On a fresh load of `/`, the page starts white and the name clears out of the mis
 ## Work with a photo
 
 Any item with a photo is shown as a big picture with a short description beside it (`components/FeatureRow.tsx`). Czarne Szmaty's "Wybrane akcje" use it already. To give a production on Reżyseria a photo, put the file in `public/photos/` and add `image: { src: "/photos/…jpg", alt: "…" }` to that production in `content/pl.ts`.
+
+## Deploying
+
+Vercel deploys only the `main` branch (`git.deploymentEnabled` in `vercel.json`), so work can be pushed to other branches without using up the daily deployment limit. Update `main` when you want the changes live.
