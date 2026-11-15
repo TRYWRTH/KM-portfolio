@@ -33,9 +33,6 @@ export const pl = {
   },
   nav: {
     main: "Główna nawigacja",
-    sections: "Sekcje",
-    close: "Zamknij ×",
-    closeLabel: "Zamknij i wróć na stronę główną",
   },
   placeholder: "W przygotowaniu.",
   // The four sections, in order. Order = the hero navigation (Kontakt sits top right),

@@ -5,7 +5,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import Landing from "@/components/Landing";
-import { num, pl, sectionByPath, sections, type Side } from "@/content/pl";
+import NavLabel from "@/components/NavLabel";
+import { pl, sectionByPath, sections, type Side } from "@/content/pl";
 
 const HIDE: Record<Side, string> = { l: "inset(0 100% 0 0)", r: "inset(0 0 0 100%)" };
 const SWAP_MS = 220;
@@ -50,6 +51,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
   // Tab switch while open: keep showing the old content until it has faded out.
   const swapping = open && !!section && shownPath !== pathname && !!sectionByPath(shownPath);
   const snapshot = useRef<React.ReactNode>(children);
+  const isCurrent = (slug: string) => ("/" + slug === (swapping ? pathname : shownPath) ? ("page" as const) : undefined);
   const glassSrc = (sectionByPath(shownPath) ?? sections[0]).bg;
   if (section && !swapping) snapshot.current = children;
 
@@ -150,30 +152,26 @@ export default function Shell({ children }: { children: React.ReactNode }) {
           <div className="glass" aria-hidden>
             <Image key={glassSrc} src={glassSrc} alt="" fill sizes="480px" quality={40} />
           </div>
-          <header className="bar tiny">
+          {/* same chrome as the home page: wordmark + Kontakt on top, the other sections at the bottom */}
+          <header className="bar">
             <a
               href="/"
-              className="home"
+              className="navlink wordmark"
               onClick={(e) => {
                 e.preventDefault();
                 close();
               }}
             >
-              / {pl.shortName}
+              <span className="sl" aria-hidden>/</span>
+              {pl.shortName}
             </a>
-            <nav className="tabs" aria-label={pl.nav.sections}>
-              {sections.map((s) => {
-                const current = ("/" + s.slug === (swapping ? pathname : shownPath)) || undefined;
-                return (
-                  <Link key={s.id} href={"/" + s.slug} replace scroll={false} aria-current={current && "page"}>
-                    {num(s.id)} {s.label}
-                  </Link>
-                );
-              })}
-            </nav>
-            <button type="button" className="close" onClick={close} aria-label={pl.nav.closeLabel}>
-              {pl.nav.close}
-            </button>
+            {sections
+              .filter((s) => s.topBar)
+              .map((s) => (
+                <Link key={s.id} href={"/" + s.slug} replace scroll={false} className="navlink dim" aria-current={isCurrent(s.slug)}>
+                  {s.label}
+                </Link>
+              ))}
           </header>
           <main
             id="view"
@@ -183,6 +181,15 @@ export default function Shell({ children }: { children: React.ReactNode }) {
           >
             {snapshot.current}
           </main>
+          <nav className="sub-nav" aria-label={pl.nav.main}>
+            {sections
+              .filter((s) => !s.topBar)
+              .map((s) => (
+                <Link key={s.id} href={"/" + s.slug} replace scroll={false} className="navlink dim" aria-current={isCurrent(s.slug)}>
+                  <NavLabel label={s.label} mobileHide={s.mobileHide} />
+                </Link>
+              ))}
+          </nav>
         </div>
       </div>
     </div>

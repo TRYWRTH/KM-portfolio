@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useRef } from "react";
+import NavLabel from "@/components/NavLabel";
 import { pl, sections } from "@/content/pl";
 
 // Intro: letters clear from the middle of the name outwards, with a little
@@ -64,14 +65,14 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
 
       <div className="over tiny" inert={open}>
         <header className="top">
-          <Link href="/" scroll={false} className="wordmark">
+          <Link href="/" scroll={false} className="navlink wordmark">
             <span className="sl" aria-hidden>/</span>
             {pl.shortName}
           </Link>
           {sections
             .filter((s) => s.topBar)
             .map((s) => (
-              <Link key={s.id} href={"/" + s.slug} scroll={false} className="nav-link">
+              <Link key={s.id} href={"/" + s.slug} scroll={false} className="navlink dim">
                 {s.label}
               </Link>
             ))}
@@ -100,15 +101,8 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
 
         <nav className="hero-nav" aria-label={pl.nav.main}>
           {sections.filter((s) => !s.topBar).map((s) => (
-            <Link key={s.id} href={"/" + s.slug} scroll={false}>
-              {s.mobileHide && s.label.startsWith(s.mobileHide) ? (
-                <>
-                  <span className="wide-only">{s.mobileHide} </span>
-                  {s.label.slice(s.mobileHide.length).trim()}
-                </>
-              ) : (
-                s.label
-              )}
+            <Link key={s.id} href={"/" + s.slug} scroll={false} className="navlink dim">
+              <NavLabel label={s.label} mobileHide={s.mobileHide} />
             </Link>
           ))}
         </nav>

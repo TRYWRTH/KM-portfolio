@@ -56,24 +56,26 @@ a { color: inherit; text-decoration: none }
 .over > * { pointer-events: auto }
 .stage.open .over { opacity: 0; pointer-events: none; transition: opacity .4s .3s }
 
-/* top bar: wordmark only; bottom row: the four section links */
-.top { position: absolute; left: 48px; right: 48px; top: 40px; display: flex; justify-content: space-between; align-items: baseline }
-.top a, .hero-nav a {
+/* navigation links: one style for the hero and the subpages */
+.navlink {
+  display: inline-flex; gap: 10px; align-items: baseline; line-height: 1;
   font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .18em;
   text-transform: uppercase; color: #fff; white-space: nowrap;
   text-decoration: underline 1px transparent; text-underline-offset: 6px;
   transition: opacity .2s, text-decoration-color .2s;
 }
-.top .wordmark { display: inline-flex; gap: 10px }
-.top .sl { opacity: .7 }
-/* bottom row: the same gap between every link, starting at the wordmark's left edge */
+.navlink .sl { opacity: .7 }
+.navlink.dim { opacity: .7 }
+.navlink:is(:hover, :focus-visible), .navlink[aria-current="page"] { opacity: 1; text-decoration-color: currentColor }
+.navlink:focus-visible { outline: 1px solid #fff; outline-offset: 4px }
+
+/* hero top bar: wordmark left, Kontakt right, on exactly the same line */
+.top { position: absolute; left: 48px; right: 48px; top: 40px; display: flex; justify-content: space-between; align-items: center }
+/* hero bottom row: the same gap between every link, starting at the wordmark's left edge */
 .hero-nav {
   position: absolute; left: 48px; right: 48px; bottom: 44px;
   display: flex; flex-wrap: wrap; gap: 16px 64px;
 }
-.hero-nav a, .top .nav-link { opacity: .7 }
-.top a:is(:hover, :focus-visible), .hero-nav a:is(:hover, :focus-visible) { opacity: 1; text-decoration-color: currentColor }
-.top a:focus-visible, .hero-nav a:focus-visible { outline: 1px solid #fff; outline-offset: 4px }
 
 .name {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -52%);
@@ -137,30 +139,18 @@ a { color: inherit; text-decoration: none }
 .stage.open #curtain .c { clip-path: inset(0 0 0 0) }
 #curtain[data-snap] .c, #curtain[data-nt] .c, #curtain[data-nt] .c *, .stage:has(#curtain[data-nt]) .over { transition: none !important }
 
-.bar {
-  flex: none; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-  padding: var(--pad); border-bottom: 1px solid rgba(178,190,181,.22); opacity: 0; transition: opacity .5s;
-}
-.stage.open .bar, .stage.open #view > * { transition-delay: .7s }
-.stage.open .bar { opacity: 1 }
-.bar .home { justify-self: start }
-/* tabs look like the hero menu: text only, same gap between every item */
-.tabs { display: flex; gap: 12px 40px; flex-wrap: wrap; justify-content: center }
-.tabs a {
-  font-size: 12px; letter-spacing: .18em; font-weight: 500; text-transform: uppercase; white-space: nowrap;
-  color: #fff; opacity: .7; text-decoration: underline 1px transparent; text-underline-offset: 6px;
-  transition: opacity .2s, text-decoration-color .2s;
-}
-.tabs a:is(:hover, :focus-visible), .tabs a[aria-current="page"] { opacity: 1; text-decoration-color: currentColor }
-.bar .close { justify-self: end; white-space: nowrap }
-.bar .home, .bar .close { transition: opacity .2s; text-decoration: underline 1px transparent; text-underline-offset: 6px }
-.bar .close { opacity: .7; text-transform: uppercase }
-.bar .close:is(:hover, :focus-visible), .bar .home:is(:hover, :focus-visible) { opacity: 1; text-decoration-color: currentColor }
-.bar a:focus-visible, .bar button:focus-visible { outline: 1px solid #fff; outline-offset: 4px }
+/* subpage chrome mirrors the hero: wordmark + Kontakt on top, the other sections at the bottom */
+.bar, .sub-nav { flex: none; opacity: 0; transition: opacity .5s }
+.bar { display: flex; justify-content: space-between; align-items: center; padding: 40px 48px 20px }
+.sub-nav { display: flex; flex-wrap: wrap; gap: 16px 64px; padding: 20px 48px 44px }
+.stage.open :is(.bar, .sub-nav), .stage.open #view > * { transition-delay: .7s }
+.stage.open :is(.bar, .sub-nav) { opacity: 1 }
 
 #view {
   flex: 1; overflow: auto; outline: none;
-  padding: clamp(28px, 5vw, 72px) var(--pad) calc(var(--pad) * 3);
+  -webkit-mask-image: linear-gradient(transparent, #000 28px, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(transparent, #000 28px, #000 calc(100% - 28px), transparent);
+  padding: clamp(28px, 4vw, 56px) 48px 48px;
   transition: opacity .22s;
 }
 #view > * { opacity: 0; transform: translate3d(0, 18px, 0); transition: opacity .7s, transform .9s var(--ease) }
@@ -174,17 +164,18 @@ a { color: inherit; text-decoration: none }
 
 @media (max-width: 820px) {
   :root { --ox: 74% }
-  .bar { grid-template-columns: auto 1fr auto; gap: 10px }
-  .tabs { display: none }
   .name h1 { font-size: clamp(2.6rem, 12vw, 3.6rem) }
   .name .word { display: block }
 }
 @media (max-width: 767.98px) {
   .top { left: 20px; right: 20px; top: 20px }
+  .bar { padding: 20px 20px 14px }
+  .sub-nav { padding: 14px 20px 24px; gap: 16px 28px }
+  #view { padding-left: 20px; padding-right: 20px }
   .hero-nav { left: 20px; right: 20px; bottom: 24px; gap: 16px 28px }
-  .top a, .hero-nav a { font-size: 12px }
+  .navlink { font-size: 12px }
   /* "Kolektyw Czarne Szmaty" is too wide for a half-width column: show "Czarne Szmaty" */
-  .hero-nav .wide-only { display: none }
+  .wide-only { display: none }
 }
 @media (prefers-reduced-motion: reduce) {
   #bg .drift, .stage.intro .name .ch, .stage.intro .name h1 { animation: none }
