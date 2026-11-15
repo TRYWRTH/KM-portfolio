@@ -6,8 +6,6 @@ import { Fragment, useEffect, useRef } from "react";
 import NavLabel from "@/components/NavLabel";
 import { pl, sections } from "@/content/pl";
 
-// Intro: letters rise into place left to right, 35ms apart.
-const revealDelay = (i: number) => i * 35;
 
 export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoLoad?: () => void }) {
   const photo = useRef<HTMLImageElement>(null);
@@ -74,20 +72,13 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
         </header>
 
         <div className="name">
-          <h1 aria-label={pl.name}>
-            {pl.name.split(" ").map((word, w, words) => (
+          <h1 className="editorial-sweep" aria-label={pl.name}>
+            {pl.name.split(" ").map((word, w) => (
               <Fragment key={w}>
-              {w > 0 ? " " : null}
-              <span className="word" aria-hidden>
-                {Array.from(word).map((ch, c) => {
-                  const i = words.slice(0, w).join("").length + c; // letter index across the name
-                  return (
-                    <span className="ch" key={c} style={{ "--cd": `${revealDelay(i)}ms` } as React.CSSProperties}>
-                      {ch}
-                    </span>
-                  );
-                })}
-              </span>
+                {w > 0 ? " " : null}
+                <span className="word" aria-hidden>
+                  {word}
+                </span>
               </Fragment>
             ))}
           </h1>
