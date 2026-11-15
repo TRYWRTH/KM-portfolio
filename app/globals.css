@@ -409,23 +409,19 @@ a { color: inherit; text-decoration: none }
   .hero-rail .navlink, .top .navlink { font-size: 11px }
 }
 
+/* ---------- Kontakt menu: "Mail" and "Telefon" open under the link (above it in the bottom rail) ---------- */
+.cm { position: relative; display: inline-flex }
+.cm-toggle { cursor: pointer; background: none; border: 0; padding: 0 }
+.cm-list {
+  position: absolute; right: 0; top: calc(100% + 16px); z-index: 2; list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 12px; text-shadow: 0 1px 12px rgba(0,0,0,.35);
+}
+.cm-list[hidden] { display: none }
+.cm-up .cm-list { top: auto; bottom: calc(100% + 16px) }
+.cm.is-open .cm-toggle { opacity: 1; text-decoration-color: currentColor }
+.cm-list .navlink { opacity: .85 }
+.cm-list .navlink:hover, .cm-list .navlink:focus-visible { opacity: 1; text-decoration-color: currentColor }
+.hero-rail .cm-list .navlink:hover { opacity: .6; text-decoration: none }
 
-/* ---------- Kontakt ---------- */
-.ct-list { list-style: none; padding-top: 10px }
-.ct-list li + li { margin-top: 40px }
-.ct-list .ab-label { margin-bottom: 10px }
-.ct-link {
-  font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.6vw, 52px); line-height: 1.1; letter-spacing: -.01em;
-  color: #fff; overflow-wrap: anywhere; transition: opacity .2s ease;
-}
-.ct-link:hover { opacity: .6 }
-.ct-link:focus-visible { outline: 1px solid #fff; outline-offset: 4px }
-@media (max-width: 767.98px) { .ct-link { font-size: 26px } }
-.ct-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 28px }
-.ct-reveal { cursor: pointer; text-align: left }
-.ct-copy {
-  font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #dfe5e1;
-  cursor: pointer; text-decoration: underline 1px transparent; text-underline-offset: 6px; transition: opacity .2s ease, text-decoration-color .2s ease;
-}
-.ct-copy:hover { text-decoration-color: currentColor }
-.ct-copy:focus-visible { outline: 1px solid #fff; outline-offset: 4px }
+.bar .cm-toggle { opacity: .7 }
+.bar .cm-toggle:hover, .bar .cm.is-open .cm-toggle { opacity: 1 }

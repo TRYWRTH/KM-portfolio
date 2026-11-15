@@ -29,7 +29,7 @@ The script uses Playwright (`npm i -D playwright` if it is not installed globall
 | Styles (ported 1:1 from the reference) | `app/globals.css` |
 | Subpage background photos (blurred behind palette-tinted glass; pick one per section with `bg` in `content/pl.ts`) | `public/photos/` |
 | One component per section (placeholders for now) | `components/sections/*.tsx` |
-| Routes (`/o-mnie`, `/rezyseria`, `/czarne-szmaty`, `/kontakt`) | `app/<slug>/page.tsx` |
+| Routes (`/o-mnie`, `/rezyseria`, `/czarne-szmaty`; Kontakt is a small menu in `components/ContactMenu.tsx`, and `/kontakt` redirects home) | `app/<slug>/page.tsx` |
 | Original visual reference | `reference/v2.html` |
 
 To design a section, replace the body of its file in `components/sections/`. The curtain logic doesn't need to change.

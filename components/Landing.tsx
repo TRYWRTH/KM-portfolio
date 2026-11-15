@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useRef } from "react";
+import ContactMenu from "@/components/ContactMenu";
 import NavLabel from "@/components/NavLabel";
 import { pl, sections } from "@/content/pl";
 
@@ -63,22 +64,19 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
             {pl.shortName}
           </Link>
           {/* phones only: Kontakt sits up here so the three other links fit side by side in the rail */}
-          {sections
-            .filter((s) => s.topBar)
-            .map((s) => (
-              <Link key={s.id} href={"/" + s.slug} scroll={false} className="navlink top-contact">
-                {s.label}
-              </Link>
-            ))}
+          <ContactMenu className="top-contact" />
         </header>
 
         {/* bottom rail: the four sections spread across the bottom of the hero */}
         <nav className="hero-rail" aria-label={pl.nav.main}>
-          {sections.map((s) => (
-            <Link key={s.id} href={"/" + s.slug} scroll={false} className={s.topBar ? "navlink rail-contact" : "navlink"}>
-              <NavLabel label={s.label} mobileHide={s.mobileHide} />
-            </Link>
-          ))}
+          {sections
+            .filter((s) => !s.topBar)
+            .map((s) => (
+              <Link key={s.id} href={"/" + s.slug} scroll={false} className="navlink">
+                <NavLabel label={s.label} mobileHide={s.mobileHide} />
+              </Link>
+            ))}
+          <ContactMenu className="rail-contact" up />
         </nav>
 
         <div className="name">

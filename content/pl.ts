@@ -97,13 +97,14 @@ export const about = {
 };
 
 // Kontakt
+// "Kontakt" is a small menu (components/ContactMenu.tsx), not a page.
 // The e-mail address and phone number are stored reversed and only put together in the browser
 // when someone clicks, so they never appear in the page's HTML (keeps address-harvesting bots away).
 // To change them, write the new value backwards here (e.g. "gmail.com" -> "moc.liamg").
 export const contact = {
   title: "Kontakt",
   email: {
-    label: "mail",
+    label: "Mail",
     action: "Napisz e-mail",
     copy: "kopiuj adres",
     copied: "skopiowano",
@@ -111,7 +112,7 @@ export const contact = {
     domain: "moc.liamg",
   },
   phone: {
-    label: "tel.",
+    label: "Telefon",
     action: "Zadzwoń",
     country: "+48",
     digits: "003092606",

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import ContactMenu from "@/components/ContactMenu";
 import Landing from "@/components/Landing";
 import NavLabel from "@/components/NavLabel";
 import { pl, sectionByPath, sections, type Side } from "@/content/pl";
@@ -209,13 +210,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
                 </Link>
               ))}
           </nav>
-          {sections
-            .filter((s) => s.topBar)
-            .map((s) => (
-              <Link key={s.id} href={"/" + s.slug} replace scroll={false} className="navlink dim" aria-current={isCurrent(s.slug)} onClick={() => !isCurrent(s.slug) && snapGhost()}>
-                {s.label}
-              </Link>
-            ))}
+          <ContactMenu />
         </header>
         <main id="view" className="view" ref={page} tabIndex={-1}>
           {content}
