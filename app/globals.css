@@ -313,16 +313,15 @@ a { color: inherit; text-decoration: none }
 .pc-role { margin-top: 5px; color: rgba(255,255,255,.86) }
 .pc-place { margin-top: 2px; color: rgba(255,255,255,.7) }
 
-/* curtain: closed = clipped to nothing at the left edge (.r: at the right edge) */
+/* curtain: materialises from nothing — the glass fades up while its frost thickens, then the text emerges */
 .cv {
   position: absolute; inset: 0; overflow: hidden; z-index: 2;
-  clip-path: inset(0 100% 0 0); visibility: hidden;
-  transition: clip-path .7s cubic-bezier(.8, 0, .2, 1), visibility 0s linear .7s;
+  opacity: 0; visibility: hidden;
+  transition: opacity .7s cubic-bezier(.4, 0, .2, 1), visibility 0s linear .7s;
 }
-.cv.r { clip-path: inset(0 0 0 100%) }
 .cv-blur, .cv-scrim, .cv-grain, .cv-sheen, .cv-rim, .cv-text { position: absolute; inset: 0 }
 /* frosted, not opaque: the production's shapes and colours still read through the glass */
-.cv-blur img { object-fit: cover; filter: blur(16px) saturate(1.45) brightness(1.06); transform: scale(1.12) }
+.cv-blur img { object-fit: cover; filter: blur(4px) saturate(1.1); transform: scale(1.12); transition: filter .9s cubic-bezier(.4, 0, .2, 1) }
 /* light at the top, darker towards the text at the bottom */
 .cv-scrim { background: linear-gradient(180deg, rgba(10,12,22,.04) 0%, rgba(10,12,22,.22) 45%, rgba(10,12,22,.64) 100%) }
 /* fine film grain so the glass reads as a material */
@@ -338,12 +337,18 @@ a { color: inherit; text-decoration: none }
 }
 .cv-text p { max-width: 560px; margin-bottom: .8em }
 .cv-text p:last-child { margin-bottom: 0 }
+.cv-text { opacity: 0; transform: translate3d(0, 8px, 0); filter: blur(6px); transition: opacity .35s ease, transform .35s ease, filter .35s ease }
 .pc-sm .cv-text { padding: 28px; font-size: 15px }
-.pc.is-open .cv { clip-path: inset(0 0 0 0); visibility: visible; transition: clip-path .7s cubic-bezier(.8, 0, .2, 1), visibility 0s }
+/* open (mobile button) */
+.pc.is-open .cv { opacity: 1; visibility: visible; transition: opacity .7s cubic-bezier(.4, 0, .2, 1), visibility 0s }
+.pc.is-open .cv-blur img { filter: blur(16px) saturate(1.45) brightness(1.06) }
+.pc.is-open .cv-text { opacity: 1; transform: none; filter: none; transition: opacity .7s ease .2s, transform .9s cubic-bezier(.2, .7, .2, 1) .2s, filter .7s ease .2s }
 
 /* desktop with a real pointer: hover or keyboard focus opens it */
 @media (hover: hover) and (min-width: 768px) {
-  .pc:hover .cv, .pc:focus-within .cv { clip-path: inset(0 0 0 0); visibility: visible; transition: clip-path .7s cubic-bezier(.8, 0, .2, 1), visibility 0s }
+  .pc:hover .cv, .pc:focus-within .cv { opacity: 1; visibility: visible; transition: opacity .7s cubic-bezier(.4, 0, .2, 1), visibility 0s }
+  .pc:hover .cv-blur img, .pc:focus-within .cv-blur img { filter: blur(16px) saturate(1.45) brightness(1.06) }
+  .pc:hover .cv-text, .pc:focus-within .cv-text { opacity: 1; transform: none; filter: none; transition: opacity .7s ease .2s, transform .9s cubic-bezier(.2, .7, .2, 1) .2s, filter .7s ease .2s }
 }
 
 /* info button: only on touch / narrow screens */
@@ -362,18 +367,20 @@ a { color: inherit; text-decoration: none }
 @media (hover: none), (max-width: 767.98px) {
   .pc-info { display: flex }
   .pc .rz-frame { cursor: default }
-  .cv.r { clip-path: inset(0 100% 0 0) } /* left-to-right wipe on mobile */
-  .pc.is-open .cv { clip-path: inset(0 0 0 0) }
   .cv-text, .pc-sm .cv-text { padding: 22px; font-size: 13px }
   .cv-text p { max-width: 300px }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cv, .cv.r { clip-path: none; opacity: 0; transition: opacity .15s, visibility 0s linear .15s }
-  .pc.is-open .cv { opacity: 1; transition: opacity .15s, visibility 0s }
+  .cv { transition: opacity .15s, visibility 0s linear .15s }
+  .pc.is-open .cv { transition: opacity .15s, visibility 0s }
+  .cv-blur img, .pc.is-open .cv-blur img { filter: blur(16px) saturate(1.45) brightness(1.06); transition: none }
+  .cv-text, .pc.is-open .cv-text { opacity: 1; transform: none; filter: none; transition: none }
 }
 @media (prefers-reduced-motion: reduce) and (hover: hover) and (min-width: 768px) {
-  .pc:hover .cv, .pc:focus-within .cv { opacity: 1; transition: opacity .15s, visibility 0s }
+  .pc:hover .cv, .pc:focus-within .cv { transition: opacity .15s, visibility 0s }
+  .pc:hover .cv-blur img, .pc:focus-within .cv-blur img { transition: none }
+  .pc:hover .cv-text, .pc:focus-within .cv-text { transition: none }
 }
 
 

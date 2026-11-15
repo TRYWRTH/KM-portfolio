@@ -6,18 +6,15 @@ import { pl, type Production } from "@/content/pl";
 
 /**
  * One production on Reżyseria: photo with a glass "curtain" description and a two-line caption.
- * Desktop: the curtain wipes in on hover or keyboard focus of the card.
- * Touch / narrow screens: only the info button opens it (left-to-right wipe).
+ * Desktop: the curtain materialises on hover or keyboard focus of the card.
+ * Touch / narrow screens: only the info button opens it.
  */
 export default function ProductionCard({
   p,
-  side,
   small,
   sizes,
 }: {
   p: Production;
-  /** "r" for cards on the right: the curtain comes in from the right on desktop */
-  side: "l" | "r";
   small: boolean;
   sizes: string;
 }) {
@@ -31,7 +28,7 @@ export default function ProductionCard({
             <Image src={p.image.src} alt={p.image.alt} fill sizes={sizes} />
           </div>
         ) : null}
-        <div className={`cv${side === "r" ? " r" : ""}`} id={cvId}>
+        <div className="cv" id={cvId}>
           {p.image ? (
             <div className="cv-blur" aria-hidden>
               {/* same sizes as the photo above, so the browser reuses the file it already has */}

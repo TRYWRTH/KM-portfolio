@@ -20,7 +20,6 @@ export default function DirectingSection() {
             <li key={`${p.year}-${p.title}`} className={`rz-item rz-slot-${slot}`} data-drift={right ? "1" : undefined}>
               <ProductionCard
                 p={p}
-                side={right ? "r" : "l"}
                 small={small}
                 sizes={small ? "(max-width: 767px) 100vw, 34vw" : "(max-width: 767px) 100vw, 60vw"}
               />
