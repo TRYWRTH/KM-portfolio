@@ -27,7 +27,7 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
       cx += (mx - cx) * 0.06;
       cy += (my - cy) * 0.06;
       if (photo.current)
-        photo.current.style.objectPosition = `calc(var(--ox) + ${(cx * -1.2).toFixed(2)}%) calc(50% + ${(cy * -1.5).toFixed(2)}%)`;
+        photo.current.style.objectPosition = `calc(var(--ox) + ${(cx * -1.2).toFixed(2)}%) 0%`; // stays pinned to the top
       raf = Math.abs(mx - cx) + Math.abs(my - cy) > 0.0005 ? requestAnimationFrame(tick) : 0;
     };
     const move = (e: PointerEvent) => {
@@ -68,6 +68,13 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
             <span className="sl" aria-hidden>/</span>
             {pl.shortName}
           </Link>
+          {sections
+            .filter((s) => s.topBar)
+            .map((s) => (
+              <Link key={s.id} href={"/" + s.slug} scroll={false} className="nav-link">
+                {s.label}
+              </Link>
+            ))}
         </header>
 
         <div className="name">
@@ -92,7 +99,7 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
         </div>
 
         <nav className="hero-nav" aria-label={pl.nav.main}>
-          {sections.map((s) => (
+          {sections.filter((s) => !s.topBar).map((s) => (
             <Link key={s.id} href={"/" + s.slug} scroll={false}>
               {s.mobileHide && s.label.startsWith(s.mobileHide) ? (
                 <>

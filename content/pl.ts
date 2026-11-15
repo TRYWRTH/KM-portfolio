@@ -10,6 +10,8 @@ export interface Section {
   /** URL path, without the leading slash */
   slug: string;
   label: string;
+  /** shown in the top-right corner of the hero instead of the bottom row */
+  topBar?: true;
   /** words dropped from the label on narrow screens (< 768px), e.g. "Kolektyw" */
   mobileHide?: string;
   /** side the link lives on = side the curtain wipes in from */
@@ -34,7 +36,7 @@ export const pl = {
     closeLabel: "Zamknij i wróć na stronę główną",
   },
   placeholder: "W przygotowaniu.",
-  // The four sections, in order. Order = the bottom navigation row on the hero,
+  // The four sections, in order. Order = the hero navigation (Kontakt sits top right),
   // the tabs inside an open page, and the 01–04 numbering on the kickers.
   sections: [
     // bio + timeline (education, Kalendarium) + teaching at the Akademia
@@ -42,7 +44,7 @@ export const pl = {
     // her main work
     { id: "work", slug: "rezyseria", label: "Reżyseria", side: "l" },
     { id: "czsz", slug: "czarne-szmaty", label: "Kolektyw Czarne Szmaty", mobileHide: "Kolektyw", side: "l" },
-    { id: "contact", slug: "kontakt", label: "Kontakt", side: "r" },
+    { id: "contact", slug: "kontakt", label: "Kontakt", side: "r", topBar: true },
   ] satisfies Section[],
 };
 

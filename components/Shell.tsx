@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -144,6 +145,10 @@ export default function Shell({ children }: { children: React.ReactNode }) {
       <div id="curtain" ref={curtain} data-nt={ready ? undefined : ""} inert={!open} aria-hidden={!open}>
         <div className="c c1" />
         <div className="c c2">
+          {/* frosted glass: the hero photo, heavily blurred, under a light wash */}
+          <div className="glass" aria-hidden>
+            <Image src="/karolina.jpg" alt="" fill sizes="480px" quality={40} />
+          </div>
           <header className="bar tiny">
             <a
               href="/"

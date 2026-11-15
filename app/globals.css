@@ -30,15 +30,16 @@ a { color: inherit; text-decoration: none }
 .stage { position: fixed; inset: 0; background: #1c1c1d; transition: background-color 1s var(--ease-io) }
 
 /* ---------- photo = the whole background ---------- */
-#bg { position: fixed; inset: 0; overflow: hidden; transition: opacity 1s var(--ease-io), transform 1s var(--ease-io) }
+#bg { position: fixed; inset: 0; overflow: hidden; transform-origin: 50% 0; transition: opacity 1s var(--ease-io), transform 1s var(--ease-io) }
+/* the photo is pinned to the top edge and only ever grows downwards/sideways, so the head is never cropped */
 #bg .drift {
-  position: absolute; inset: -2%;
-  transform: scale(1.04);
+  position: absolute; inset: 0 -2% -2%;
+  transform: scale(1.04); transform-origin: var(--ox) 0;
   animation: drift 30s ease-in-out infinite alternate;
   will-change: transform;
 }
-#bg img { object-fit: cover; object-position: var(--ox) 50%; user-select: none }
-@keyframes drift { to { transform: scale(1.09) translate3d(-1.2%, .6%, 0) } }
+#bg img { object-fit: cover; object-position: var(--ox) 0%; user-select: none }
+@keyframes drift { to { transform: scale(1.09) translate3d(-1.2%, 0, 0) } }
 /* dark veil: keeps the white type legible while the photo stays recognisable */
 #bg::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
@@ -58,20 +59,21 @@ a { color: inherit; text-decoration: none }
 .stage.open .over { opacity: 0; pointer-events: none; transition: opacity .4s .3s }
 
 /* top bar: wordmark only; bottom row: the four section links */
-.top { position: absolute; left: 48px; top: 40px }
+.top { position: absolute; left: 48px; right: 48px; top: 40px; display: flex; justify-content: space-between; align-items: baseline }
 .top a, .hero-nav a {
   font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .18em;
   text-transform: uppercase; color: #fff; white-space: nowrap;
   text-decoration: underline 1px transparent; text-underline-offset: 6px;
   transition: opacity .2s, text-decoration-color .2s;
 }
-.top a { display: inline-flex; gap: 10px }
+.top .wordmark { display: inline-flex; gap: 10px }
 .top .sl { opacity: .7 }
+/* bottom row: the same gap between every link, starting at the wordmark's left edge */
 .hero-nav {
   position: absolute; left: 48px; right: 48px; bottom: 44px;
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 24px;
+  display: flex; flex-wrap: wrap; gap: 16px 64px;
 }
-.hero-nav a { justify-self: start; opacity: .7 }
+.hero-nav a, .top .nav-link { opacity: .7 }
 .top a:is(:hover, :focus-visible), .hero-nav a:is(:hover, :focus-visible) { opacity: 1; text-decoration-color: currentColor }
 .top a:focus-visible, .hero-nav a:focus-visible { outline: 1px solid #fff; outline-offset: 4px }
 
@@ -118,6 +120,10 @@ a { color: inherit; text-decoration: none }
 #curtain .c { position: absolute; inset: 0; clip-path: var(--hide); transition: clip-path .9s var(--ease) }
 #curtain .c1 { background: var(--ink) }
 #curtain .c2 { background: var(--white); display: flex; flex-direction: column; overflow: hidden; font-family: var(--sans) }
+#curtain .glass { position: absolute; inset: 0; overflow: hidden; pointer-events: none }
+#curtain .glass img { object-fit: cover; object-position: var(--ox) 0%; filter: blur(48px) saturate(.85); transform: scale(1.25) }
+#curtain .glass::after { content: ""; position: absolute; inset: 0; background: rgba(253,253,252,.58) }
+#curtain .c2 > :not(.glass) { position: relative; z-index: 1 }
 /* subpages: grotesk type, calm single column, easy to read */
 #curtain .tiny { font-size: .75rem; letter-spacing: .06em; font-weight: 600 }
 .stage:not(.open) #curtain .c1 { transition-delay: .12s }
@@ -166,8 +172,8 @@ a { color: inherit; text-decoration: none }
   .name .word { display: block }
 }
 @media (max-width: 767.98px) {
-  .top { left: 20px; top: 20px }
-  .hero-nav { left: 20px; right: 20px; bottom: 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px }
+  .top { left: 20px; right: 20px; top: 20px }
+  .hero-nav { left: 20px; right: 20px; bottom: 24px; gap: 16px 28px }
   .top a, .hero-nav a { font-size: 12px }
   /* "Kolektyw Czarne Szmaty" is too wide for a half-width column: show "Czarne Szmaty" */
   .hero-nav .wide-only { display: none }
