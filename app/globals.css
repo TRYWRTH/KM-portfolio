@@ -305,7 +305,13 @@ a { color: inherit; text-decoration: none }
 .pc-name {
   position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 24px;
   font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 2.1vw, 30px); line-height: 1.1; text-align: center; color: #fff;
-  text-shadow: 0 1px 18px rgba(10,12,22,.55); pointer-events: none; transition: opacity .5s ease;
+  text-shadow: 0 1px 2px rgba(10,12,22,.55), 0 2px 12px rgba(10,12,22,.6), 0 0 40px rgba(10,12,22,.45);
+  pointer-events: none; transition: opacity .5s ease;
+}
+/* soft dark oval behind the title only, so it reads on bright photos; no visible box */
+.pc-name::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(ellipse 46% 42% at 50% 50%, rgba(10,12,22,.58) 0%, rgba(10,12,22,.32) 45%, rgba(10,12,22,0) 100%);
 }
 .pc.is-open .pc-name { opacity: 0 }
 .pc-role { color: rgba(255,255,255,.86) }
