@@ -70,6 +70,76 @@ export const about = {
   ],
 };
 
+export interface Award {
+  /** shown once per year group; omit when unknown (the entry then sits in the group above) */
+  year?: number;
+  title: string;
+  festival?: string;
+  description?: string;
+  list?: string[];
+}
+
+// Nagrody (shown on O mnie, after Doświadczenie).
+export const awardsTitle = "Nagrody";
+export const awards: Award[] = [
+  {
+    year: 2022, title: "Grand Prix",
+    festival: "26. Międzynarodowy Festiwal Teatru dla Dzieci i Młodzieży „Korczak dzisiaj” w Warszawie",
+    description: "Spektakl „Tonja z Glimmerdalen”: „za wykorzystanie polifonicznych możliwości teatru w służbie opowieści o dziecięcej sprawczości. Za trafny wybór tekstu i adaptację. Za koncepcję scenograficzną, muzyczność oraz zespołowe aktorstwo.”",
+  },
+  {
+    year: 2020, title: "Grand Prix",
+    festival: "XIII Międzynarodowy Festiwal Teatralny „Boska Komedia” w Krakowie",
+    description: "Spektakl „Rutka” zrealizowany w Teatrze Lalek Arlekin w Łodzi, sekcja festiwalu: Mała Boska Komedia.",
+  },
+  {
+    year: 2020, title: "Nagroda za najlepszą reżyserię",
+    festival: "27. Festiwal Teatrów Lalek „Spotkania” w Toruniu",
+    description: "Reżyseria spektaklu „Rutka” w Teatrze Lalek Arlekin w Łodzi.",
+  },
+  {
+    year: 2020, title: "Nagroda im. Jana Wilkowskiego",
+    festival: "27. Festiwal Teatrów Lalek „Spotkania” w Toruniu",
+    description: "Spektakl „Rutka” „za poruszającą wyobraźnię widza, wielopoziomową, nowoczesną i historyczną animację”.",
+  },
+  {
+    // year not given in the source
+    title: "Wyróżnienie jury profesjonalnego oraz wyróżnienie jury młodzieżowego",
+    festival: "25. Międzynarodowy Festiwal Teatru dla Dzieci i Młodzieży „Korczak dzisiaj” w Warszawie",
+    description: "Spektakl „Rutka” zrealizowany w Teatrze Lalek Arlekin w Łodzi.",
+  },
+  {
+    title: "Spektakl „Rutka” otrzymał również szereg innych nagród",
+    list: [
+      "Nagrody aktorskie za najlepszą rolę kobiecą dla Katarzyny Pałki i Teresy Kowalik: V Festiwal Małych Prapremier w Wałbrzychu, 11. Międzynarodowy Festiwal Teatrów Ożywionej Formy „Maskarada” w Rzeszowie, 34. Międzynarodowy Festiwal „Walizka” w Łomży, 27. Festiwal Teatrów Lalek „Spotkania” w Toruniu",
+      "Nagrody za najlepszą scenografię: 27. Festiwal Teatrów Lalek „Spotkania” w Toruniu, 26. Festiwal na Wystawienie Polskiej Sztuki Współczesnej",
+      "Nagroda za muzykę: 26. Festiwal na Wystawienie Polskiej Sztuki Współczesnej",
+      "Finalista: 26. Festiwal na Wystawienie Polskiej Sztuki Współczesnej",
+      "Nominacja do „Plastrów Kultury” i „Energii Kultury” w kategorii „spektakl roku”",
+    ],
+  },
+  {
+    year: 2016, title: "Nagroda dla najlepszego spektaklu przyznana przez jury dziecięce",
+    festival: "III Festiwal Małych Prapremier w Wałbrzychu",
+    description: "Dla spektaklu „Ronja, córka zbójnika” z Teatru Pinokio w Łodzi.",
+  },
+  {
+    year: 2016, title: "Nagroda dla najlepszego spektaklu przyznana przez jury młodzieżowe",
+    festival: "XXI Międzynarodowy Festiwal Teatrów dla Dzieci i Młodzieży „Korczak”",
+    description: "Dla spektaklu „Ronja, córka zbójnika” Teatru Pinokio w Łodzi.",
+  },
+  {
+    year: 2016, title: "Złota Maska",
+    festival: "Za najlepszy spektakl w teatrach lalkowych w sezonie 2015/2016",
+    description: "Dla spektaklu „Ronja, córka zbójnika” zrealizowanego w Teatrze Pinokio w Łodzi.",
+  },
+  {
+    year: 2014, title: "Złota Maska",
+    festival: "Za najlepszy spektakl w teatrach lalkowych w sezonie 2013/2014",
+    description: "Za spektakl „Koralina” zrealizowany w Teatrze Pinokio w Łodzi.",
+  },
+];
+
 export interface Production {
   year: number;
   title: string;

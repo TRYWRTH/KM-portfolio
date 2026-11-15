@@ -214,3 +214,10 @@ a { color: inherit; text-decoration: none }
 @media (max-width: 767.98px) {
   .timeline .work { grid-template-columns: 1fr }
 }
+
+/* ---------- Nagrody (on O mnie) ---------- */
+.timeline .work:not(.new-year) { border-top: 0 }
+.awards .work:last-child { border-bottom: 1px solid rgba(178,190,181,.22) }
+.award-list { margin-top: 10px; padding-left: 1.1em; font-size: 14px; line-height: 1.75; color: #eef1ef; max-width: 64ch }
+.award-list li + li { margin-top: 6px }
+.award-list li::marker { color: #dfe5e1 }

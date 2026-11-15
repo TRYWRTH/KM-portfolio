@@ -1,5 +1,5 @@
 import SectionHeader from "@/components/SectionHeader";
-import { about } from "@/content/pl";
+import { about, awards, awardsTitle } from "@/content/pl";
 
 /** O mnie: bio, then the timeline (education, Kalendarium, teaching at the Akademia). */
 export default function AboutSection() {
@@ -29,6 +29,34 @@ export default function AboutSection() {
               </div>
             </li>
           ))}
+        </ol>
+      </section>
+
+      <section aria-labelledby="awards-title">
+        <h2 id="awards-title" className="k tiny sub-k">
+          {awardsTitle}
+        </h2>
+        <ol className="work-list timeline awards">
+          {awards.map((a, i) => {
+            const firstOfYear = a.year !== undefined && (i === 0 || awards[i - 1].year !== a.year);
+            return (
+              <li key={a.title + (a.festival ?? "")} className={firstOfYear ? "work new-year" : "work"}>
+                <span className="work-year tiny">{firstOfYear ? a.year : ""}</span>
+                <div className="work-body">
+                  <h3 className="work-title">{a.title}</h3>
+                  {a.festival ? <p className="work-venue tiny">{a.festival}</p> : null}
+                  {a.description ? <p className="work-desc">{a.description}</p> : null}
+                  {a.list ? (
+                    <ul className="award-list">
+                      {a.list.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              </li>
+            );
+          })}
         </ol>
       </section>
     </article>
