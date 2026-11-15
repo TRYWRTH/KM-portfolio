@@ -8,6 +8,7 @@
   --mono: var(--font-mono), "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   --ease: cubic-bezier(.76, 0, .18, 1);
   --ease-io: cubic-bezier(.8, 0, .2, 1);
+  --reveal: 2.4s cubic-bezier(.4, 0, .2, 1); /* the opening crossfade: photo in, name out, together */
   /* subpage palette */
   --ash: #b2beb5; --blue-gray: #7393b3; --charcoal: #36454f; --dark-gray: #a9a9a9; --glaucous: #6082b6;
 }
@@ -25,10 +26,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 a { color: inherit; text-decoration: none }
 .tiny { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 500 }
 
-.stage { position: fixed; inset: 0; background: #1c1c1d; transition: background-color 1s var(--ease-io) }
+.stage { position: fixed; inset: 0; background: #1c1c1d; transition: background-color var(--reveal) }
 
 /* ---------- photo = the whole background ---------- */
-#bg { position: fixed; inset: 0; overflow: hidden; transform-origin: 50% 0; transition: opacity 1s var(--ease-io), transform 1s var(--ease-io) }
+#bg { position: fixed; inset: 0; overflow: hidden; transform-origin: 50% 0; transition: opacity var(--reveal), transform var(--reveal) }
 /* the photo is pinned to the top edge and only ever grows downwards/sideways, so the head is never cropped */
 #bg .drift {
   position: absolute; inset: 0 -2% -2%;
@@ -84,10 +85,7 @@ a { color: inherit; text-decoration: none }
 }
 /* the name and roles are only seen during the opening: after the photo comes in they fade away
    (opacity only, so the heading stays available to screen readers); without the opening they stay hidden */
-.name {
-  text-shadow: 0 1px 14px rgba(0,0,0,.35); opacity: 0;
-  transition: color 1s var(--ease-io), text-shadow 1s var(--ease-io), opacity .9s ease 2s;
-}
+.name { color: var(--ink); opacity: 0; transition: opacity var(--reveal) } /* fades out exactly as the photo fades in */
 .name h1 {
   font-family: var(--serif); font-weight: 400; text-transform: none;
   font-size: calc(2.25rem + 2.25vw); line-height: 1; letter-spacing: -.015em; white-space: nowrap;
@@ -98,10 +96,10 @@ a { color: inherit; text-decoration: none }
 .name .word { display: inline-block }
 
 /* ---------- intro: white page, the name sweeps in (editorial sweep) ---------- */
-.top, .hero-nav { transition: opacity .8s ease .25s, visibility 0s .25s }
+.top, .hero-nav { transition: opacity 1.2s ease 1.4s, visibility 0s 1.4s } /* arrive as the photo settles */
 .stage.intro { background: var(--white) }
 .stage.intro #bg { opacity: 0; transform: scale(1.05) }
-.stage.intro .name { color: var(--ink); text-shadow: none; opacity: 1; transition: none }
+.stage.intro .name { opacity: 1; transition: none }
 .stage.intro :is(.top, .hero-nav) { opacity: 0; visibility: hidden; transition: none }
 .stage.intro .editorial-sweep { animation: editorialSweep 1.15s cubic-bezier(.76, 0, .24, 1) .3s both }
 .stage.intro .name-roles { animation: editorialSweep .9s cubic-bezier(.76, 0, .24, 1) 1.5s both }
