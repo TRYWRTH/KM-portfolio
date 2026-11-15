@@ -91,11 +91,40 @@ export const collective = {
     { title: "Wolna Polska?", with: "współpraca z Biennale Warszawa, Joanną Szczepkowską i Pat Mic" },
     { title: "Aresztowanie Cricoteki", with: "z Pat Mic" },
   ],
+  photosTitle: "Wybrane akcje",
+  // order and credits as on the "czarne szmaty / #czsz – wybrane akcje" slide
   photos: [
-    { src: "/photos/granica-pogardy.jpg", caption: "Granica pogardy", alt: "Uczestniczki akcji trzymają w poprzek ulicy długi czarny transparent z napisem „Granica pogardy”." },
-    { src: "/photos/pozdrowienia-z-lesbos.jpg", caption: "Pozdrowienia z Lesbos", alt: "Trzy performerki w strojach kąpielowych pozują na miejskim skrzyżowaniu przy tablicy z napisem „Lesbos”." },
-    { src: "/photos/ulanskie-fantazje.jpg", caption: "Ułańskie fantazje", alt: "Dwie postaci w historycznych mundurach i z doklejonymi wąsami obejmują się w jesiennym parku." },
-    { src: "/photos/orlice.jpg", caption: "Orlice", alt: "Trzy performerki w maskach orłów z koronami i czerwonych pelerynach na tle budynku we mgle." },
+    {
+      src: "/photos/aresztowanie-cricoteki.jpg", title: "Aresztowanie Cricoteki",
+      credit: "#czsz + Pat Mic · fot. Pat Mic · Kraków, 2021",
+      alt: "Trzy performerki w policyjnych mundurach i z doklejonymi wąsami stoją przed budynkiem Cricoteki w Krakowie.",
+    },
+    {
+      // NOTE: cut from the slide (512 px wide); replace with the original file when available
+      src: "/photos/wolna-polska.jpg", title: "Wolna Polska?",
+      credit: "#czsz + Biennale Warszawa + Joanna Szczepkowska + Pat Mic · fot. Pat Mic · Warszawa, 2019",
+      alt: "Pomnik Warszawskiej Nike z biało-czerwoną szarfą na tle wieżowca i błękitnego nieba.",
+    },
+    {
+      src: "/photos/orlice.jpg", title: "Orlice",
+      credit: "#czsz + Pat Mic · fot. Pat Mic · Warszawa, 2018",
+      alt: "Trzy performerki w maskach orłów z koronami i czerwonych pelerynach na tle budynku we mgle.",
+    },
+    {
+      src: "/photos/pozdrowienia-z-lesbos.jpg", title: "Pozdrowienia z Lesbos",
+      credit: "#czsz + Pat Mic · fot. Pat Mic · Warszawa, 2018",
+      alt: "Trzy performerki w strojach kąpielowych pozują na miejskim skrzyżowaniu przy tablicy z napisem „Lesbos”.",
+    },
+    {
+      src: "/photos/ulanskie-fantazje.jpg", title: "Ułańskie fantazje",
+      credit: "#czsz + Pat Mic · fot. Pat Mic · Warszawa, 2017",
+      alt: "Dwie postaci w historycznych mundurach i z doklejonymi wąsami obejmują się w jesiennym parku.",
+    },
+    {
+      src: "/photos/granica-pogardy.jpg", title: "Granica pogardy",
+      credit: "#czsz · fot. Katarzyna Nurowska · Warszawa, 2016",
+      alt: "Uczestniczki akcji trzymają w poprzek ulicy długi czarny transparent z napisem „Granica pogardy”.",
+    },
   ],
   more: { before: "Więcej informacji znajdziesz na ", linkText: "Facebooku", href: "https://www.facebook.com/czarneszmaty" },
 };

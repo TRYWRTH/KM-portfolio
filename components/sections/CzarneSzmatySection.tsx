@@ -29,18 +29,26 @@ export default function CzarneSzmatySection() {
         </ul>
       </section>
 
-      <ul className="gallery">
-        {collective.photos.map((ph) => (
-          <li key={ph.src}>
-            <figure>
-              <div className="gallery-img">
-                <Image src={ph.src} alt={ph.alt} fill sizes="(max-width: 767px) 100vw, 480px" />
-              </div>
-              <figcaption className="tiny">„{ph.caption}”</figcaption>
-            </figure>
-          </li>
-        ))}
-      </ul>
+      <section aria-labelledby="photos-title">
+        <h2 id="photos-title" className="k tiny sub-k">
+          {collective.photosTitle}
+        </h2>
+        <ul className="gallery">
+          {collective.photos.map((ph) => (
+            <li key={ph.src}>
+              <figure>
+                <div className="gallery-img">
+                  <Image src={ph.src} alt={ph.alt} fill sizes="(max-width: 767px) 100vw, (max-width: 1100px) 50vw, 400px" />
+                </div>
+                <figcaption>
+                  <span className="gallery-title">„{ph.title}”</span>
+                  <span className="gallery-credit">{ph.credit}</span>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <p className="p more">
         {collective.more.before}
