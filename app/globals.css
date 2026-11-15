@@ -276,16 +276,16 @@ a { color: inherit; text-decoration: none }
 .rz-wide { grid-column: 1 / -1 }
 /* Reżyseria: the first photo opens the page centred in the visible area (.view is a size container) */
 .rz > .rz-grid > .rz-item:first-child { margin-top: max(0px, calc((100cqh - 100cqw * 9 / 32) / 2)) }
-.rz > .rz-grid > .rz-item.rz-wide:first-child { margin-top: max(0px, calc((100cqh - 100cqw * 3 / 7) / 2)) }
+.rz > .rz-grid > .rz-item.rz-wide:first-child { margin-top: max(0px, calc((100cqh - min(100cqw * 3 / 7, 100cqh - 24px)) / 2)) }
 .rz-item figure { margin: 0 }
 .rz-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: rgba(54,69,79,.6) }
-.rz-wide .rz-frame { aspect-ratio: 7 / 3 }
+.rz-wide .rz-frame { aspect-ratio: 7 / 3; max-height: calc(100cqh - 24px) } /* never taller than the visible area */
 /* the photo is taller than its frame and lags behind it while scrolling */
 .rz-img { position: absolute; left: 0; right: 0; top: -10%; bottom: -10%; transform: translate3d(0, var(--par, 0px), 0); will-change: transform }
 .rz-img img { object-fit: cover }
 @media (max-width: 767.98px) {
   .rz-grid { grid-template-columns: 1fr; gap: 20px }
-  .rz-frame, .rz-wide .rz-frame { aspect-ratio: 3 / 2 }
+  .rz-frame, .rz-wide .rz-frame { aspect-ratio: 3 / 2; max-height: none }
   .rz > .rz-grid > .rz-item:first-child, .rz > .rz-grid > .rz-item.rz-wide:first-child { margin-top: 0 } /* mobile: photos start at the top */
 }
 
