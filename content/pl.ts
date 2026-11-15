@@ -63,10 +63,8 @@ export const about = {
     {
       title: "Wykształcenie",
       entries: [
-        // TODO: real years (placeholder kept visible on purpose)
-        { label: "[RRRR–RRRR]", title: "Akademia Teatralna im. Aleksandra Zelwerowicza w Warszawie", description: "Reżyseria" },
-        // TODO: real years (placeholder kept visible on purpose)
-        { label: "[RRRR–RRRR]", title: "Uniwersytet Jagielloński w Krakowie", description: "Teatrologia" },
+        { label: "2002–2008", title: "Akademia Teatralna im. Aleksandra Zelwerowicza w Warszawie", description: "Reżyseria" },
+        { label: "1998–2003", title: "Uniwersytet Jagielloński w Krakowie", description: "Teatrologia" },
       ] as AboutEntry[],
     },
     {
