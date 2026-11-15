@@ -13,7 +13,6 @@ export default function CzarneSzmatySection() {
     <div className="ab-page">
       <div className="ab">
         <div className="ab-left">
-          <p className="ab-eyebrow">{collective.eyebrow}</p>
           <h1 className="ab-h1">{collective.title}</h1>
           <div className="ab-sections">
             <details className="ab-acc">

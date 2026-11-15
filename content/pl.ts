@@ -55,7 +55,6 @@ export interface AboutEntry {
 }
 
 export const about = {
-  eyebrow: "O mnie",
   title: "Reżyserka, performerka, wykładowczyni",
   sections: [
     {
@@ -111,7 +110,6 @@ export const about = {
 
 // Kolektyw Czarne Szmaty
 export const collective = {
-  eyebrow: "Kolektyw",
   title: "Czarne Szmaty",
   // paragraphs[0] is the lead on the page
   paragraphs: [

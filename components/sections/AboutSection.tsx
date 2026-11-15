@@ -6,7 +6,6 @@ export default function AboutSection() {
   return (
     <div className="ab">
       <div className="ab-left">
-        <p className="ab-eyebrow">{about.eyebrow}</p>
         <h1 className="ab-h1">{about.title}</h1>
         <div className="ab-sections">
           {about.sections.map((sec) => (
