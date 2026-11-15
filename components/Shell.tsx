@@ -199,6 +199,15 @@ export default function Shell({ children }: { children: React.ReactNode }) {
             <span className="sl" aria-hidden>/</span>
             {pl.shortName}
           </a>
+          <nav className="top-nav" aria-label={pl.nav.main}>
+            {sections
+              .filter((s) => !s.topBar)
+              .map((s) => (
+                <Link key={s.id} href={"/" + s.slug} replace scroll={false} className="navlink dim" aria-current={isCurrent(s.slug)} onClick={() => !isCurrent(s.slug) && snapGhost()}>
+                  <NavLabel label={s.label} mobileHide={s.mobileHide} />
+                </Link>
+              ))}
+          </nav>
           {sections
             .filter((s) => s.topBar)
             .map((s) => (
@@ -210,15 +219,6 @@ export default function Shell({ children }: { children: React.ReactNode }) {
         <main id="view" className="view" ref={page} tabIndex={-1}>
           {content}
         </main>
-        <nav className="sub-nav" aria-label={pl.nav.main}>
-          {sections
-            .filter((s) => !s.topBar)
-            .map((s) => (
-              <Link key={s.id} href={"/" + s.slug} replace scroll={false} className="navlink dim" aria-current={isCurrent(s.slug)} onClick={() => !isCurrent(s.slug) && snapGhost()}>
-                <NavLabel label={s.label} mobileHide={s.mobileHide} />
-              </Link>
-            ))}
-        </nav>
       </>
     );
   }

@@ -62,6 +62,13 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
             <span className="sl" aria-hidden>/</span>
             {pl.shortName}
           </Link>
+          <nav className="hero-nav" aria-label={pl.nav.main}>
+            {sections.filter((s) => !s.topBar).map((s) => (
+              <Link key={s.id} href={"/" + s.slug} scroll={false} className="navlink dim">
+                <NavLabel label={s.label} mobileHide={s.mobileHide} />
+              </Link>
+            ))}
+          </nav>
           {sections
             .filter((s) => s.topBar)
             .map((s) => (
@@ -84,13 +91,6 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
           </h1>
         </div>
 
-        <nav className="hero-nav" aria-label={pl.nav.main}>
-          {sections.filter((s) => !s.topBar).map((s) => (
-            <Link key={s.id} href={"/" + s.slug} scroll={false} className="navlink dim">
-              <NavLabel label={s.label} mobileHide={s.mobileHide} />
-            </Link>
-          ))}
-        </nav>
       </div>
     </>
   );
