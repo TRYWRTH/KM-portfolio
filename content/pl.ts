@@ -41,7 +41,7 @@ export const pl = {
     { id: "about", slug: "o-mnie", label: "O mnie", bg: "/karolina.jpg", side: "l" },
     // her main work
     { id: "work", slug: "rezyseria", label: "Reżyseria", bg: "/photos/orlice.jpg", side: "l" },
-    { id: "czsz", slug: "czarne-szmaty", label: "Kolektyw Czarne Szmaty", mobileHide: "Kolektyw", bg: "/photos/granica-pogardy.jpg", side: "l" },
+    { id: "czsz", slug: "czarne-szmaty", label: "Performance", bg: "/photos/granica-pogardy.jpg", side: "l" },
     { id: "contact", slug: "kontakt", label: "Kontakt", bg: "/photos/ulanskie-fantazje.jpg", side: "r", topBar: true },
   ] satisfies Section[],
 };
