@@ -1,47 +1,38 @@
-import FeatureRow from "@/components/FeatureRow";
+import Image from "next/image";
+import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeader from "@/components/SectionHeader";
 import { productions } from "@/content/pl";
 
-/** Reżyseria: a single readable list, newest first; the year is shown once per year. */
+/**
+ * Reżyseria: productions newest first in two staggered columns (right column set lower),
+ * big photo with a short caption underneath. Productions without a photo show the caption only.
+ */
 export default function DirectingSection() {
   return (
-    <article className="works">
+    <article className="rz">
       <SectionHeader id="work" />
-      <ol className="work-list">
-        {productions.map((p, i) => {
-          const firstOfYear = i === 0 || productions[i - 1].year !== p.year;
-          return (
-            <li key={`${p.year}-${p.title}`} className={firstOfYear ? "work new-year" : "work"}>
-              <span className="work-year tiny" aria-hidden={!firstOfYear}>
-                {firstOfYear ? p.year : ""}
-              </span>
+      <ol className="rz-grid">
+        {productions.map((p, i) => (
+          <li key={`${p.year}-${p.title}`} className="rz-item" data-col={i % 2 === 0 ? "l" : "r"}>
+            <figure>
               {p.image ? (
-                <FeatureRow
-                  image={p.image}
-                  headingLevel={2}
-                  title={
-                    <>
-                      <span className="sr-only">{p.year}: </span>„{p.title}”
-                      {p.author ? <span className="work-author"> {p.author}</span> : null}
-                    </>
-                  }
-                  subtitle={p.venue}
-                  description={p.description}
-                />
-              ) : (
-              <div className="work-body">
-                <h2 className="work-title">
-                  <span className="sr-only">{p.year}: </span>„{p.title}”
-                  {p.author ? <span className="work-author"> {p.author}</span> : null}
+                <div className="rz-frame">
+                  <Image src={p.image.src} alt={p.image.alt} fill sizes="(max-width: 767px) 100vw, 44vw" />
+                </div>
+              ) : null}
+              <figcaption className="rz-cap">
+                <p className="rz-year tiny">{p.year}</p>
+                <h2 className="rz-title">
+                  „{p.title}”{p.author ? <span className="rz-author"> {p.author}</span> : null}
                 </h2>
-                <p className="work-venue tiny">{p.venue}</p>
-                {p.description ? <p className="work-desc">{p.description}</p> : null}
-              </div>
-              )}
-            </li>
-          );
-        })}
+                <p className="rz-venue tiny">{p.venue}</p>
+                {p.description ? <p className="rz-desc">{p.description}</p> : null}
+              </figcaption>
+            </figure>
+          </li>
+        ))}
       </ol>
+      <ScrollReveal selector=".rz-item" />
     </article>
   );
 }
