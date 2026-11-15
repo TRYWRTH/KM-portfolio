@@ -24,7 +24,6 @@ export const pl = {
   lang: "pl",
   name: "Karolina Maciejaszek",
   shortName: "K. Maciejaszek",
-  tagline: "reżyserka · performerka · wykładowczyni",
   photoAlt: "Karolina Maciejaszek",
   meta: {
     title: "Karolina Maciejaszek — reżyserka, performerka, wykładowczyni",

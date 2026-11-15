@@ -87,33 +87,17 @@ a { color: inherit; text-decoration: none }
   font-size: calc(2.25rem + 2.25vw); line-height: 1; letter-spacing: -.015em; white-space: nowrap;
 }
 .name .word, .name .ch { display: inline-block }
-.name p { margin-top: 14px; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 400; opacity: .9 }
+/* each word is a mask: letters rise into it from below the baseline (padding keeps descenders visible) */
+.name .word { overflow: hidden; padding: .06em 0 .14em; margin: -.06em 0 -.14em; vertical-align: top }
 
-/* ---------- intro: white page, the name clears out of the fog ---------- */
+/* ---------- intro: white page, the name rises into place letter by letter ---------- */
 .top, .hero-nav { transition: opacity .8s ease .25s, visibility 0s .25s }
-.name p { transition: opacity 1s var(--ease-io) .35s, visibility 0s .35s }
 .stage.intro { background: var(--white) }
 .stage.intro #bg { opacity: 0; transform: scale(1.05) }
 .stage.intro .name { color: var(--ink); text-shadow: none }
-.stage.intro :is(.top, .hero-nav, .name p) { opacity: 0; visibility: hidden; transition: none }
-.stage.intro .name .ch { animation: settle 1.4s cubic-bezier(.22, 1, .36, 1) calc(.45s + var(--cd)) both }
-.stage.intro .name h1 { animation: tighten 2.6s cubic-bezier(.22, 1, .36, 1) .45s both }
-.stage.intro .name::before {
-  content: ""; position: absolute; inset: -60% -15%; z-index: -1; pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(13,13,14,.09), rgba(13,13,14,0) 62%);
-  filter: blur(24px); animation: haze 2.8s ease-in-out .2s both;
-}
-@keyframes settle {
-  from { opacity: 0; filter: blur(14px); transform: translate3d(0, -.16em, 0) }
-  45% { opacity: .55 }
-  to { opacity: 1; filter: blur(0); transform: none }
-}
-@keyframes tighten { from { letter-spacing: .09em } to { letter-spacing: -.015em } }
-@keyframes haze {
-  from { opacity: 0; transform: scale(.7) }
-  40% { opacity: 1 }
-  to { opacity: 0; transform: scale(1.35) }
-}
+.stage.intro :is(.top, .hero-nav) { opacity: 0; visibility: hidden; transition: none }
+.stage.intro .name .ch { animation: rise .9s cubic-bezier(.2, .8, .2, 1) calc(.3s + var(--cd)) both }
+@keyframes rise { from { transform: translate3d(0, 110%, 0) } to { transform: none } }
 
 /* ---------- curtain ---------- */
 #curtain { position: fixed; inset: 0; z-index: 30; pointer-events: none; --hide: inset(0 0 0 100%) }
@@ -181,8 +165,7 @@ a { color: inherit; text-decoration: none }
   .wide-only { display: none }
 }
 @media (prefers-reduced-motion: reduce) {
-  #bg .drift, .stage.intro .name .ch, .stage.intro .name h1 { animation: none }
-  .stage.intro .name::before { display: none }
+  #bg .drift, .stage.intro .name .ch { animation: none }
   #curtain .c { transition-duration: .01s }
   .view, .view > * { transition-duration: .01s }
 }

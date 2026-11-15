@@ -10,8 +10,8 @@ import { pl, sectionByPath, sections, type Side } from "@/content/pl";
 
 const HIDE: Record<Side, string> = { l: "inset(0 100% 0 0)", r: "inset(0 0 0 100%)" };
 const SWAP_MS = 1100; // ink + page wipe (.9s, page layer +.14s) when switching sections
-// Intro: letters start at 450ms, the outermost ones ~1.1s later, each settling for 1.4s.
-const INTRO_LETTERS_MS = 3000;
+// Intro: letters start at 300ms, the last one 18 × 35ms later, each rising for .9s.
+const INTRO_LETTERS_MS = 1900;
 const INTRO_MAX_MS = 6000; // reveal anyway if the photo is slow
 const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 

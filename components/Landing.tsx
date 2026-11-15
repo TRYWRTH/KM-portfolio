@@ -6,13 +6,8 @@ import { Fragment, useEffect, useRef } from "react";
 import NavLabel from "@/components/NavLabel";
 import { pl, sections } from "@/content/pl";
 
-// Intro: letters clear from the middle of the name outwards, with a little
-// deterministic jitter so the mist doesn't lift in a perfectly even wave.
-const LETTERS = pl.name.replace(/\s/g, "").length;
-const revealDelay = (i: number) => {
-  const mid = (LETTERS - 1) / 2;
-  return Math.round((Math.abs(i - mid) / mid) * 900 + ((i * 7) % 5) * 45);
-};
+// Intro: letters rise into place left to right, 35ms apart.
+const revealDelay = (i: number) => i * 35;
 
 export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoLoad?: () => void }) {
   const photo = useRef<HTMLImageElement>(null);
@@ -96,7 +91,6 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
               </Fragment>
             ))}
           </h1>
-          <p>{pl.tagline}</p>
         </div>
 
         <nav className="hero-nav" aria-label={pl.nav.main}>
