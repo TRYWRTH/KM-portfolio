@@ -56,6 +56,15 @@ export const about = {
     "Nagradzana za spektakle dla młodzieży: m.in. Grand Prix 26. Międzynarodowego Festiwalu Teatru dla dzieci i młodzieży „Korczak dzisiaj” w Warszawie 2022 za przedstawienie „Tonja z Glimmerdalen” zrealizowane w Miejskim Teatrze Miniatura w Gdańsku, Grand Prix XIII Festiwalu Mała Boska Komedia w Krakowie 2020, Nagroda za najlepszą reżyserię na 27. Festiwalu Teatrów Lalek „Spotkania” w Toruniu, Wyróżnienia jury profesjonalnego i jury młodzieżowego na 25. Międzynarodowym Festiwalu Teatrów dla Dzieci i Młodzieży „Korczak dzisiaj” dla spektaklu „Rutka” zrealizowanego w Teatrze Arlekin w Łodzi.",
     "Współzałożycielka i członkini kolektywu akcjonistycznego „Czarne Szmaty”. Wykładowczyni w Akademii Sztuk Teatralnych w Krakowie, Filii we Wrocławiu, w latach 2020–2024 Prodziekanka d.s. reżyserii na w/w uczelni.",
   ],
+  teachingTitle: "Praca dydaktyczna",
+  teaching: "Od 2020 roku zatrudniona na stanowisku asystentki badawczo-dydaktycznej w Akademii Sztuk Teatralnych w Krakowie, Filii we Wrocławiu, w latach 2020–2024 Prodziekanka d.s. reżyserii Wydziału Lalkarskiego.",
+  coursesTitle: "Prowadzone zajęcia",
+  courses: [
+    { name: "Propedeutyka reżyserii", field: "kierunek: reżyseria" },
+    { name: "Czytanie performatywne", field: "kierunek: reżyseria" },
+    { name: "Reżyseria teatru formy", field: "kierunek: reżyseria" },
+    { name: "Sceny współczesne", field: "kierunek: aktorstwo teatru lalek oraz reżyseria" },
+  ],
   experienceTitle: "Doświadczenie",
   experience: [
     { years: "1998–2003", title: "Teatrologia", detail: "Instytut Polonistyki, Uniwersytet Jagielloński w Krakowie" },

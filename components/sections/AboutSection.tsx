@@ -32,6 +32,22 @@ export default function AboutSection() {
         </ol>
       </section>
 
+      <section aria-labelledby="teaching-title">
+        <h2 id="teaching-title" className="k tiny sub-k">
+          {about.teachingTitle}
+        </h2>
+        <p className="p teaching">{about.teaching}</p>
+        <h3 className="courses-title tiny">{about.coursesTitle}</h3>
+        <ul className="actions courses">
+          {about.courses.map((c) => (
+            <li key={c.name}>
+              <span className="work-title">{c.name}</span>
+              <span className="action-with">{c.field}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section aria-labelledby="awards-title">
         <h2 id="awards-title" className="k tiny sub-k">
           {awardsTitle}
