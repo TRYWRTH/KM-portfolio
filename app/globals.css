@@ -283,8 +283,10 @@ a { color: inherit; text-decoration: none }
 }
 .rz-wide { grid-column: 1 / -1 }
 /* Reżyseria: the first photo opens the page centred in the visible area (.view is a size container) */
-.rz > .rz-grid > .rz-item:first-child { margin-top: max(0px, calc((100cqh - 100cqw * 9 / 32) / 2)) }
-.rz > .rz-grid > .rz-item.rz-wide:first-child { margin-top: max(0px, calc((100cqh - min(100cqw * 3 / 7, 100cqh - 24px)) / 2)) }
+/* --rz-m = the space above it; the same space plus the view's bottom padding (48px) below it keeps
+   the next row just out of sight until you scroll */
+.rz > .rz-grid > .rz-item:first-child { --rz-m: max(0px, calc((100cqh - 100cqw * 9 / 32) / 2)); margin-top: var(--rz-m); margin-bottom: calc(var(--rz-m) + 48px) }
+.rz > .rz-grid > .rz-item.rz-wide:first-child { --rz-m: max(0px, calc((100cqh - min(100cqw * 3 / 7, 100cqh - 24px)) / 2)) }
 .rz-item figure { margin: 0 }
 .rz-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: rgba(54,69,79,.6) }
 .rz-wide .rz-frame { aspect-ratio: 7 / 3; max-height: calc(100cqh - 24px) } /* never taller than the visible area */
@@ -294,7 +296,7 @@ a { color: inherit; text-decoration: none }
 @media (max-width: 767.98px) {
   .rz-grid { grid-template-columns: 1fr; gap: 20px }
   .rz-frame, .rz-wide .rz-frame { aspect-ratio: 3 / 2; max-height: none }
-  .rz > .rz-grid > .rz-item:first-child, .rz > .rz-grid > .rz-item.rz-wide:first-child { margin-top: 0 } /* mobile: photos start at the top */
+  .rz > .rz-grid > .rz-item:first-child, .rz > .rz-grid > .rz-item.rz-wide:first-child { margin-top: 0; margin-bottom: 0 } /* mobile: photos start at the top */
 }
 
 /* ---------- Reżyseria photo cards: small title in the middle + glass curtain ---------- */
