@@ -4,8 +4,9 @@ import SectionHeader from "@/components/SectionHeader";
 import { productions } from "@/content/pl";
 
 /**
- * Reżyseria: productions newest first in two staggered columns (right column set lower),
- * big photo with a short caption underneath. Productions without a photo show the caption only.
+ * Reżyseria: productions newest first in an uneven grid (a repeating rhythm of five sizes and offsets),
+ * big photo with a short caption underneath; the photo drifts inside its frame while scrolling.
+ * Productions without a photo show the caption only.
  */
 export default function DirectingSection() {
   return (
@@ -13,11 +14,13 @@ export default function DirectingSection() {
       <SectionHeader id="work" />
       <ol className="rz-grid">
         {productions.map((p, i) => (
-          <li key={`${p.year}-${p.title}`} className="rz-item" data-col={i % 2 === 0 ? "l" : "r"}>
+          <li key={`${p.year}-${p.title}`} className={`rz-item rz-slot-${i % 5}`} data-drift={i % 5 === 1 || i % 5 === 3 ? "1" : undefined}>
             <figure>
               {p.image ? (
                 <div className="rz-frame">
-                  <Image src={p.image.src} alt={p.image.alt} fill sizes="(max-width: 767px) 100vw, 44vw" />
+                  <div className="rz-img">
+                    <Image src={p.image.src} alt={p.image.alt} fill sizes={i % 5 === 1 || i % 5 === 2 ? "(max-width: 767px) 100vw, 34vw" : "(max-width: 767px) 100vw, 60vw"} />
+                  </div>
                 </div>
               ) : null}
               <figcaption className="rz-cap">
