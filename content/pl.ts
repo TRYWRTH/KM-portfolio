@@ -56,7 +56,7 @@ export interface AboutEntry {
 
 export const about = {
   eyebrow: "O mnie",
-  title: "Reżyserka, performerka, wykładowczyni.",
+  title: "Reżyserka, performerka, wykładowczyni",
   sections: [
     {
       title: "Wykształcenie",
