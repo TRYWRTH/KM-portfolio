@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useRef } from "react";
-import { pl, sections, num, sectionById } from "@/content/pl";
+import { pl, sectionById } from "@/content/pl";
 
 // Intro: letters clear from the middle of the name outwards, with a little
 // deterministic jitter so the mist doesn't lift in a perfectly even wave.
@@ -13,12 +13,8 @@ const revealDelay = (i: number) => {
   return Math.round((Math.abs(i - mid) / mid) * 900 + ((i * 7) % 5) * 45);
 };
 
-// Parallax depth per label, same formula as the reference: .5 + ((i*37) % 10) / 10
-const depth = (i: number) => 0.5 + ((i * 37) % 10) / 10;
-
 export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoLoad?: () => void }) {
   const photo = useRef<HTMLImageElement>(null);
-  const labs = useRef<HTMLDivElement>(null);
   const openRef = useRef(open);
   openRef.current = open;
 
@@ -27,14 +23,9 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
   useEffect(() => {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let mx = 0, my = 0, cx = 0, cy = 0, raf = 0;
-    const nodes = Array.from(labs.current?.children ?? []) as HTMLElement[];
     const tick = () => {
       cx += (mx - cx) * 0.06;
       cy += (my - cy) * 0.06;
-      for (const a of nodes) {
-        const d = +(a.dataset.depth ?? 1);
-        a.style.translate = `${(-cx * 30 * d).toFixed(2)}px ${(-cy * 22 * d).toFixed(2)}px`;
-      }
       if (photo.current)
         photo.current.style.objectPosition = `calc(var(--ox) + ${(cx * -1.2).toFixed(2)}%) calc(50% + ${(cy * -1.5).toFixed(2)}%)`;
       raf = Math.abs(mx - cx) + Math.abs(my - cy) > 0.0005 ? requestAnimationFrame(tick) : 0;
@@ -51,9 +42,6 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
       cancelAnimationFrame(raf);
     };
   }, []);
-
-  const about = sectionById("about");
-  const contact = sectionById("contact");
 
   return (
     <>
@@ -75,20 +63,12 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
       </div>
 
       <div className="over tiny" inert={open}>
-        <nav className="top" aria-label={pl.nav.main}>
-          <Link href="/" scroll={false}>
+        <header className="top">
+          <Link href="/" scroll={false} className="wordmark">
             <span className="sl" aria-hidden>/</span>
             {pl.shortName}
           </Link>
-          <Link href={"/" + about.slug} scroll={false} className="dimmer">
-            <span className="sl" aria-hidden>/</span>
-            {about.label}
-          </Link>
-          <Link href={"/" + contact.slug} scroll={false} className="dimmer">
-            <span className="sl" aria-hidden>/</span>
-            {contact.label}
-          </Link>
-        </nav>
+        </header>
 
         <div className="name">
           <h1 aria-label={pl.name}>
@@ -111,34 +91,12 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
           <p>{pl.tagline}</p>
         </div>
 
-        <nav className="labs" ref={labs} aria-label={pl.nav.sections}>
-          {sections.map((s, i) =>
-            s.pos ? (
-              <Link
-                key={s.id}
-                href={"/" + s.slug}
-                scroll={false}
-                className="lab"
-                data-depth={depth(i).toFixed(2)}
-                style={
-                  {
-                    "--d": `${-i * 1.1}s`,
-                    "--x": `${s.pos[0]}%`,
-                    "--y": `${s.pos[1]}%`,
-                    "--mx": `${s.mpos![0]}%`,
-                    "--my": `${s.mpos![1]}%`,
-                  } as React.CSSProperties
-                }
-              >
-                <span className="w">
-                  <span className="sl" aria-hidden>/</span>
-                  <span className="l">{s.label}</span>
-                  <span className="n" aria-hidden>{num(s.id)}</span>
-                </span>
-                <span className="t">{s.teaser}</span>
-              </Link>
-            ) : null,
-          )}
+        <nav className="hero-nav" aria-label={pl.nav.main}>
+          {pl.heroNav.map((item) => (
+            <Link key={item.id} href={"/" + sectionById(item.id).slug} scroll={false}>
+              {item.label}
+            </Link>
+          ))}
         </nav>
       </div>
     </>

@@ -21,10 +21,6 @@ export interface Section {
   teaser: string;
   /** side the link lives on = side the curtain wipes in from */
   side: Side;
-  /** floating label position in % of the viewport [x, y]; absent for top-row items */
-  pos?: [number, number];
-  /** mobile position (<= 820px) */
-  mpos?: [number, number];
 }
 
 export const pl = {
@@ -39,20 +35,28 @@ export const pl = {
       "Karolina Maciejaszek — reżyserka teatralna, performerka i wykładowczyni. Teatr formy łączący elementy teatru dramatycznego i plastycznego.",
   },
   nav: {
-    main: "Główne",
+    main: "Główna nawigacja",
     sections: "Sekcje",
     close: "Zamknij ×",
     closeLabel: "Zamknij i wróć na stronę główną",
   },
   placeholder: "W przygotowaniu.",
+  // Bottom navigation row on the hero, in display order.
+  // O mnie = bio + timeline (education, Kalendarium) + teaching at the Akademia.
+  heroNav: [
+    { id: "about", label: "O mnie" },
+    { id: "work", label: "Reżyseria" },
+    { id: "czsz", label: "Kolektyw Czarne Szmaty" },
+    { id: "contact", label: "Kontakt" },
+  ] satisfies { id: SectionId; label: string }[],
   // Order defines the 01–07 numbering used on labels, tabs and kickers.
   sections: [
     { id: "about", slug: "o-mnie", label: "O mnie", teaser: "reżyserka · performerka · wykładowczyni", side: "l" },
-    { id: "exp", slug: "doswiadczenie", label: "Doświadczenie", teaser: "2002 → dziś", side: "l", pos: [6, 78], mpos: [6, 68] },
-    { id: "work", slug: "rezyseria", label: "Reżyseria", teaser: "17 realizacji · 2007–2025", side: "l", pos: [7, 30], mpos: [8, 75] },
-    { id: "czsz", slug: "czarne-szmaty", label: "Czarne Szmaty", teaser: "kolektyw akcjonistyczny · od 2016", side: "l", pos: [30, 64], mpos: [8, 82] },
-    { id: "awards", slug: "nagrody", label: "Nagrody", teaser: "2 × Grand Prix · 2 × Złota Maska", side: "r", pos: [49, 19], mpos: [50, 68] },
-    { id: "teach", slug: "dydaktyka", label: "Dydaktyka", teaser: "ASTA Wrocław · od 2020", side: "r", pos: [63, 76], mpos: [48, 78] },
+    { id: "exp", slug: "doswiadczenie", label: "Doświadczenie", teaser: "2002 → dziś", side: "l" },
+    { id: "work", slug: "rezyseria", label: "Reżyseria", teaser: "17 realizacji · 2007–2025", side: "l" },
+    { id: "czsz", slug: "czarne-szmaty", label: "Czarne Szmaty", teaser: "kolektyw akcjonistyczny · od 2016", side: "l" },
+    { id: "awards", slug: "nagrody", label: "Nagrody", teaser: "2 × Grand Prix · 2 × Złota Maska", side: "r" },
+    { id: "teach", slug: "dydaktyka", label: "Dydaktyka", teaser: "ASTA Wrocław · od 2020", side: "r" },
     { id: "contact", slug: "kontakt", label: "Kontakt", teaser: "współpraca · zaproszenia", side: "r" },
   ] satisfies Section[],
 };

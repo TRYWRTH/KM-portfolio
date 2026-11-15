@@ -43,7 +43,7 @@ a { color: inherit; text-decoration: none }
 #bg::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background:
-    linear-gradient(to bottom, rgba(8,8,9,.5) 0, rgba(8,8,9,0) 22%, rgba(8,8,9,0) 70%, rgba(8,8,9,.55) 100%),
+    linear-gradient(180deg, rgba(0,0,0,.34) 0%, rgba(0,0,0,0) 26%, rgba(0,0,0,0) 62%, rgba(0,0,0,.42) 100%),
     linear-gradient(to right, rgba(8,8,9,.66) 0, rgba(8,8,9,.5) 45%, rgba(8,8,9,.32) 100%),
     repeating-linear-gradient(0deg, rgba(0,0,0,.03) 0 1px, transparent 1px 3px);
 }
@@ -57,15 +57,23 @@ a { color: inherit; text-decoration: none }
 .over > * { pointer-events: auto }
 .stage.open .over { opacity: 0; pointer-events: none; transition: opacity .4s .3s }
 
-.top {
-  position: absolute; left: var(--pad); right: var(--pad); top: var(--pad);
-  display: grid; grid-template-columns: 1fr auto 1fr; align-items: start;
+/* top bar: wordmark only; bottom row: the four section links */
+.top { position: absolute; left: 48px; top: 40px }
+.top a, .hero-nav a {
+  font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .18em;
+  text-transform: uppercase; color: #fff; white-space: nowrap;
+  text-decoration: underline 1px transparent; text-underline-offset: 6px;
+  transition: opacity .2s, text-decoration-color .2s;
 }
-.top a { display: inline-flex; gap: .9em; transition: opacity .25s; justify-self: start }
-.top > *:nth-child(2) { justify-self: center }
-.top > *:last-child { justify-self: end }
-.top .sl, .lab .sl { display: inline-block; transition: transform .45s var(--ease) }
-.top a:hover .sl, .top a:focus-visible .sl, .lab:hover .sl, .lab:focus-visible .sl { transform: translateX(5px) rotate(14deg) }
+.top a { display: inline-flex; gap: 10px }
+.top .sl { opacity: .7 }
+.hero-nav {
+  position: absolute; left: 48px; right: 48px; bottom: 44px;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 24px;
+}
+.hero-nav a { justify-self: start; opacity: .7 }
+.top a:is(:hover, :focus-visible), .hero-nav a:is(:hover, :focus-visible) { opacity: 1; text-decoration-color: currentColor }
+.top a:focus-visible, .hero-nav a:focus-visible { outline: 1px solid #fff; outline-offset: 4px }
 
 .name {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -52%);
@@ -79,43 +87,13 @@ a { color: inherit; text-decoration: none }
 .name .word, .name .ch { display: inline-block }
 .name p { margin-top: 14px; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 400; opacity: .9 }
 
-.labs { position: absolute; inset: 0; pointer-events: none !important }
-.lab {
-  position: absolute; left: var(--x); top: var(--y); display: block;
-  font-size: .8rem; pointer-events: auto; transition: opacity .4s;
-}
-.lab .w { display: inline-flex; gap: .9em; align-items: baseline; animation: bob 7s ease-in-out infinite; animation-delay: var(--d) }
-@keyframes bob { 50% { transform: translate3d(0, -6px, 0) } }
-.lab .n { opacity: .65; font-size: .6rem; letter-spacing: .06em }
-.lab .l { position: relative; padding-bottom: 3px }
-.lab .l::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor;
-  transform: scaleX(0); transform-origin: left; transition: transform .55s var(--ease);
-}
-.lab:hover .l::after, .lab:focus-visible .l::after { transform: scaleX(1) }
-.lab .t {
-  display: block; margin: 7px 0 0 calc(.9em + 1.6em); font-size: .62rem; letter-spacing: .04em;
-  text-transform: none; font-weight: 300; opacity: 0; transform: translateY(-4px);
-  transition: opacity .4s, transform .5s var(--ease); white-space: nowrap;
-}
-.lab:hover .t, .lab:focus-visible .t { opacity: .9; transform: none }
-
-/* hovering (or focusing) a label / section link dims everything else */
-.over:has(.lab:is(:hover, :focus-visible), .dimmer:is(:hover, :focus-visible)) :is(.lab, .top > *):not(:hover, :focus-visible) { opacity: .35 }
-
-/* visible keyboard focus (labels also show underline + teaser) */
-.lab, .top a { outline: none }
-.top a:focus-visible, .lab:focus-visible .l { outline: 1px dashed currentColor; outline-offset: 5px }
-
 /* ---------- intro: white page, the name clears out of the fog ---------- */
-.top, .labs, .name p { transition: opacity 1s var(--ease-io), visibility 0s }
-.top { transition-delay: .25s }
-.name p { transition-delay: .35s }
-.labs { transition-delay: .5s }
+.top, .hero-nav { transition: opacity .8s ease .25s, visibility 0s .25s }
+.name p { transition: opacity 1s var(--ease-io) .35s, visibility 0s .35s }
 .stage.intro { background: var(--white) }
 .stage.intro #bg { opacity: 0; transform: scale(1.05) }
 .stage.intro .name { color: var(--ink); text-shadow: none }
-.stage.intro :is(.top, .labs, .name p) { opacity: 0; visibility: hidden; transition: none }
+.stage.intro :is(.top, .hero-nav, .name p) { opacity: 0; visibility: hidden; transition: none }
 .stage.intro .name .ch { animation: settle 1.4s cubic-bezier(.22, 1, .36, 1) calc(.45s + var(--cd)) both }
 .stage.intro .name h1 { animation: tighten 2.6s cubic-bezier(.22, 1, .36, 1) .45s both }
 .stage.intro .name::before {
@@ -182,15 +160,20 @@ a { color: inherit; text-decoration: none }
 
 @media (max-width: 820px) {
   :root { --ox: 74% }
-  .lab { left: var(--mx); top: var(--my) }
   .bar { grid-template-columns: auto 1fr auto; gap: 10px }
   .tabs { display: none }
   .name h1 { font-size: clamp(2.6rem, 12vw, 3.6rem) }
   .name .word { display: block }
-  .lab .t { display: none }
+}
+@media (max-width: 767.98px) {
+  .top { left: 20px; top: 20px }
+  .hero-nav { left: 20px; right: 20px; bottom: 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px }
+  .top a, .hero-nav a { font-size: 12px }
+  /* "Kolektyw Czarne Szmaty" is wider than a half-width column at 390px: let it wrap rather than overlap */
+  .hero-nav a { white-space: normal }
 }
 @media (prefers-reduced-motion: reduce) {
-  #bg .drift, .lab .w, .stage.intro .name .ch, .stage.intro .name h1 { animation: none }
+  #bg .drift, .stage.intro .name .ch, .stage.intro .name h1 { animation: none }
   .stage.intro .name::before { display: none }
   #curtain .c { transition-duration: .01s }
   #view, #view > * { transition-duration: .01s }
