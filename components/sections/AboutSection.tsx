@@ -1,14 +1,5 @@
-import { about, type AboutEntry } from "@/content/pl";
-
-function Entry({ e }: { e: AboutEntry }) {
-  return (
-    <div className="ab-entry">
-      {e.label ? <p className="ab-label">{e.label}</p> : null}
-      <h3 className="ab-title">{e.title}</h3>
-      {e.description ? <p className="ab-desc">{e.description}</p> : null}
-    </div>
-  );
-}
+import Entry from "@/components/AbEntry";
+import { about } from "@/content/pl";
 
 /** O mnie: left column = title + collapsible sections (closed by default), right column = bio + selected awards. */
 export default function AboutSection() {

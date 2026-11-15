@@ -147,7 +147,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
 
       <div id="curtain" ref={curtain} data-nt={ready ? undefined : ""} inert={!open} aria-hidden={!open}>
         <div className="c c1" />
-        <div className="c c2" data-theme={(sectionByPath(shownPath) ?? sections[0]).theme}>
+        <div className="c c2">
           {/* tinted glass: the section's photo, heavily blurred, under a palette tint */}
           <div className="glass" aria-hidden>
             <Image key={glassSrc} src={glassSrc} alt="" fill sizes="480px" quality={40} />

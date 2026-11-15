@@ -14,8 +14,6 @@ export interface Section {
   topBar?: true;
   /** words dropped from the label on narrow screens (< 768px), e.g. "Kolektyw" */
   mobileHide?: string;
-  /** "light": plain light page instead of the blurred photo behind tinted glass */
-  theme?: "light";
   /** photo shown blurred, behind tinted glass, as the page background */
   bg: string;
   /** side the link lives on = side the curtain wipes in from */
@@ -41,7 +39,7 @@ export const pl = {
   // the tabs inside an open page, and the 01–04 numbering on the kickers.
   sections: [
     // bio + timeline (education, Kalendarium) + teaching at the Akademia
-    { id: "about", slug: "o-mnie", label: "O mnie", bg: "/karolina.jpg", theme: "light", side: "l" },
+    { id: "about", slug: "o-mnie", label: "O mnie", bg: "/karolina.jpg", side: "l" },
     // her main work
     { id: "work", slug: "rezyseria", label: "Reżyseria", bg: "/photos/orlice.jpg", side: "l" },
     { id: "czsz", slug: "czarne-szmaty", label: "Kolektyw Czarne Szmaty", mobileHide: "Kolektyw", bg: "/photos/granica-pogardy.jpg", side: "l" },
@@ -113,12 +111,15 @@ export const about = {
 
 // Kolektyw Czarne Szmaty
 export const collective = {
+  eyebrow: "Kolektyw",
+  title: "Czarne Szmaty",
+  // paragraphs[0] is the lead on the page
   paragraphs: [
     "Kolektyw akcjonistyczny Czarne Szmaty założony w 2016 (wspólnie z Martą Jalowską i Magdaleną Staroszczyk) działa w obrębie szeroko pojętej sztuki performatywnej – performensu, street artu, happeningu – używając do nawiązania dialogu społecznego różnych mediów.",
     "Odpowiadając na nowe modele komunikacji, konfrontacyjny aspekt działań Czarnych Szmat przyjmuje różne formy, od bezpośredniej konfrontacji w przestrzeni miejskiej do publikacji w internecie i mediach społecznościowych.",
     "W swych działaniach kolektyw odnosi się do aktualnych wydarzeń społecznych oraz politycznych a także do obowiązujących narracji historycznych kształtujących naszą tożsamość, poddając je krytycznej analizie i stosując strategie subwersji. W zależności od rodzaju podejmowanych działań, grupa zaprasza do współpracy innych artystów i inne artystki.",
   ],
-  actionsTitle: "Grupa zrealizowała następujące akcje performatywne",
+  actionsTitle: "Akcje performatywne",
   actions: [
     { title: "Granica pogardy" },
     { title: "Jeszcze mamy prawo" },
