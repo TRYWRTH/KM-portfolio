@@ -8,8 +8,8 @@ import { num, pl, sectionByPath, sections, type Side } from "@/content/pl";
 
 const HIDE: Record<Side, string> = { l: "inset(0 100% 0 0)", r: "inset(0 0 0 100%)" };
 const SWAP_MS = 220;
-// Intro: letters start at 500ms; last letter (index 18) starts at 18²·2.9ms ≈ 940ms and runs 1s.
-const INTRO_LETTERS_MS = 2500;
+// Intro: letters start at 450ms, the outermost ones ~1.1s later, each settling for 1.4s.
+const INTRO_LETTERS_MS = 3000;
 const INTRO_MAX_MS = 6000; // reveal anyway if the photo is slow
 const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 

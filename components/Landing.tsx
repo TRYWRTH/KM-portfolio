@@ -5,6 +5,14 @@ import Link from "next/link";
 import { Fragment, useEffect, useRef } from "react";
 import { pl, sections, num, sectionById } from "@/content/pl";
 
+// Intro: letters clear from the middle of the name outwards, with a little
+// deterministic jitter so the mist doesn't lift in a perfectly even wave.
+const LETTERS = pl.name.replace(/\s/g, "").length;
+const revealDelay = (i: number) => {
+  const mid = (LETTERS - 1) / 2;
+  return Math.round((Math.abs(i - mid) / mid) * 900 + ((i * 7) % 5) * 45);
+};
+
 // Parallax depth per label, same formula as the reference: .5 + ((i*37) % 10) / 10
 const depth = (i: number) => 0.5 + ((i * 37) % 10) / 10;
 
@@ -91,7 +99,7 @@ export default function Landing({ open, onPhotoLoad }: { open: boolean; onPhotoL
                 {Array.from(word).map((ch, c) => {
                   const i = words.slice(0, w).join("").length + c; // letter index across the name
                   return (
-                    <span className="ch" key={c} style={{ "--cd": `${Math.round(i * i * 2.9)}ms` } as React.CSSProperties}>
+                    <span className="ch" key={c} style={{ "--cd": `${revealDelay(i)}ms` } as React.CSSProperties}>
                       {ch}
                     </span>
                   );
