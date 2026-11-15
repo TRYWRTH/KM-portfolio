@@ -4,7 +4,7 @@ import { collective } from "@/content/pl";
 
 /**
  * Kolektyw Czarne Szmaty, in the same light two-column style as O mnie:
- * left = eyebrow, title, collapsible list of actions; right = lead, paragraphs, Facebook link;
+ * left = title, collapsible list of actions; right = lead, paragraphs, Facebook link;
  * below = selected actions with photos.
  */
 export default function CzarneSzmatySection() {
