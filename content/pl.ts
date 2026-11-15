@@ -14,6 +14,8 @@ export interface Section {
   topBar?: true;
   /** words dropped from the label on narrow screens (< 768px), e.g. "Kolektyw" */
   mobileHide?: string;
+  /** "light": plain light page instead of the blurred photo behind tinted glass */
+  theme?: "light";
   /** photo shown blurred, behind tinted glass, as the page background */
   bg: string;
   /** side the link lives on = side the curtain wipes in from */
@@ -39,7 +41,7 @@ export const pl = {
   // the tabs inside an open page, and the 01–04 numbering on the kickers.
   sections: [
     // bio + timeline (education, Kalendarium) + teaching at the Akademia
-    { id: "about", slug: "o-mnie", label: "O mnie", bg: "/karolina.jpg", side: "l" },
+    { id: "about", slug: "o-mnie", label: "O mnie", bg: "/karolina.jpg", theme: "light", side: "l" },
     // her main work
     { id: "work", slug: "rezyseria", label: "Reżyseria", bg: "/photos/orlice.jpg", side: "l" },
     { id: "czsz", slug: "czarne-szmaty", label: "Kolektyw Czarne Szmaty", mobileHide: "Kolektyw", bg: "/photos/granica-pogardy.jpg", side: "l" },
@@ -47,34 +49,66 @@ export const pl = {
   ] satisfies Section[],
 };
 
-// O mnie: bio + timeline (education, Kalendarium) + teaching at the Akademia.
+// O mnie: two columns. Left: title + collapsible sections; right: bio + selected awards.
+export interface AboutEntry {
+  label?: string;
+  title: string;
+  description?: string;
+}
+
 export const about = {
-  lead: "Reżyserka, performerka, wykładowczyni.",
-  bio: [
-    "Absolwentka reżyserii na Akademii Teatralnej im. Aleksandra Zelwerowicza w Warszawie oraz teatrologii na Uniwersytecie Jagiellońskim w Krakowie. Debiutowała w 2007 roku spektaklem „Woyzeck” w Teatrze im. Jaracza w Olsztynie.",
+  eyebrow: "O mnie",
+  title: "Reżyserka, performerka, wykładowczyni.",
+  sections: [
+    {
+      title: "Wykształcenie",
+      entries: [
+        // TODO: real years (placeholder kept visible on purpose)
+        { label: "[RRRR–RRRR]", title: "Akademia Teatralna im. Aleksandra Zelwerowicza w Warszawie", description: "Reżyseria" },
+        // TODO: real years (placeholder kept visible on purpose)
+        { label: "[RRRR–RRRR]", title: "Uniwersytet Jagielloński w Krakowie", description: "Teatrologia" },
+      ] as AboutEntry[],
+    },
+    {
+      title: "Kariera",
+      entries: [
+        { label: "2007–obecnie", title: "Reżyseria teatralna", description: "Realizacje w teatrach dramatycznych i lalkowych" },
+        { label: "2016–obecnie", title: "Performerka w kolektywie Czarne Szmaty", description: "Współzałożycielka i członkini kolektywu akcjonistycznego" },
+      ] as AboutEntry[],
+    },
+    {
+      title: "Praca dydaktyczna",
+      entries: [
+        {
+          title: "Akademia Sztuk Teatralnych w Krakowie, Filia we Wrocławiu",
+          description: "Wykładowczyni na Wydziale Lalkarskim, w latach 2020–2024 prodziekanka d.s. reżyserii Wydziału Lalkarskiego",
+        },
+      ] as AboutEntry[],
+      coursesLabel: "Zajęcia",
+      courses: [
+        { title: "Propedeutyka reżyserii", description: "kierunek: reżyseria" },
+        { title: "Czytanie performatywne", description: "kierunek: reżyseria" },
+        { title: "Reżyseria teatru formy", description: "kierunek: reżyseria" },
+        { title: "Sceny współczesne", description: "kierunek: aktorstwo teatru lalek oraz reżyseria" },
+      ] as AboutEntry[],
+    },
+  ],
+  lead: "Absolwentka reżyserii na Akademii Teatralnej im. Aleksandra Zelwerowicza w Warszawie oraz teatrologii na Uniwersytecie Jagiellońskim w Krakowie. Debiutowała w 2007 roku spektaklem „Woyzeck” w Teatrze im. Jaracza w Olsztynie.",
+  paragraphs: [
     "Pracuje w teatrach dramatycznych i lalkowych, instytucjonalnych i offowych. W ostatnich latach aktywnie działa w teatrze formy: łączącym elementy teatru dramatycznego i teatru plastycznego.",
-    "Nagradzana za spektakle dla młodzieży: m.in. Grand Prix 26. Międzynarodowego Festiwalu Teatru dla dzieci i młodzieży „Korczak dzisiaj” w Warszawie 2022 za przedstawienie „Tonja z Glimmerdalen” zrealizowane w Miejskim Teatrze Miniatura w Gdańsku, Grand Prix XIII Festiwalu Mała Boska Komedia w Krakowie 2020, Nagroda za najlepszą reżyserię na 27. Festiwalu Teatrów Lalek „Spotkania” w Toruniu, Wyróżnienia jury profesjonalnego i jury młodzieżowego na 25. Międzynarodowym Festiwalu Teatrów dla Dzieci i Młodzieży „Korczak dzisiaj” dla spektaklu „Rutka” zrealizowanego w Teatrze Arlekin w Łodzi.",
     "Współzałożycielka i członkini kolektywu akcjonistycznego „Czarne Szmaty”. Wykładowczyni w Akademii Sztuk Teatralnych w Krakowie, Filii we Wrocławiu, w latach 2020–2024 Prodziekanka d.s. reżyserii na w/w uczelni.",
   ],
-  teachingTitle: "Praca dydaktyczna",
-  teaching: "Od 2020 roku zatrudniona na stanowisku asystentki badawczo-dydaktycznej w Akademii Sztuk Teatralnych w Krakowie, Filii we Wrocławiu, w latach 2020–2024 Prodziekanka d.s. reżyserii Wydziału Lalkarskiego.",
-  coursesTitle: "Prowadzone zajęcia",
-  courses: [
-    { name: "Propedeutyka reżyserii", field: "kierunek: reżyseria" },
-    { name: "Czytanie performatywne", field: "kierunek: reżyseria" },
-    { name: "Reżyseria teatru formy", field: "kierunek: reżyseria" },
-    { name: "Sceny współczesne", field: "kierunek: aktorstwo teatru lalek oraz reżyseria" },
-  ],
-  experienceTitle: "Doświadczenie",
-  experience: [
-    { years: "1998–2003", title: "Teatrologia", detail: "Instytut Polonistyki, Uniwersytet Jagielloński w Krakowie" },
-    { years: "2002–2008", title: "Akademia Teatralna im. Aleksandra Zelwerowicza w Warszawie", detail: "Studia magisterskie" },
-    { years: "2007–obecnie", title: "Reżyseria teatralna", detail: "Realizacje w teatrach dramatycznych i lalkowych" },
-    { years: "2016–obecnie", title: "Performerka w kolektywie Czarne Szmaty", detail: "Współzałożycielka i członkini kolektywu akcjonistycznego" },
+  awardsIntro: "Nagradzana za spektakle dla młodzieży: m.in.",
+  awards: [
     {
-      years: "2020–obecnie",
-      title: "Akademia Sztuk Teatralnych w Krakowie, Filia we Wrocławiu",
-      detail: "Wykładowczyni na Wydziale Lalkarskim, w latach 2020–2024 prodziekanka d.s. reżyserii Wydziału Lalkarskiego",
+      lead: "Grand Prix",
+      rest: "26. Międzynarodowego Festiwalu Teatru dla dzieci i młodzieży „Korczak dzisiaj” w Warszawie 2022 za przedstawienie „Tonja z Glimmerdalen” zrealizowane w Miejskim Teatrze Miniatura w Gdańsku",
+    },
+    { lead: "Grand Prix", rest: "XIII Festiwalu Mała Boska Komedia w Krakowie 2020" },
+    { lead: "Nagroda za najlepszą reżyserię", rest: "na 27. Festiwalu Teatrów Lalek „Spotkania” w Toruniu" },
+    {
+      lead: "Wyróżnienia jury profesjonalnego i jury młodzieżowego",
+      rest: "na 25. Międzynarodowym Festiwalu Teatrów dla Dzieci i Młodzieży „Korczak dzisiaj” dla spektaklu „Rutka” zrealizowanego w Teatrze Arlekin w Łodzi",
     },
   ],
 };
@@ -147,7 +181,7 @@ export interface Award {
   list?: string[];
 }
 
-// Nagrody (shown on O mnie, after Doświadczenie).
+// Full list of awards. Not shown on the site at the moment (the O mnie page lists a selection in `about.awards`).
 export const awardsTitle = "Nagrody";
 export const awards: Award[] = [
   {

@@ -1,80 +1,67 @@
-import SectionHeader from "@/components/SectionHeader";
-import { about, awards, awardsTitle } from "@/content/pl";
+import { about, type AboutEntry } from "@/content/pl";
 
-/** O mnie: bio, then the timeline (education, Kalendarium, teaching at the Akademia). */
+function Entry({ e }: { e: AboutEntry }) {
+  return (
+    <div className="ab-entry">
+      {e.label ? <p className="ab-label">{e.label}</p> : null}
+      <h3 className="ab-title">{e.title}</h3>
+      {e.description ? <p className="ab-desc">{e.description}</p> : null}
+    </div>
+  );
+}
+
+/** O mnie: left column = title + collapsible sections (closed by default), right column = bio + selected awards. */
 export default function AboutSection() {
   return (
-    <article className="works about">
-      <SectionHeader id="about" />
-      <div className="bio">
-        <p className="lead">{about.lead}</p>
-        {about.bio.map((para) => (
-          <p className="p" key={para.slice(0, 24)}>
-            {para}
-          </p>
-        ))}
+    <div className="ab">
+      <div className="ab-left">
+        <p className="ab-eyebrow">{about.eyebrow}</p>
+        <h1 className="ab-h1">{about.title}</h1>
+        <div className="ab-sections">
+          {about.sections.map((sec) => (
+            <details key={sec.title} className="ab-acc">
+              <summary>
+                <h2 className="ab-acc-title">
+                  <span>{sec.title}</span>
+                  <span className="ab-icon" aria-hidden />
+                </h2>
+              </summary>
+              <div className="ab-acc-body">
+                {sec.entries.map((e) => (
+                  <Entry key={e.title} e={e} />
+                ))}
+                {"courses" in sec && sec.courses ? (
+                  <>
+                    <p className="ab-label ab-sublabel">{sec.coursesLabel}</p>
+                    <div className="ab-courses">
+                      {sec.courses.map((c) => (
+                        <Entry key={c.title} e={c} />
+                      ))}
+                    </div>
+                  </>
+                ) : null}
+              </div>
+            </details>
+          ))}
+        </div>
       </div>
 
-      <section aria-labelledby="exp-title">
-        <h2 id="exp-title" className="k tiny sub-k">
-          {about.experienceTitle}
-        </h2>
-        <ol className="work-list timeline">
-          {about.experience.map((e) => (
-            <li key={e.years + e.title} className="work new-year">
-              <span className="work-year tiny">{e.years}</span>
-              <div className="work-body">
-                <h3 className="work-title">{e.title}</h3>
-                <p className="work-desc">{e.detail}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section aria-labelledby="teaching-title">
-        <h2 id="teaching-title" className="k tiny sub-k">
-          {about.teachingTitle}
-        </h2>
-        <p className="p teaching">{about.teaching}</p>
-        <h3 className="courses-title tiny">{about.coursesTitle}</h3>
-        <ul className="actions courses">
-          {about.courses.map((c) => (
-            <li key={c.name}>
-              <span className="work-title">{c.name}</span>
-              <span className="action-with">{c.field}</span>
+      <div className="ab-right">
+        <p className="ab-lead">{about.lead}</p>
+        {about.paragraphs.map((p) => (
+          <p className="ab-p" key={p.slice(0, 24)}>
+            {p}
+          </p>
+        ))}
+        <p className="ab-p ab-awards-intro">{about.awardsIntro}</p>
+        <ul className="ab-awards">
+          {about.awards.map((a) => (
+            <li key={a.rest}>
+              <strong>{a.lead}</strong> {a.rest}
             </li>
           ))}
         </ul>
-      </section>
-
-      <section aria-labelledby="awards-title">
-        <h2 id="awards-title" className="k tiny sub-k">
-          {awardsTitle}
-        </h2>
-        <ol className="work-list timeline awards">
-          {awards.map((a, i) => {
-            const firstOfYear = a.year !== undefined && (i === 0 || awards[i - 1].year !== a.year);
-            return (
-              <li key={a.title + (a.festival ?? "")} className={firstOfYear ? "work new-year" : "work"}>
-                <span className="work-year tiny">{firstOfYear ? a.year : ""}</span>
-                <div className="work-body">
-                  <h3 className="work-title">{a.title}</h3>
-                  {a.festival ? <p className="work-venue tiny">{a.festival}</p> : null}
-                  {a.description ? <p className="work-desc">{a.description}</p> : null}
-                  {a.list ? (
-                    <ul className="award-list">
-                      {a.list.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-              </li>
-            );
-          })}
-        </ol>
-      </section>
-    </article>
+      </div>
+    </div>
   );
 }
