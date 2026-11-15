@@ -246,6 +246,8 @@ export interface Production {
   theatre: string;
   year: number;
   image?: { src: string; alt: string };
+  /** full-width slot on Reżyseria (only for photos at least ~1600px wide); the rest pair up side by side */
+  wide?: true;
   /** the curtain description, one sentence per entry; names the original author */
   paragraphs: string[];
 }
@@ -254,7 +256,7 @@ export interface Production {
 // "Na podstawie tekstu …" sentences were added where the description did not name the author yet.
 export const productions: Production[] = [
   {
-    title: "Olbrzyyym", role: "Reżyseria", theatre: "Wrocławski Teatr Lalek", year: 2025,
+    title: "Olbrzyyym", wide: true, role: "Reżyseria", theatre: "Wrocławski Teatr Lalek", year: 2025,
     image: { src: "/photos/olbrzyyym.jpg", alt: "Scena zalana czerwonym światłem: aktorzy wokół przezroczystej, świecącej kurtyny." },
     paragraphs: [
       "Spektakl familijny na podstawie dramatu Philippe’a Dorina.",
@@ -276,7 +278,7 @@ export const productions: Production[] = [
     ],
   },
   {
-    title: "Hystericon", role: "Adaptacja i reżyseria", theatre: "Teatr Akademii Sztuk Teatralnych w Krakowie, Filii we Wrocławiu", year: 2023,
+    title: "Hystericon", wide: true, role: "Adaptacja i reżyseria", theatre: "Teatr Akademii Sztuk Teatralnych w Krakowie, Filii we Wrocławiu", year: 2023,
     image: { src: "/photos/hystericon.jpg", alt: "Aktor w masce starca opiera się o stos kartonowych pudeł." },
     paragraphs: [
       "Spektakl dramatyczny na podstawie współczesnego dramatu zrealizowany ze studentami Akademii Sztuk Teatralnych.",
@@ -300,7 +302,7 @@ export const productions: Production[] = [
     ],
   },
   {
-    title: "Rutka", role: "Reżyseria i adaptacja", theatre: "Teatr Lalek Arlekin w Łodzi", year: 2020,
+    title: "Rutka", wide: true, role: "Reżyseria i adaptacja", theatre: "Teatr Lalek Arlekin w Łodzi", year: 2020,
     image: { src: "/photos/rutka.jpg", alt: "Aktorzy budują miasto z czerwonych klocków w niebiesko-czerwonym świetle." },
     paragraphs: [
       "Spektakl zrealizowany w ramach Konkursu im. Jana Dormana Instytutu Teatralnego w Warszawie.",
@@ -326,7 +328,7 @@ export const productions: Production[] = [
     ],
   },
   {
-    title: "Fru-Fru", role: "Reżyseria i scenariusz", theatre: "Olsztyński Teatr Lalek", year: 2019,
+    title: "Fru-Fru", wide: true, role: "Reżyseria i scenariusz", theatre: "Olsztyński Teatr Lalek", year: 2019,
     image: { src: "/photos/fru-fru.jpg", alt: "Rząd świecących, białych kul przypominających lampiony na czarnym tle." },
     paragraphs: [
       "Spektakl dla najmłodszych widzów (od lat 4) na podstawie picture booka „Metamorfoza Fru-Fru”.",
@@ -350,7 +352,7 @@ export const productions: Production[] = [
     ],
   },
   {
-    title: "Ronja, córka zbójnika", role: "Reżyseria", theatre: "Teatr Pinokio w Łodzi", year: 2016,
+    title: "Ronja, córka zbójnika", wide: true, role: "Reżyseria", theatre: "Teatr Pinokio w Łodzi", year: 2016,
     image: { src: "/photos/ronja.jpg", alt: "Zbójnicy w futrach i hełmach z rogami wspinają się na pochyłą drewnianą płytę." },
     paragraphs: [
       "Na podstawie tekstu Astrid Lindgren.",

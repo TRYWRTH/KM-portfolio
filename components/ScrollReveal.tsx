@@ -3,17 +3,15 @@
 import { useEffect } from "react";
 
 /**
- * Scroll effects for the Reżyseria grid, driven by the curtain's scroll container (#view):
- * the photo inside each frame lags behind the frame (inner parallax, --par), and items marked
- * data-drift move slightly faster than the rest (--drift). Off under reduced motion; the drift is
- * also off on narrow screens.
+ * Scroll effect for the Reżyseria grid, driven by the curtain's scroll container (#view):
+ * the photo inside each frame lags slightly behind the frame (inner parallax, --par).
+ * Off under reduced motion.
  */
 export default function ScrollReveal({ selector }: { selector: string }) {
   useEffect(() => {
     const scroller = document.getElementById("view");
     if (!scroller || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const items = Array.from(document.querySelectorAll<HTMLElement>(selector));
-    const wide = matchMedia("(min-width: 768px)");
     let raf = 0;
     const update = () => {
       raf = 0;
@@ -27,8 +25,6 @@ export default function ScrollReveal({ selector }: { selector: string }) {
         const max = r.height * 0.1; // the photo overhangs its frame by 10% top and bottom
         const par = Math.max(-max, Math.min(max, -offset * 0.14));
         el.style.setProperty("--par", `${par.toFixed(1)}px`);
-        const drift = wide.matches && el.dataset.drift ? (offset * -0.07).toFixed(1) : "0";
-        el.style.setProperty("--drift", `${drift}px`);
       }
     };
     const onScroll = () => {

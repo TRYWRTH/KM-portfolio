@@ -5,29 +5,23 @@ import { useId, useState } from "react";
 import { pl, type Production } from "@/content/pl";
 
 /**
- * One production on Reżyseria: photo with a glass "curtain" description and a two-line caption.
- * Desktop: the curtain materialises on hover or keyboard focus of the card.
+ * One production on Reżyseria: photo with a small title in the middle and a glass "curtain"
+ * (role, theatre · year, description) that materialises over it.
+ * Desktop: the curtain opens on hover or keyboard focus of the card.
  * Touch / narrow screens: only the info button opens it.
  */
-export default function ProductionCard({
-  p,
-  small,
-  sizes,
-}: {
-  p: Production;
-  small: boolean;
-  sizes: string;
-}) {
+export default function ProductionCard({ p, sizes }: { p: Production; sizes: string }) {
   const [open, setOpen] = useState(false);
   const cvId = useId();
   return (
-    <figure className={`pc${open ? " is-open" : ""}${small ? " pc-sm" : ""}`} tabIndex={0} aria-describedby={cvId}>
+    <figure className={`pc${open ? " is-open" : ""}${p.wide ? "" : " pc-sm"}`} tabIndex={0} aria-describedby={cvId}>
       <div className="rz-frame">
         {p.image ? (
           <div className="rz-img">
             <Image src={p.image.src} alt={p.image.alt} fill sizes={sizes} />
           </div>
         ) : null}
+        <h2 className="pc-name">{p.title}</h2>
         <div className="cv" id={cvId}>
           {p.image ? (
             <div className="cv-blur" aria-hidden>
@@ -40,9 +34,19 @@ export default function ProductionCard({
           <div className="cv-sheen" aria-hidden />
           <div className="cv-rim" aria-hidden />
           <div className="cv-text">
-            {p.paragraphs.map((t) => (
-              <p key={t}>{t}</p>
-            ))}
+            <div className="cv-meta">
+              <p className="pc-line pc-role">
+                {p.role} — {pl.name}
+              </p>
+              <p className="pc-line pc-place">
+                {p.theatre} · {p.year}
+              </p>
+            </div>
+            <div className="cv-desc">
+              {p.paragraphs.map((t) => (
+                <p key={t}>{t}</p>
+              ))}
+            </div>
           </div>
         </div>
         <button
@@ -56,15 +60,6 @@ export default function ProductionCard({
           <span className="pc-info-dot">{open ? <span className="pc-x" aria-hidden /> : <i aria-hidden>i</i>}</span>
         </button>
       </div>
-      <figcaption className="pc-cap">
-        <h2 className="pc-title">„{p.title}”</h2>
-        <p className="pc-line pc-role">
-          {p.role} — {pl.name}
-        </p>
-        <p className="pc-line pc-place">
-          {p.theatre} · {p.year}
-        </p>
-      </figcaption>
     </figure>
   );
 }

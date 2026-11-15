@@ -4,28 +4,19 @@ import SectionHeader from "@/components/SectionHeader";
 import { productions } from "@/content/pl";
 
 /**
- * Reżyseria: productions newest first in an uneven grid (a repeating rhythm of five sizes and offsets).
- * Each card is a photo with a glass-curtain description and a two-line caption (see ProductionCard).
+ * Reżyseria: productions newest first; photos pair up side by side, "wide" ones take the full width.
+ * A small title sits in the middle of each photo; details live in the glass curtain (see ProductionCard).
  */
 export default function DirectingSection() {
   return (
     <article className="rz">
       <SectionHeader id="work" />
       <ol className="rz-grid">
-        {productions.map((p, i) => {
-          const slot = i % 5;
-          const right = slot === 1 || slot === 3;
-          const small = slot === 1 || slot === 2;
-          return (
-            <li key={`${p.year}-${p.title}`} className={`rz-item rz-slot-${slot}`} data-drift={right ? "1" : undefined}>
-              <ProductionCard
-                p={p}
-                small={small}
-                sizes={small ? "(max-width: 767px) 100vw, 34vw" : "(max-width: 767px) 100vw, 60vw"}
-              />
-            </li>
-          );
-        })}
+        {productions.map((p) => (
+          <li key={`${p.year}-${p.title}`} className={`rz-item${p.wide ? " rz-wide" : ""}`}>
+            <ProductionCard p={p} sizes={p.wide ? "(max-width: 767px) 100vw, 96vw" : "(max-width: 767px) 100vw, 48vw"} />
+          </li>
+        ))}
       </ol>
       <ScrollReveal selector=".rz-item" />
     </article>
