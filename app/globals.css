@@ -407,3 +407,15 @@ a { color: inherit; text-decoration: none }
   .hero-rail .navlink { font-size: 11px }
 }
 
+
+/* ---------- Kontakt ---------- */
+.ct-list { list-style: none; padding-top: 10px }
+.ct-list li + li { margin-top: 40px }
+.ct-list .ab-label { margin-bottom: 10px }
+.ct-link {
+  font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.6vw, 52px); line-height: 1.1; letter-spacing: -.01em;
+  color: #fff; overflow-wrap: anywhere; transition: opacity .2s ease;
+}
+.ct-link:hover { opacity: .6 }
+.ct-link:focus-visible { outline: 1px solid #fff; outline-offset: 4px }
+@media (max-width: 767.98px) { .ct-link { font-size: 26px } }

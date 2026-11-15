@@ -96,6 +96,15 @@ export const about = {
   ],
 };
 
+// Kontakt
+export const contact = {
+  title: "Kontakt",
+  items: [
+    { label: "tel.", text: "606 290 300", href: "tel:+48606290300" },
+    { label: "mail", text: "karolina.maciejaszek@gmail.com", href: "mailto:karolina.maciejaszek@gmail.com" },
+  ],
+};
+
 // Kolektyw Czarne Szmaty
 export const collective = {
   title: "Czarne Szmaty",
