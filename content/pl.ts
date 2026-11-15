@@ -259,7 +259,6 @@ export const productions: Production[] = [
     image: { src: "/photos/olbrzyyym.jpg", alt: "Scena zalana czerwonym światłem: aktorzy wokół przezroczystej, świecącej kurtyny." },
     paragraphs: [
       "Spektakl familijny na podstawie dramatu Philippe’a Dorina.",
-      "Premiera: 4.10.2025.",
     ],
   },
   {
@@ -267,7 +266,6 @@ export const productions: Production[] = [
     image: { src: "/photos/harun.jpg", alt: "Dwóch aktorów na tle fioletowego morza; jeden w kamizelce ratunkowej, drugi w pióropuszu z pomarańczowych piór." },
     paragraphs: [
       "Spektakl familijny, będący adaptacją powieści słynnego autora, Salmana Rushdiego.",
-      "Premiera: 1.03.2025.",
     ],
   },
   {
