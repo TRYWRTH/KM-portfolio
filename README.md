@@ -47,3 +47,7 @@ Replace `public/karolina.jpg` with the new image (landscape, about 2400px wide).
 ## Intro
 
 On a fresh load of `/`, the page starts white and the name clears out of the mist from the middle outwards (letters settle down as they sharpen, the tracking tightens and a soft haze swells and dissolves behind it) (`.stage.intro` in `app/globals.css`, letter delays in `components/Landing.tsx`). Once the letters have finished and the photo has loaded, `Shell` removes the `intro` class: the photo fades in from 105% scale, the name turns white, and the wordmark and bottom navigation follow. If the photo is slow, the page is revealed after 6s anyway. Visitors with reduced motion get no intro. Section URLs opened directly skip it too.
+
+## Work with a photo
+
+Any item with a photo is shown as a big picture with a short description beside it (`components/FeatureRow.tsx`). Czarne Szmaty's "Wybrane akcje" use it already. To give a production on Reżyseria a photo, put the file in `public/photos/` and add `image: { src: "/photos/…jpg", alt: "…" }` to that production in `content/pl.ts`.

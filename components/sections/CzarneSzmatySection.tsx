@@ -1,4 +1,4 @@
-import Image from "next/image";
+import FeatureRow from "@/components/FeatureRow";
 import SectionHeader from "@/components/SectionHeader";
 import { collective } from "@/content/pl";
 
@@ -33,18 +33,16 @@ export default function CzarneSzmatySection() {
         <h2 id="photos-title" className="k tiny sub-k">
           {collective.photosTitle}
         </h2>
-        <ul className="gallery">
+        <ul className="features">
           {collective.photos.map((ph) => (
             <li key={ph.src}>
-              <figure>
-                <div className="gallery-img">
-                  <Image src={ph.src} alt={ph.alt} fill sizes="(max-width: 767px) 100vw, (max-width: 1100px) 50vw, 400px" />
-                </div>
-                <figcaption>
-                  <span className="gallery-title">„{ph.title}”</span>
-                  <span className="gallery-credit">{ph.credit}</span>
-                </figcaption>
-              </figure>
+              <FeatureRow
+                image={{ src: ph.src, alt: ph.alt }}
+                kicker={`${ph.place}, ${ph.year}`}
+                title={`„${ph.title}”`}
+                description={ph.with}
+                credit={ph.photo}
+              />
             </li>
           ))}
         </ul>

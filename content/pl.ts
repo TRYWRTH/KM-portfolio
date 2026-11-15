@@ -105,33 +105,33 @@ export const collective = {
   photos: [
     {
       src: "/photos/aresztowanie-cricoteki.jpg", title: "Aresztowanie Cricoteki",
-      credit: "#czsz + Pat Mic · fot. Pat Mic · Kraków, 2021",
+      with: "#czsz + Pat Mic", photo: "fot. Pat Mic", place: "Kraków", year: 2021,
       alt: "Trzy performerki w policyjnych mundurach i z doklejonymi wąsami stoją przed budynkiem Cricoteki w Krakowie.",
     },
     {
       // NOTE: cut from the slide (512 px wide); replace with the original file when available
       src: "/photos/wolna-polska.jpg", title: "Wolna Polska?",
-      credit: "#czsz + Biennale Warszawa + Joanna Szczepkowska + Pat Mic · fot. Pat Mic · Warszawa, 2019",
+      with: "#czsz + Biennale Warszawa + Joanna Szczepkowska + Pat Mic", photo: "fot. Pat Mic", place: "Warszawa", year: 2019,
       alt: "Pomnik Warszawskiej Nike z biało-czerwoną szarfą na tle wieżowca i błękitnego nieba.",
     },
     {
       src: "/photos/orlice.jpg", title: "Orlice",
-      credit: "#czsz + Pat Mic · fot. Pat Mic · Warszawa, 2018",
+      with: "#czsz + Pat Mic", photo: "fot. Pat Mic", place: "Warszawa", year: 2018,
       alt: "Trzy performerki w maskach orłów z koronami i czerwonych pelerynach na tle budynku we mgle.",
     },
     {
       src: "/photos/pozdrowienia-z-lesbos.jpg", title: "Pozdrowienia z Lesbos",
-      credit: "#czsz + Pat Mic · fot. Pat Mic · Warszawa, 2018",
+      with: "#czsz + Pat Mic", photo: "fot. Pat Mic", place: "Warszawa", year: 2018,
       alt: "Trzy performerki w strojach kąpielowych pozują na miejskim skrzyżowaniu przy tablicy z napisem „Lesbos”.",
     },
     {
       src: "/photos/ulanskie-fantazje.jpg", title: "Ułańskie fantazje",
-      credit: "#czsz + Pat Mic · fot. Pat Mic · Warszawa, 2017",
+      with: "#czsz + Pat Mic", photo: "fot. Pat Mic", place: "Warszawa", year: 2017,
       alt: "Dwie postaci w historycznych mundurach i z doklejonymi wąsami obejmują się w jesiennym parku.",
     },
     {
       src: "/photos/granica-pogardy.jpg", title: "Granica pogardy",
-      credit: "#czsz · fot. Katarzyna Nurowska · Warszawa, 2016",
+      with: "#czsz", photo: "fot. Katarzyna Nurowska", place: "Warszawa", year: 2016,
       alt: "Uczestniczki akcji trzymają w poprzek ulicy długi czarny transparent z napisem „Granica pogardy”.",
     },
   ],
@@ -210,6 +210,8 @@ export const awards: Award[] = [
 
 export interface Production {
   year: number;
+  /** optional photo: a production with one is shown as a big picture with a short description */
+  image?: { src: string; alt: string };
   title: string;
   /** author in the form used on the poster ("Philippe’a Dorina", "wg Andrzeja Barta") */
   author?: string;
