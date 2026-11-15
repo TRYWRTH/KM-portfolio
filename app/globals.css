@@ -327,9 +327,16 @@ a { color: inherit; text-decoration: none }
   transition: clip-path .7s cubic-bezier(.8, 0, .2, 1), visibility 0s linear .7s;
 }
 .cv.r { clip-path: inset(0 0 0 100%) }
-.cv-blur, .cv-scrim, .cv-sheen, .cv-rim, .cv-text { position: absolute; inset: 0 }
-.cv-blur img { object-fit: cover; filter: blur(40px) saturate(1.5) brightness(1.08); transform: scale(1.35) }
-.cv-scrim { background: rgba(10,12,22,.30) }
+.cv-blur, .cv-scrim, .cv-grain, .cv-sheen, .cv-rim, .cv-text { position: absolute; inset: 0 }
+/* frosted, not opaque: the production's shapes and colours still read through the glass */
+.cv-blur img { object-fit: cover; filter: blur(16px) saturate(1.45) brightness(1.06); transform: scale(1.12) }
+/* light at the top, darker towards the text at the bottom */
+.cv-scrim { background: linear-gradient(180deg, rgba(10,12,22,.04) 0%, rgba(10,12,22,.22) 45%, rgba(10,12,22,.64) 100%) }
+/* fine film grain so the glass reads as a material */
+.cv-grain {
+  opacity: .22; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 .cv-sheen { background: linear-gradient(120deg, rgba(255,255,255,.30) 0%, rgba(255,255,255,.08) 28%, rgba(255,255,255,.02) 52%, rgba(255,255,255,.12) 100%) }
 .cv-rim { box-shadow: inset 0 0 0 1px rgba(255,255,255,.32), inset 0 1px 0 rgba(255,255,255,.65), inset 1px 0 0 rgba(255,255,255,.35), inset 0 -50px 60px -40px rgba(255,255,255,.16) }
 .cv-text {

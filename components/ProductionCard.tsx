@@ -34,10 +34,12 @@ export default function ProductionCard({
         <div className={`cv${side === "r" ? " r" : ""}`} id={cvId}>
           {p.image ? (
             <div className="cv-blur" aria-hidden>
-              <Image src={p.image.src} alt="" fill sizes="320px" quality={40} />
+              {/* same sizes as the photo above, so the browser reuses the file it already has */}
+              <Image src={p.image.src} alt="" fill sizes={sizes} />
             </div>
           ) : null}
           <div className="cv-scrim" aria-hidden />
+          <div className="cv-grain" aria-hidden />
           <div className="cv-sheen" aria-hidden />
           <div className="cv-rim" aria-hidden />
           <div className="cv-text">
