@@ -70,6 +70,36 @@ export const about = {
   ],
 };
 
+// Kolektyw Czarne Szmaty
+export const collective = {
+  paragraphs: [
+    "Kolektyw akcjonistyczny Czarne Szmaty założony w 2016 (wspólnie z Martą Jalowską i Magdaleną Staroszczyk) działa w obrębie szeroko pojętej sztuki performatywnej – performensu, street artu, happeningu – używając do nawiązania dialogu społecznego różnych mediów.",
+    "Odpowiadając na nowe modele komunikacji, konfrontacyjny aspekt działań Czarnych Szmat przyjmuje różne formy, od bezpośredniej konfrontacji w przestrzeni miejskiej do publikacji w internecie i mediach społecznościowych.",
+    "W swych działaniach kolektyw odnosi się do aktualnych wydarzeń społecznych oraz politycznych a także do obowiązujących narracji historycznych kształtujących naszą tożsamość, poddając je krytycznej analizie i stosując strategie subwersji. W zależności od rodzaju podejmowanych działań, grupa zaprasza do współpracy innych artystów i inne artystki.",
+  ],
+  actionsTitle: "Grupa zrealizowała następujące akcje performatywne",
+  actions: [
+    { title: "Granica pogardy" },
+    { title: "Jeszcze mamy prawo" },
+    { title: "Polki walczące" },
+    { title: "Ułańskie fantazje", with: "razem z fotografką Pat Mic" },
+    { title: "Nie jesteś sama" },
+    { title: "Pozdrowienia z Lesbos", with: "z Pat Mic" },
+    { title: "BezKres nienawiści" },
+    { title: "Koniec Panowania" },
+    { title: "Orlice", with: "z Pat Mic" },
+    { title: "Wolna Polska?", with: "współpraca z Biennale Warszawa, Joanną Szczepkowską i Pat Mic" },
+    { title: "Aresztowanie Cricoteki", with: "z Pat Mic" },
+  ],
+  photos: [
+    { src: "/photos/granica-pogardy.jpg", caption: "Granica pogardy", alt: "Uczestniczki akcji trzymają w poprzek ulicy długi czarny transparent z napisem „Granica pogardy”." },
+    { src: "/photos/pozdrowienia-z-lesbos.jpg", caption: "Pozdrowienia z Lesbos", alt: "Trzy performerki w strojach kąpielowych pozują na miejskim skrzyżowaniu przy tablicy z napisem „Lesbos”." },
+    { src: "/photos/ulanskie-fantazje.jpg", caption: "Ułańskie fantazje", alt: "Dwie postaci w historycznych mundurach i z doklejonymi wąsami obejmują się w jesiennym parku." },
+    { src: "/photos/orlice.jpg", caption: "Orlice", alt: "Trzy performerki w maskach orłów z koronami i czerwonych pelerynach na tle budynku we mgle." },
+  ],
+  more: { before: "Więcej informacji znajdziesz na ", linkText: "Facebooku", href: "https://www.facebook.com/czarneszmaty" },
+};
+
 export interface Award {
   /** shown once per year group; omit when unknown (the entry then sits in the group above) */
   year?: number;
